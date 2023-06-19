@@ -33,6 +33,8 @@ class Dashboard:UIView
     
     var btn_count:Int!
     
+    var chatDetails:ChatDetails!
+    
     override init (frame : CGRect)
     {
         super.init(frame : frame)
@@ -109,8 +111,37 @@ class Dashboard:UIView
         pagesA.add(pageMore)
         mainCon.addSubview(pageMore)
         
+        chatDetails = ChatDetails(frame: sharedData.fullRect)
+        chatDetails.x = sharedData.screenWidth
+        mainCon.addSubview(chatDetails)
         
         updatePages()
+        
+        sharedData.addEventListener(title: "GO_CHAT", target: self, selector: #selector(self.goChat))
+        sharedData.addEventListener(title: "GO_BACK_CHAT", target: self, selector: #selector(self.goBackChat))
+    }
+    
+    @objc func initClass()
+    {
+        
+    }
+    
+    @objc func goChat()
+    {
+        chatDetails.initClass()
+        mainCon.addSubview(chatDetails)
+        UIView.animate(withDuration: 0.25)
+        {
+            self.mainCon.x = self.sharedData.screenWidth * -1
+        }
+    }
+    
+    @objc func goBackChat()
+    {
+        UIView.animate(withDuration: 0.25)
+        {
+            self.mainCon.x = 0
+        }
     }
     
     func createBtn(title:String, icon:String) -> UIButton

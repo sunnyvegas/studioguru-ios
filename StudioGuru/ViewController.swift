@@ -11,7 +11,7 @@ class ViewController: UIViewController
 {
     
     var sharedData:SharedData!
-    
+    var dashPage:Dashboard!
     
     override func viewDidLoad()
     {
@@ -21,12 +21,21 @@ class ViewController: UIViewController
         
         let loginPage = Login(frame: sharedData.fullRect)
         view.addSubview(loginPage)
+        dashPage = Dashboard(frame: sharedData.fullRect)
         
+//        let dashPage = Dashboard(frame: sharedData.fullRect)
+//        view.addSubview(dashPage)
         
-        let dashPage = Dashboard(frame: sharedData.fullRect)
-        view.addSubview(dashPage)
+        sharedData.addEventListener(title: "SHOW_DASHBOARD", target: self, selector: #selector(self.goDash))
     }
-
+    
+    @objc func goDash()
+    {
+        dashPage.y = sharedData.screenHeight
+        view.addSubview(dashPage)
+        dashPage.initClass()
+        dashPage.animateUp()
+    }
 
 }
 

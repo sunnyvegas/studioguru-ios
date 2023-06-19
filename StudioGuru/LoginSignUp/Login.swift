@@ -119,6 +119,10 @@ class Login:UIView, UITextFieldDelegate
         btnSignUp.addEventListener(selector: #selector(self.goSignUp), target: self)
         //btnLogin.alpha = 0.5
         addSubview(btnSignUp)
+        
+        sharedData.setTimeout(delay: 0.5, block: {
+            self.checkLogin()
+        })
     }
     
     func initClass()
@@ -147,6 +151,11 @@ class Login:UIView, UITextFieldDelegate
         }
     }
     
+    @objc func loadStudios()
+    {
+        ///api-studios
+    }
+    
     @objc func goLogin()
     {
         
@@ -158,7 +167,7 @@ class Login:UIView, UITextFieldDelegate
         
         
         
-        sharedData.postIt(urlString: sharedData.base_domain + "/api-app-login", params: ["email":inputEmail.text!, "password":inputPass.text!], callback: {
+        sharedData.postIt(urlString: sharedData.base_domain + "/api-login", params: ["email":inputEmail.text!, "password":inputPass.text!], callback: {
             success, result_dict in
             
             self.sharedData.postEvent(event: "HIDE_LOADING")

@@ -40,6 +40,7 @@ class SharedData: NSObject
     
     var base_domain:String!
     var domain:String!
+    var studio_id:String!
     
     var member_id:String!
     var member_token:String!
@@ -47,6 +48,9 @@ class SharedData: NSObject
     var s_email = ""
     var s_password = ""
     
+    
+    var chat_title = ""
+    var chat_id = ""
     
     private override init()
     {
@@ -59,10 +63,10 @@ class SharedData: NSObject
       
         member_id = ""
         
-        base_domain = "https://dev-studiobossapp.herokuapp.com"
+        base_domain = "https://dev-studiobossapp.herokuapp.com/studio/abc"
         domain = "dev-studiobossapp.herokuapp.com"
         member_token = ""
-        
+        studio_id = "abc"
         blue = UIColor(hex: 0x336699)
         
         
