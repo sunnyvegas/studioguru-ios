@@ -85,10 +85,10 @@ class ChatDetails:UIView, UITextFieldDelegate
     func initClass()
     {
         topBar.titleLabel.text = sharedData.chat_title
-        pplCon.removeSubViews()
+        
         pplDataA.removeAllObjects()
         messagesDataA.removeAllObjects()
-        messagesCon.removeSubViews()
+        
         loadData()
     }
     
@@ -112,6 +112,8 @@ class ChatDetails:UIView, UITextFieldDelegate
     {
         print("self.pplDataA---->",self.pplDataA)
         
+        messagesCon.removeSubViews()
+        pplCon.removeSubViews()
         if(CGFloat(pplDataA.count) * 60 < sharedData.screenWidth)
         {
             pplCon.contentSize = CGSize(width: sharedData.screenWidth, height: 60)
@@ -220,6 +222,10 @@ class ChatDetails:UIView, UITextFieldDelegate
         }
         
         messagesCon.contentSize = CGSize(width: sharedData.screenWidth, height: lastY + 20)
+        
+        let contentHeight = messagesCon.contentSize.height
+        let bottomOffset = CGPoint(x: 0, y: contentHeight - messagesCon.bounds.size.height)
+        messagesCon.setContentOffset(bottomOffset, animated: false)
     }
     
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool
@@ -241,6 +247,17 @@ class ChatDetails:UIView, UITextFieldDelegate
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool
     {
+        let data = NSMutableDictionary()
+        data.setValue(sharedData.member_id, forKey: "member_id")
+        data.setValue(input.text, forKey: "message")
+        
+        messagesDataA.add(data)
+        renderDetails()
+        input.text = ""
+        let contentHeight = messagesCon.contentSize.height
+        let bottomOffset = CGPoint(x: 0, y: contentHeight - messagesCon.bounds.size.height)
+        messagesCon.setContentOffset(bottomOffset, animated: true)
+        /*
         input.resignFirstResponder()
         input.text = ""
         messagesCon.height = sharedData.screenHeight - messagesCon.y - bottomCon.height
@@ -248,6 +265,7 @@ class ChatDetails:UIView, UITextFieldDelegate
         {
             self.bottomCon.y = self.sharedData.screenHeight -  self.bottomCon.height
         }
+        */
         
         return true
     }
