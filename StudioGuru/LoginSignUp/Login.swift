@@ -30,7 +30,7 @@ class Login:UIView, UITextFieldDelegate
         mainLogo.height = mainLogo.width/2
         mainLogo.x = sharedData.screenWidth/2 - mainLogo.width/2
         mainLogo.y = 100
-        mainLogo.image = UIImage(named: "main_logo")
+        mainLogo.image = UIImage(named: "kiwi_logo_square")
         mainLogo.contentMode = .scaleAspectFit
         addSubview(mainLogo)
         

@@ -8,7 +8,7 @@
 import UIKit
 
 
-class ChatDetails:UIView, UITextFieldDelegate
+class ChatDetails:UIView, UITextFieldDelegate, UIScrollViewDelegate
 {
     var sharedData:SharedData!
     
@@ -26,6 +26,8 @@ class ChatDetails:UIView, UITextFieldDelegate
     var bottomCon:UIView!
     
     var input:UITextField!
+    
+    var isKeyboardUp:Bool = false
     
     override init (frame : CGRect)
     {
@@ -75,6 +77,7 @@ class ChatDetails:UIView, UITextFieldDelegate
         
         messagesCon = UIScrollView()
         messagesCon.y = line.posY()
+        messagesCon.delegate = self
         messagesCon.width = sharedData.screenWidth
         messagesCon.height = sharedData.screenHeight - messagesCon.y - bottomCon.height
         
@@ -232,7 +235,7 @@ class ChatDetails:UIView, UITextFieldDelegate
     {
             // Perform actions when the keyboard is about to be shown
             print("Keyboard will show")
-            
+        isKeyboardUp = true
         messagesCon.height = sharedData.screenHeight - messagesCon.y - bottomCon.height - (400 - bottomCon.height)
         UIView.animate(withDuration: 0.25)
         {
@@ -270,6 +273,37 @@ class ChatDetails:UIView, UITextFieldDelegate
         return true
     }
     
+    func scrollViewDidScroll(_ scrollView: UIScrollView)
+    {
+       
+        
+        let contentOffsetY = scrollView.contentOffset.y
+        
+        if(isKeyboardUp == true)
+        {
+            if scrollView.contentOffset.y > 0
+            {
+                // Scrolling down
+                
+                //print("Y---",contentOffsetY, "-", scrollView.contentSize.height)
+                if(contentOffsetY + 600 < scrollView.contentSize.height)
+                {
+                    print("Scrolling down")
+                    isKeyboardUp = false
+                    input.resignFirstResponder()
+                    input.text = ""
+                    messagesCon.height = sharedData.screenHeight - messagesCon.y - bottomCon.height
+                    UIView.animate(withDuration: 0.01)
+                    {
+                        self.bottomCon.y = self.sharedData.screenHeight -  self.bottomCon.height
+                    }
+                }
+            }
+        }
+        
+        
+    }
+    
     @objc func goSetting()
     {
         
@@ -277,6 +311,14 @@ class ChatDetails:UIView, UITextFieldDelegate
     
     @objc func goBack()
     {
+        isKeyboardUp = false
+        input.resignFirstResponder()
+        input.text = ""
+        messagesCon.height = sharedData.screenHeight - messagesCon.y - bottomCon.height
+        UIView.animate(withDuration: 0.01)
+        {
+            self.bottomCon.y = self.sharedData.screenHeight -  self.bottomCon.height
+        }
         sharedData.postEvent(event: "GO_BACK_CHAT")
     }
     

@@ -29,6 +29,7 @@ class SharedData: NSObject
     var edit_valuesA:NSMutableArray = NSMutableArray()
     
     var blue:UIColor!
+    var green:UIColor!
     var bkColor:UIColor!
     
     var cPage:CGFloat!
@@ -67,8 +68,8 @@ class SharedData: NSObject
         domain = "dev-studiobossapp.herokuapp.com"
         member_token = ""
         studio_id = "abc"
-        blue = UIColor(hex: 0x336699)
-        
+        blue = UIColor(hex: 0x1187be)
+        green = UIColor(hex: 0x2cbe11)
         
     }
     

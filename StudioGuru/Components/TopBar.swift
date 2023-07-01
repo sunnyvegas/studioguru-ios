@@ -25,7 +25,7 @@ class TopBar: UIView
 
         sharedData = SharedData.sharedInstance
         //backgroundColor = UIColor(hex: 0x00919E)
-        backgroundColor = sharedData.blue
+        backgroundColor = sharedData.green
         
         titleLabel = UILabel(frame: CGRect(x: 0, y: 40, width: sharedData.screenWidth, height: 40))
         titleLabel.textColor = .white
