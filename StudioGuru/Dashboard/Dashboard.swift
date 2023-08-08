@@ -164,7 +164,7 @@ class Dashboard:UIView
         imgHome.y = 5
         imgHome.padding(num: 5)
         imgHome.image = UIImage(named:icon)?.withRenderingMode(.alwaysTemplate)
-        imgHome.tintColor = sharedData.green
+        imgHome.tintColor = sharedData.gray
         imgHome.contentMode = .scaleAspectFit
         imgHome.x = ((sharedData.screenWidth/4) - 30)/2
         btn.addSubview(imgHome)
@@ -177,7 +177,7 @@ class Dashboard:UIView
         homeLabel.textAlignment = NSTextAlignment.center
         homeLabel.height = 15
         homeLabel.y = 35
-        homeLabel.textColor = sharedData.green
+        homeLabel.textColor = sharedData.gray
         homeLabel.text = title
         homeLabel.font = UIFont.systemFont(ofSize: 9)
         homeLabel.isUserInteractionEnabled = false
@@ -223,15 +223,15 @@ class Dashboard:UIView
             if(i == cPage)
             {
                 btn.alpha = 1
-                btn.backgroundColor = sharedData.green
+                btn.backgroundColor = sharedData.gray
                 icon.tintColor = .white
                 title.textColor = .white
                 
             }else{
                 btn.alpha = 1
                 btn.backgroundColor = .white
-                icon.tintColor = sharedData.green
-                title.textColor = sharedData.green
+                icon.tintColor = sharedData.gray
+                title.textColor = sharedData.gray
             }
         }
         
@@ -240,7 +240,7 @@ class Dashboard:UIView
         let borderTop = UIView()
         borderTop.width = sharedData.screenWidth
         borderTop.height = 1
-        borderTop.backgroundColor = sharedData.green
+        borderTop.backgroundColor = sharedData.gray
         borderTop.y = sharedData.screenHeight - bottomHeight - 1
         mainCon.addSubview(borderTop)
     }

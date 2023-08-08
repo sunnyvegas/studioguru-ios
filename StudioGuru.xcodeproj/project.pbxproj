@@ -32,6 +32,12 @@
 		FA464ED72A35134200910323 /* Roboto-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA464ED32A35134200910323 /* Roboto-Light.ttf */; };
 		FA464ED82A35134200910323 /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA464ED42A35134200910323 /* Roboto-Bold.ttf */; };
 		FA464ED92A35134200910323 /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA464ED52A35134200910323 /* Roboto-Regular.ttf */; };
+		FA70D4FD2A81DAEE00ED4449 /* SideMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA70D4FC2A81DAEE00ED4449 /* SideMenu.swift */; };
+		FA8E94C32A7F5CFF00951D52 /* MoreCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8E94C22A7F5CFF00951D52 /* MoreCell.swift */; };
+		FA8E94C62A7F5D2D00951D52 /* StudioRentals.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8E94C52A7F5D2D00951D52 /* StudioRentals.swift */; };
+		FA8E94C82A7F5D3D00951D52 /* MyAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8E94C72A7F5D3D00951D52 /* MyAccount.swift */; };
+		FA8E94CA2A7FFABB00951D52 /* MainDashboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8E94C92A7FFABB00951D52 /* MainDashboard.swift */; };
+		FA8E94CC2A81915600951D52 /* MyAccountCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8E94CB2A81915600951D52 /* MyAccountCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,6 +89,12 @@
 		FA464ED32A35134200910323 /* Roboto-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Roboto-Light.ttf"; path = "fonts/Roboto-Light.ttf"; sourceTree = SOURCE_ROOT; };
 		FA464ED42A35134200910323 /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Roboto-Bold.ttf"; path = "fonts/Roboto-Bold.ttf"; sourceTree = SOURCE_ROOT; };
 		FA464ED52A35134200910323 /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Roboto-Regular.ttf"; path = "fonts/Roboto-Regular.ttf"; sourceTree = SOURCE_ROOT; };
+		FA70D4FC2A81DAEE00ED4449 /* SideMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenu.swift; sourceTree = "<group>"; };
+		FA8E94C22A7F5CFF00951D52 /* MoreCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreCell.swift; sourceTree = "<group>"; };
+		FA8E94C52A7F5D2D00951D52 /* StudioRentals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudioRentals.swift; sourceTree = "<group>"; };
+		FA8E94C72A7F5D3D00951D52 /* MyAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAccount.swift; sourceTree = "<group>"; };
+		FA8E94C92A7FFABB00951D52 /* MainDashboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainDashboard.swift; sourceTree = "<group>"; };
+		FA8E94CB2A81915600951D52 /* MyAccountCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAccountCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -206,6 +218,8 @@
 		FA464EC12A34EA4000910323 /* Dashboard */ = {
 			isa = PBXGroup;
 			children = (
+				FA8E94C92A7FFABB00951D52 /* MainDashboard.swift */,
+				FA70D4FC2A81DAEE00ED4449 /* SideMenu.swift */,
 				FA464EC62A34EEB600910323 /* Dashboard.swift */,
 				FA0E93432A404EF000EEB22F /* ChatDetails.swift */,
 				FA464EC82A3511EA00910323 /* Pages */,
@@ -216,11 +230,16 @@
 		FA464EC82A3511EA00910323 /* Pages */ = {
 			isa = PBXGroup;
 			children = (
+				FA8E94C72A7F5D3D00951D52 /* MyAccount.swift */,
+				FA8E94CB2A81915600951D52 /* MyAccountCell.swift */,
+				FA8E94C52A7F5D2D00951D52 /* StudioRentals.swift */,
 				FA464EC92A3511F700910323 /* Home.swift */,
 				FA464ECB2A35124100910323 /* CalendarPage.swift */,
 				FA464ECD2A35124F00910323 /* Chat.swift */,
 				FA0E93412A404BC800EEB22F /* ChatCell.swift */,
 				FA464ECF2A35125C00910323 /* More.swift */,
+				FA8E94C22A7F5CFF00951D52 /* MoreCell.swift */,
+				FA8E94C42A7F5D0900951D52 /* More */,
 			);
 			path = Pages;
 			sourceTree = "<group>";
@@ -234,6 +253,13 @@
 				FA464ED52A35134200910323 /* Roboto-Regular.ttf */,
 			);
 			path = Fonts;
+			sourceTree = "<group>";
+		};
+		FA8E94C42A7F5D0900951D52 /* More */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = More;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -420,15 +446,21 @@
 				FA464EC72A34EEB600910323 /* Dashboard.swift in Sources */,
 				FA464E902A34E89200910323 /* ViewController.swift in Sources */,
 				FA0E93442A404EF000EEB22F /* ChatDetails.swift in Sources */,
+				FA8E94C32A7F5CFF00951D52 /* MoreCell.swift in Sources */,
 				FA464ED02A35125C00910323 /* More.swift in Sources */,
+				FA70D4FD2A81DAEE00ED4449 /* SideMenu.swift in Sources */,
+				FA8E94CC2A81915600951D52 /* MyAccountCell.swift in Sources */,
 				FA464ECA2A3511F700910323 /* Home.swift in Sources */,
 				FA464EBF2A34E98600910323 /* TopBar.swift in Sources */,
+				FA8E94CA2A7FFABB00951D52 /* MainDashboard.swift in Sources */,
 				FA464ECE2A35124F00910323 /* Chat.swift in Sources */,
 				FA464EC32A34EA5600910323 /* Login.swift in Sources */,
+				FA8E94C82A7F5D3D00951D52 /* MyAccount.swift in Sources */,
 				FA464E8C2A34E89200910323 /* AppDelegate.swift in Sources */,
 				FA0E93422A404BC800EEB22F /* ChatCell.swift in Sources */,
 				FA464E8E2A34E89200910323 /* SceneDelegate.swift in Sources */,
 				FA464ECC2A35124100910323 /* CalendarPage.swift in Sources */,
+				FA8E94C62A7F5D2D00951D52 /* StudioRentals.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

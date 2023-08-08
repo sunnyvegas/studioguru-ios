@@ -1,35 +1,46 @@
 //
-//  Chat.swift
+//  Account.swift
 //  StudioGuru
 //
-//  Created by Sunny Clark on 6/10/23.
+//  Created by Sunny Clark on 8/5/23.
 //
 
 import UIKit
 
-
-class Chat:BasePage,UITableViewDelegate, UITableViewDataSource
+class MyAccount:BasePage, UITextFieldDelegate,UITableViewDelegate, UITableViewDataSource
 {
     var sharedData:SharedData!
     
-    var mainDataA:NSMutableArray = NSMutableArray()
+    var mainCon:UIView!
     
     var feedList:UITableView!
     
-    var mainCon:UIView!
+    var mainDataA:NSMutableArray = NSMutableArray()
+    var iconsA:NSMutableArray = NSMutableArray()
     
     override init (frame : CGRect)
     {
         super.init(frame : frame)
         sharedData = SharedData.sharedInstance
-        backgroundColor = sharedData.bkColor
+        backgroundColor = .white
         
         mainCon = UIView(frame: sharedData.fullRect)
         addSubview(mainCon)
         
-        let topBar = sharedData.getTopBarBig(title: "Chat")
+        let topBar = sharedData.getTopBarBig(title: "My Account")
         topBar.addMenu()
         addSubview(topBar)
+        
+        mainDataA.add("Personal Info")
+        mainDataA.add("Login Info")
+        mainDataA.add("Students")
+        mainDataA.add("Payment Methods")
+        
+        iconsA.add("icon_personal_info")
+        iconsA.add("icon_login_info")
+        iconsA.add("icon_students")
+        iconsA.add("icon_payment_methods")
+        
         
         feedList = UITableView();
         feedList.width = sharedData.screenWidth
@@ -40,31 +51,14 @@ class Chat:BasePage,UITableViewDelegate, UITableViewDataSource
         feedList.dataSource = self
         feedList.showsVerticalScrollIndicator = false
         feedList.separatorStyle = .none
-        feedList.register(ChatCell.self, forCellReuseIdentifier: "chat_cell")
+        feedList.register(MyAccountCell.self, forCellReuseIdentifier: "myaccount_cell")
         feedList.tableFooterView = UIView(frame: .zero)
         mainCon.addSubview(feedList)
-        
-        
     }
     
     override func initClass()
     {
-        loadData()
-    }
     
-    @objc func loadData()
-    {
-        mainDataA.removeAllObjects()
-        feedList.reloadData()
-        sharedData.getIt(urlString: sharedData.base_domain + "/api-member/chat/list", params: [:], callback:
-        {   success, result_dict in
-            
-            self.mainDataA.addObjects(from: (result_dict.object(forKey: "result") as! Array<Any>) )
-            
-            self.feedList.reloadData()
-            
-            
-        })
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
@@ -79,13 +73,14 @@ class Chat:BasePage,UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
-        let cell = ChatCell(style: .default, reuseIdentifier: "chat_cell")
+        let cell = MyAccountCell(style: .default, reuseIdentifier: "myaccount_cell")
         
-        let data = mainDataA.object(at: indexPath.row) as! NSDictionary
-        cell.title.text = (data.object(forKey: "title") as! String)
-        cell.img.downloadedFrom(link: (data.object(forKey: "photo") as! String))
-        
+        let title = mainDataA.object(at: indexPath.row) as! String
         cell.accessoryType = .disclosureIndicator
+        cell.title.text = title
+        cell.title.font = sharedData.normalFont(size: 20)
+        cell.image.image = UIImage(named: (iconsA.object(at: indexPath.row) as! String) )?.withRenderingMode(.alwaysTemplate)
+        cell.image.tintColor = .black
         
         return cell
     }
@@ -93,15 +88,7 @@ class Chat:BasePage,UITableViewDelegate, UITableViewDataSource
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
         tableView.deselectRow(at: indexPath, animated: true)
-        let data = mainDataA.object(at: indexPath.row) as! NSDictionary
         
-        sharedData.chat_title = (data.object(forKey: "title") as! String)
-        sharedData.chat_id = (data.object(forKey: "chat_id") as! String)
-      
-        
-        
-        sharedData.postEvent(event: "GO_CHAT")
-      
     }
     
     convenience init ()
@@ -113,5 +100,4 @@ class Chat:BasePage,UITableViewDelegate, UITableViewDataSource
     {
        fatalError("This class does not support NSCoding")
     }
-    
 }

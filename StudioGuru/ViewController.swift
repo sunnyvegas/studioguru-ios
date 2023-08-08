@@ -11,7 +11,7 @@ class ViewController: UIViewController
 {
     
     var sharedData:SharedData!
-    var dashPage:Dashboard!
+    var dashPage:MainDashboard!
     
     override func viewDidLoad()
     {
@@ -21,7 +21,7 @@ class ViewController: UIViewController
         
         let loginPage = Login(frame: sharedData.fullRect)
         view.addSubview(loginPage)
-        dashPage = Dashboard(frame: sharedData.fullRect)
+        dashPage = MainDashboard(frame: sharedData.fullRect)
         
 //        let dashPage = Dashboard(frame: sharedData.fullRect)
 //        view.addSubview(dashPage)
@@ -35,6 +35,10 @@ class ViewController: UIViewController
         view.addSubview(dashPage)
         dashPage.initClass()
         dashPage.animateUp()
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
     }
 
 }
@@ -1203,11 +1207,12 @@ extension UITextView
  
  }
  
- UIView.animate(withDuration: 0.25, delay: 0.0, options: UIViewAnimationOptions.curveEaseOut, animations:
+ UIView.animate(withDuration: 0.25, delay: 0.0, options: .curveEaseOut, animations:
  {
- 
+    
  }, completion: {
  finished in
+    
  })
  
  
@@ -1237,9 +1242,9 @@ extension UITextView
      
      override init (frame : CGRect)
      {
-         super.init(frame : frame)
-         sharedData = SharedData.sharedInstance
-            backgroundColor = sharedData.bkColor
+        super.init(frame : frame)
+        sharedData = SharedData.sharedInstance
+        backgroundColor = .white
      }
      
      func initClass()

@@ -31,8 +31,11 @@ class SharedData: NSObject
     var blue:UIColor!
     var green:UIColor!
     var bkColor:UIColor!
+    var gray:UIColor!
     
     var cPage:CGFloat!
+    
+    var cSignUpPage:CGFloat!
     
     var c_image:UIImage!
     var c_vid_url:URL!
@@ -61,6 +64,8 @@ class SharedData: NSObject
         fullRectBottom =  CGRect(origin: CGPoint(x: 0,y :screenHeight), size: CGSize(width: screenWidth, height: screenHeight))
         imagesDict = NSMutableDictionary()
         
+        cSignUpPage = 0
+        cPage = 0
       
         member_id = ""
         
@@ -70,6 +75,7 @@ class SharedData: NSObject
         studio_id = "abc"
         blue = UIColor(hex: 0x1187be)
         green = UIColor(hex: 0x2cbe11)
+        gray = UIColor(hex: 0x004F98)
         
     }
     

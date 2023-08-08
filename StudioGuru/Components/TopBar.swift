@@ -25,7 +25,7 @@ class TopBar: UIView
 
         sharedData = SharedData.sharedInstance
         //backgroundColor = UIColor(hex: 0x00919E)
-        backgroundColor = sharedData.green
+        backgroundColor = sharedData.gray
         
         titleLabel = UILabel(frame: CGRect(x: 0, y: 40, width: sharedData.screenWidth, height: 40))
         titleLabel.textColor = .white
@@ -72,6 +72,24 @@ class TopBar: UIView
         btnExit.setImage(UIImage(named: "icon_back"), for: .normal)
         addSubview(btnExit)
         titleLabel.x = 50
+    }
+    
+    @objc func addMenu()
+    {
+        let btnExit = UIButton(type: .custom)
+        btnExit.width = 50
+        btnExit.height = 50
+        btnExit.y = 35
+        btnExit.addEventListener(selector: #selector(self.openMenu ), target: self)
+        btnExit.setImage(UIImage(named: "icon_more")?.withRenderingMode(.alwaysTemplate), for: .normal)
+        btnExit.imageView?.tintColor = .white
+        addSubview(btnExit)
+        titleLabel.x = 60
+    }
+    
+    @objc func openMenu()
+    {
+        sharedData.postEvent(event: "TOGGLE_MENU")
     }
     
     @objc func addSetting(selector:Selector, target:UIView)

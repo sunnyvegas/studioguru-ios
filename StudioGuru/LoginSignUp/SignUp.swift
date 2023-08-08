@@ -65,15 +65,15 @@ class SignUp:UIView, UITextFieldDelegate
     @objc func updatePages()
     {
         
-        let page = (pagesA.object(at: Int(sharedData.cPage) ) as! BasePage)
+        let page = (pagesA.object(at: Int(sharedData.cSignUpPage) ) as! BasePage)
         page.initClass()
 
         UIView.animate(withDuration: 0.25)
         {
-            self.mainCon.x = self.sharedData.screenWidth * self.sharedData.cPage * -1
+            self.mainCon.x = self.sharedData.screenWidth * self.sharedData.cSignUpPage * -1
         }
         
-        //mainScroll.setContentOffset(CGPoint(x: sharedData.screenWidth * sharedData.cPage, y: 0), animated: true)
+        //mainScroll.setContentOffset(CGPoint(x: sharedData.screenWidth * sharedData.cSignUpPage, y: 0), animated: true)
     }
     
     @objc func goExit()
