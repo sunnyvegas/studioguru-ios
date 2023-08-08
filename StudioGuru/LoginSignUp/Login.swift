@@ -8,14 +8,17 @@
 
 import UIKit
 
-class Login:UIView, UITextFieldDelegate
+class Login:UIView, UITextFieldDelegate,UIPickerViewDelegate, UIPickerViewDataSource
 {
     
     var sharedData:SharedData!
     var inputEmail:UITextField!
     var inputPass:UITextField!
+    var inputStudios:UITextField!
     var btnLogin:UIButton!
     var mainCon:UIView!
+    var mainDataA:NSMutableArray = NSMutableArray()
+    var mainPicker:UIPickerView!
     
     var card:UIView!
     
@@ -34,6 +37,11 @@ class Login:UIView, UITextFieldDelegate
         mainLogo.contentMode = .scaleAspectFit
         addSubview(mainLogo)
         
+        
+        mainPicker = UIPickerView()
+        mainPicker.frame = CGRect(x: 0, y: 0, width: sharedData.screenWidth, height: 180)
+        mainPicker.delegate = self
+        mainPicker.dataSource = self
        
         let padding:CGFloat = 20
         
@@ -89,10 +97,41 @@ class Login:UIView, UITextFieldDelegate
         labelPass.font = UIFont.systemFont(ofSize: 14, weight: .bold)
         addSubview(labelPass)
         
+        let labelStudio = UILabel()
+        labelStudio.text = "Studio"
+        labelStudio.textColor = .black
+        labelStudio.x = padding
+        labelStudio.y = inputPass.posY() + 20
+        labelStudio.width = 200
+        labelStudio.height = 20
+        labelStudio.font = UIFont.systemFont(ofSize: 14, weight: .bold)
+        addSubview(labelStudio)
+        
+        
+        inputStudios = UITextField()
+        inputStudios.width = sharedData.screenWidth - (padding * 2)
+        inputStudios.backgroundColor = .white
+        inputStudios.x = padding
+        inputStudios.y = labelStudio.posY() + 10
+        inputStudios.returnKeyType = .done
+        inputStudios.autocorrectionType = .no
+        inputStudios.autocapitalizationType = .none
+        inputStudios.height = 50
+        inputStudios.borderStyle = .roundedRect
+        inputStudios.paddingLeft(10)
+        inputStudios.delegate = self
+        inputStudios.inputView = mainPicker
+        inputStudios.placeholder = "Select Studio"
+        
+        let toolbar = sharedData.getToolBar(target: self, selector: #selector(self.hidePicker), title: "Done", direction: "right")
+        inputStudios.inputAccessoryView = toolbar
+        //inputEmail.corner(radius: 10)
+        addSubview(inputStudios)
+        
         //006cab
         
         btnLogin = UIButton(type: .custom)
-        btnLogin.y = inputPass.posY() + 20
+        btnLogin.y = inputStudios.posY() + 20
         btnLogin.x = padding
         btnLogin.width = inputEmail.width
         btnLogin.height = 50
@@ -120,14 +159,71 @@ class Login:UIView, UITextFieldDelegate
         //btnLogin.alpha = 0.5
         addSubview(btnSignUp)
         
-        sharedData.setTimeout(delay: 0.5, block: {
-            self.checkLogin()
-        })
+        
+        
+        loadData()
     }
     
     func initClass()
     {
     
+    }
+    
+    @objc func loadData()
+    {
+        sharedData.getIt(urlString: "https://dev-studiobossapp.herokuapp.com/api-studios", params: [:], callback:
+        {
+            success, result_dict in
+            
+            self.mainDataA.addObjects(from: (result_dict.object(forKey: "result") as! Array<Any>) )
+            self.sharedData.setTimeout(delay: 0.15, block: {
+                self.checkLogin()
+            })
+        })
+    }
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int
+    {
+       return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int
+    {
+        mainDataA.count
+    }
+    
+    @objc func hidePicker()
+    {
+        print("hidePicker!")
+        
+        inputStudios.resignFirstResponder()
+        
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String?
+    {
+        
+//        if(row == 1)
+//        {
+//            return "Unspecified"
+//        }
+        
+        return ((mainDataA.object(at: row) as! NSDictionary).object(forKey: "text") as! String)
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int)
+    {
+        // use the row to get the selected row from the picker view
+        // using the row extract the value from your datasource (array[row])
+        
+//        if(row == 1)
+//        {
+//            main_input.text =  "Unspecified"
+//            return
+//        }
+//
+        inputStudios.text = ((mainDataA.object(at: row) as! NSDictionary).object(forKey: "text") as! String)
+        print("updated!!")
     }
     
     @objc func updateLoginFromSignUp()
@@ -147,6 +243,7 @@ class Login:UIView, UITextFieldDelegate
         {
             inputEmail.text = sharedData.getUserData(title: "user_email")
             inputPass.text = sharedData.getUserData(title: "user_pass")
+            inputStudios.text = sharedData.getUserData(title: "studio_id")
             self.goLogin()
         }
     }
@@ -158,14 +255,22 @@ class Login:UIView, UITextFieldDelegate
     
     @objc func goLogin()
     {
+        if(inputStudios.text == "")
+        {
+            sharedData.showMessage(title: "Error", message: "Please select a studio to login with")
+            return
+        }
         
         inputPass.resignFirstResponder()
         inputEmail.resignFirstResponder()
+        inputStudios.resignFirstResponder()
         
         sharedData.postEvent(event: "SHOW_LOADING")
         
+        print("mainPicker.selectedRow(inComponent: 0)--->",mainPicker.selectedRow(inComponent: 0))
+        sharedData.studio_id = ((mainDataA.object(at: mainPicker.selectedRow(inComponent: 0)) as! NSDictionary).object(forKey: "id") as! String)
         
-        
+        sharedData.base_domain = "https://dev-studiobossapp.herokuapp.com" +  "/studio/" + sharedData.studio_id
         
         sharedData.postIt(urlString: sharedData.base_domain + "/api-login", params: ["email":inputEmail.text!, "password":inputPass.text!], callback: {
             success, result_dict in
@@ -178,11 +283,12 @@ class Login:UIView, UITextFieldDelegate
                 
                 self.sharedData.setUserData(key: "user_email", value: self.inputEmail.text!)
                 self.sharedData.setUserData(key: "user_pass", value: self.inputPass.text!)
+                self.sharedData.setUserData(key: "studio_id", value: self.inputStudios.text!)
                 
                 
                 self.inputPass.text = ""
                 self.inputEmail.text = ""
-                
+                self.inputStudios.text = ""
                 
                 
                 self.sharedData.member_id = (result_dict.object(forKey: "member_id") as! String)

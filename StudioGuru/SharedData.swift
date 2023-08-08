@@ -69,7 +69,7 @@ class SharedData: NSObject
       
         member_id = ""
         
-        base_domain = "https://dev-studiobossapp.herokuapp.com/studio/abc"
+        base_domain = "https://dev-studiobossapp.herokuapp.com"
         domain = "dev-studiobossapp.herokuapp.com"
         member_token = ""
         studio_id = "abc"
