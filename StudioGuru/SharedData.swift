@@ -45,9 +45,11 @@ class SharedData: NSObject
     var base_domain:String!
     var domain:String!
     var studio_id:String!
+    var studio_name:String!
     
     var member_id:String!
     var member_token:String!
+    var member_name:String!
     
     var s_email = ""
     var s_password = ""
@@ -55,6 +57,14 @@ class SharedData: NSObject
     
     var chat_title = ""
     var chat_id = ""
+    
+    var device_token = ""
+    
+    var owner:Bool = false
+    var manager:Bool = false
+    var instructor:Bool = false
+    var staff:Bool = false
+    
     
     private override init()
     {
@@ -68,9 +78,11 @@ class SharedData: NSObject
         cPage = 0
       
         member_id = ""
+        studio_name = ""
+        member_name = ""
         
         base_domain = "https://dev-studiobossapp.herokuapp.com"
-        domain = "dev-studiobossapp.herokuapp.com"
+        domain = "169.254.229.148"//"dev-studiobossapp.herokuapp.com"
         member_token = ""
         studio_id = "abc"
         blue = UIColor(hex: 0x1187be)
@@ -257,7 +269,7 @@ class SharedData: NSObject
             HTTPCookiePropertyKey.domain: domain,
             HTTPCookiePropertyKey.path: "/",
             HTTPCookiePropertyKey.name: "member_token",
-            HTTPCookiePropertyKey.value: member_token
+            HTTPCookiePropertyKey.value: member_token!
         ]
         let cookie = HTTPCookie(properties: cookieProps as [HTTPCookiePropertyKey : Any])!
         AF.session.configuration.httpCookieStorage?.setCookie(cookie)
@@ -268,7 +280,7 @@ class SharedData: NSObject
             HTTPCookiePropertyKey.domain: domain,
             HTTPCookiePropertyKey.path: "/",
             HTTPCookiePropertyKey.name: "member_id",
-            HTTPCookiePropertyKey.value: member_id
+            HTTPCookiePropertyKey.value: member_id!
         ]
         let cookieId = HTTPCookie(properties: cookiePropsId as [HTTPCookiePropertyKey : Any])!
         AF.session.configuration.httpCookieStorage?.setCookie(cookieId)
@@ -276,6 +288,9 @@ class SharedData: NSObject
         let headers : HTTPHeaders = ["x-access-token": ""]
         
         print("urlToSend----->",urlToSend)
+        print("member_id-",member_id!)
+        print("member_token-",member_token!)
+        print("cookie----->",cookie)
         //AF.request(urlToSend, method: .get, parameters: params, encoding:URLEncoding.default , headers: headers, interceptor: nil).response { (responseData) in
            
         AF.request( urlToSend, method: .get, parameters: params, encoding: URLEncoding.default, headers: headers).responseJSON (queue: DispatchQueue.global(qos: .background)){ (response) in

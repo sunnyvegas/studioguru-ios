@@ -29,6 +29,7 @@ class TopBar: UIView
         
         titleLabel = UILabel(frame: CGRect(x: 0, y: 40, width: sharedData.screenWidth, height: 40))
         titleLabel.textColor = .white
+        titleLabel.textAlignment = .center
         //titleLabel.font = .systemFont(ofSize: 25)
         addSubview(titleLabel)
         titleLabel.backgroundColor = UIColor.clear
@@ -44,9 +45,8 @@ class TopBar: UIView
     
     func initClass(title:String)
     {
-        titleLabel.textAlignment = .left
+        titleLabel.textAlignment = .center
         titleLabel.text = title
-        titleLabel.x = 15
         titleLabel.font = sharedData.boldFont(size: 25)
         titleLabel.textColor = .white
     }
@@ -71,7 +71,6 @@ class TopBar: UIView
         btnExit.addEventListener(selector: selector, target: target)
         btnExit.setImage(UIImage(named: "icon_back"), for: .normal)
         addSubview(btnExit)
-        titleLabel.x = 50
     }
     
     @objc func addMenu()
@@ -84,7 +83,8 @@ class TopBar: UIView
         btnExit.setImage(UIImage(named: "icon_more")?.withRenderingMode(.alwaysTemplate), for: .normal)
         btnExit.imageView?.tintColor = .white
         addSubview(btnExit)
-        titleLabel.x = 60
+        titleLabel.x = 0
+        titleLabel.textAlignment = .center
     }
     
     @objc func openMenu()

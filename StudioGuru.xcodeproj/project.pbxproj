@@ -38,6 +38,17 @@
 		FA8E94C82A7F5D3D00951D52 /* MyAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8E94C72A7F5D3D00951D52 /* MyAccount.swift */; };
 		FA8E94CA2A7FFABB00951D52 /* MainDashboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8E94C92A7FFABB00951D52 /* MainDashboard.swift */; };
 		FA8E94CC2A81915600951D52 /* MyAccountCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8E94CB2A81915600951D52 /* MyAccountCell.swift */; };
+		FAA1878F2A833FEB00598626 /* SideMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA1878E2A833FEB00598626 /* SideMenuCell.swift */; };
+		FAA187912A85C03400598626 /* StudioPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA187902A85C03400598626 /* StudioPage.swift */; };
+		FAA187932A85C08B00598626 /* ManagerPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA187922A85C08B00598626 /* ManagerPage.swift */; };
+		FAA187952A85C0EC00598626 /* InstructorPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA187942A85C0EC00598626 /* InstructorPage.swift */; };
+		FAA187972A85C10800598626 /* StaffPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA187962A85C10800598626 /* StaffPage.swift */; };
+		FAA187992A85C12500598626 /* ClassesPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA187982A85C12500598626 /* ClassesPage.swift */; };
+		FAA1879B2A85C15300598626 /* StorePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA1879A2A85C15300598626 /* StorePage.swift */; };
+		FAA1879F2A85D1C700598626 /* PersonalInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA1879E2A85D1C700598626 /* PersonalInfo.swift */; };
+		FAA187A12A85D2FC00598626 /* LoginInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA187A02A85D2FC00598626 /* LoginInfo.swift */; };
+		FAA187A32A85D31400598626 /* MyStudents.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA187A22A85D31400598626 /* MyStudents.swift */; };
+		FAA187A52A85D33500598626 /* PaymentMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA187A42A85D33500598626 /* PaymentMethods.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -95,6 +106,18 @@
 		FA8E94C72A7F5D3D00951D52 /* MyAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAccount.swift; sourceTree = "<group>"; };
 		FA8E94C92A7FFABB00951D52 /* MainDashboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainDashboard.swift; sourceTree = "<group>"; };
 		FA8E94CB2A81915600951D52 /* MyAccountCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAccountCell.swift; sourceTree = "<group>"; };
+		FAA1878E2A833FEB00598626 /* SideMenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuCell.swift; sourceTree = "<group>"; };
+		FAA187902A85C03400598626 /* StudioPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudioPage.swift; sourceTree = "<group>"; };
+		FAA187922A85C08B00598626 /* ManagerPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerPage.swift; sourceTree = "<group>"; };
+		FAA187942A85C0EC00598626 /* InstructorPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructorPage.swift; sourceTree = "<group>"; };
+		FAA187962A85C10800598626 /* StaffPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaffPage.swift; sourceTree = "<group>"; };
+		FAA187982A85C12500598626 /* ClassesPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassesPage.swift; sourceTree = "<group>"; };
+		FAA1879A2A85C15300598626 /* StorePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorePage.swift; sourceTree = "<group>"; };
+		FAA1879C2A85CCC000598626 /* StudioGuru.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = StudioGuru.entitlements; sourceTree = "<group>"; };
+		FAA1879E2A85D1C700598626 /* PersonalInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalInfo.swift; sourceTree = "<group>"; };
+		FAA187A02A85D2FC00598626 /* LoginInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInfo.swift; sourceTree = "<group>"; };
+		FAA187A22A85D31400598626 /* MyStudents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStudents.swift; sourceTree = "<group>"; };
+		FAA187A42A85D33500598626 /* PaymentMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentMethods.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -165,6 +188,7 @@
 		FA464E8A2A34E89200910323 /* StudioGuru */ = {
 			isa = PBXGroup;
 			children = (
+				FAA1879C2A85CCC000598626 /* StudioGuru.entitlements */,
 				FA464EBB2A34E92D00910323 /* SharedData.swift */,
 				FA464ED12A35131A00910323 /* Fonts */,
 				FA464EBD2A34E97800910323 /* Components */,
@@ -220,6 +244,7 @@
 			children = (
 				FA8E94C92A7FFABB00951D52 /* MainDashboard.swift */,
 				FA70D4FC2A81DAEE00ED4449 /* SideMenu.swift */,
+				FAA1878E2A833FEB00598626 /* SideMenuCell.swift */,
 				FA464EC62A34EEB600910323 /* Dashboard.swift */,
 				FA0E93432A404EF000EEB22F /* ChatDetails.swift */,
 				FA464EC82A3511EA00910323 /* Pages */,
@@ -230,8 +255,15 @@
 		FA464EC82A3511EA00910323 /* Pages */ = {
 			isa = PBXGroup;
 			children = (
+				FAA187902A85C03400598626 /* StudioPage.swift */,
 				FA8E94C72A7F5D3D00951D52 /* MyAccount.swift */,
 				FA8E94CB2A81915600951D52 /* MyAccountCell.swift */,
+				FAA1879D2A85D1A600598626 /* MyAccount */,
+				FAA187922A85C08B00598626 /* ManagerPage.swift */,
+				FAA187942A85C0EC00598626 /* InstructorPage.swift */,
+				FAA187962A85C10800598626 /* StaffPage.swift */,
+				FAA187982A85C12500598626 /* ClassesPage.swift */,
+				FAA1879A2A85C15300598626 /* StorePage.swift */,
 				FA8E94C52A7F5D2D00951D52 /* StudioRentals.swift */,
 				FA464EC92A3511F700910323 /* Home.swift */,
 				FA464ECB2A35124100910323 /* CalendarPage.swift */,
@@ -260,6 +292,17 @@
 			children = (
 			);
 			path = More;
+			sourceTree = "<group>";
+		};
+		FAA1879D2A85D1A600598626 /* MyAccount */ = {
+			isa = PBXGroup;
+			children = (
+				FAA1879E2A85D1C700598626 /* PersonalInfo.swift */,
+				FAA187A02A85D2FC00598626 /* LoginInfo.swift */,
+				FAA187A22A85D31400598626 /* MyStudents.swift */,
+				FAA187A42A85D33500598626 /* PaymentMethods.swift */,
+			);
+			path = MyAccount;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -449,16 +492,27 @@
 				FA8E94C32A7F5CFF00951D52 /* MoreCell.swift in Sources */,
 				FA464ED02A35125C00910323 /* More.swift in Sources */,
 				FA70D4FD2A81DAEE00ED4449 /* SideMenu.swift in Sources */,
+				FAA187932A85C08B00598626 /* ManagerPage.swift in Sources */,
+				FAA1878F2A833FEB00598626 /* SideMenuCell.swift in Sources */,
 				FA8E94CC2A81915600951D52 /* MyAccountCell.swift in Sources */,
 				FA464ECA2A3511F700910323 /* Home.swift in Sources */,
 				FA464EBF2A34E98600910323 /* TopBar.swift in Sources */,
 				FA8E94CA2A7FFABB00951D52 /* MainDashboard.swift in Sources */,
 				FA464ECE2A35124F00910323 /* Chat.swift in Sources */,
+				FAA187992A85C12500598626 /* ClassesPage.swift in Sources */,
+				FAA187912A85C03400598626 /* StudioPage.swift in Sources */,
 				FA464EC32A34EA5600910323 /* Login.swift in Sources */,
+				FAA187952A85C0EC00598626 /* InstructorPage.swift in Sources */,
 				FA8E94C82A7F5D3D00951D52 /* MyAccount.swift in Sources */,
 				FA464E8C2A34E89200910323 /* AppDelegate.swift in Sources */,
+				FAA1879F2A85D1C700598626 /* PersonalInfo.swift in Sources */,
 				FA0E93422A404BC800EEB22F /* ChatCell.swift in Sources */,
+				FAA187A12A85D2FC00598626 /* LoginInfo.swift in Sources */,
+				FAA187972A85C10800598626 /* StaffPage.swift in Sources */,
+				FAA1879B2A85C15300598626 /* StorePage.swift in Sources */,
 				FA464E8E2A34E89200910323 /* SceneDelegate.swift in Sources */,
+				FAA187A52A85D33500598626 /* PaymentMethods.swift in Sources */,
+				FAA187A32A85D31400598626 /* MyStudents.swift in Sources */,
 				FA464ECC2A35124100910323 /* CalendarPage.swift in Sources */,
 				FA8E94C62A7F5D2D00951D52 /* StudioRentals.swift in Sources */,
 			);
@@ -636,6 +690,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = StudioGuru/StudioGuru.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
@@ -649,8 +704,8 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -661,9 +716,12 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = KiwiDev;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -673,6 +731,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = StudioGuru/StudioGuru.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
@@ -686,8 +745,8 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -698,9 +757,12 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = KiwiDist;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

@@ -1,13 +1,13 @@
 //
-//  StudioRentals.swift
+//  LoginInfo.swift
 //  StudioGuru
 //
-//  Created by Sunny Clark on 8/5/23.
+//  Created by Sunny Clark on 8/10/23.
 //
 
 import UIKit
 
-class StudioRentals:BasePage, UITextFieldDelegate
+class LoginInfo:BasePage, UITextFieldDelegate
 {
     var sharedData:SharedData!
     
@@ -19,14 +19,19 @@ class StudioRentals:BasePage, UITextFieldDelegate
        sharedData = SharedData.sharedInstance
        backgroundColor = .white
         
-        let topBar = sharedData.getTopBarBig(title: "Studio Rentals")
-        topBar.addMenu()
+        let topBar = sharedData.getTopBarBig(title: "Login Info")
+        topBar.addBack(selector: #selector(self.goBack), target: self)
         addSubview(topBar)
     }
     
     override func initClass()
     {
     
+    }
+    
+    @objc func goBack()
+    {
+        sharedData.postEvent(event: "MY_ACCOUNT_HOME")
     }
     
     convenience init ()

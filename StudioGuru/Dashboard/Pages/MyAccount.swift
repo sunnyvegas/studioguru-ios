@@ -25,15 +25,16 @@ class MyAccount:BasePage, UITextFieldDelegate,UITableViewDelegate, UITableViewDa
         backgroundColor = .white
         
         mainCon = UIView(frame: sharedData.fullRect)
+        mainCon.width = sharedData.screenWidth * 3
         addSubview(mainCon)
         
         let topBar = sharedData.getTopBarBig(title: "My Account")
         topBar.addMenu()
-        addSubview(topBar)
+        
         
         mainDataA.add("Personal Info")
         mainDataA.add("Login Info")
-        mainDataA.add("Students")
+        mainDataA.add("My Students")
         mainDataA.add("Payment Methods")
         
         iconsA.add("icon_personal_info")
@@ -54,11 +55,21 @@ class MyAccount:BasePage, UITextFieldDelegate,UITableViewDelegate, UITableViewDa
         feedList.register(MyAccountCell.self, forCellReuseIdentifier: "myaccount_cell")
         feedList.tableFooterView = UIView(frame: .zero)
         mainCon.addSubview(feedList)
+        mainCon.addSubview(topBar)
+        sharedData.addEventListener(title: "MY_ACCOUNT_HOME", target: self, selector: #selector(self.goHome))
     }
     
     override func initClass()
     {
     
+    }
+    
+    @objc func goHome()
+    {
+        UIView.animate(withDuration: 0.25)
+        {
+            self.mainCon.x = 0
+        }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
@@ -89,6 +100,31 @@ class MyAccount:BasePage, UITextFieldDelegate,UITableViewDelegate, UITableViewDa
     {
         tableView.deselectRow(at: indexPath, animated: true)
         
+        var page:BasePage = PersonalInfo(frame: sharedData.fullRect)
+        if(indexPath.row == 1)
+        {
+            page = LoginInfo(frame: sharedData.fullRect)
+        }
+        
+        if(indexPath.row == 2)
+        {
+            page = MyStudents(frame: sharedData.fullRect)
+        }
+        
+        if(indexPath.row == 3)
+        {
+            page = PaymentMethods(frame: sharedData.fullRect)
+        }
+        
+        page.x = sharedData.screenWidth
+        page.initClass()
+        mainCon.addSubview(page)
+        
+        
+        UIView.animate(withDuration: 0.25)
+        {
+            self.mainCon.x = self.sharedData.screenWidth * -1
+        }
     }
     
     convenience init ()

@@ -7,12 +7,19 @@
 
 import UIKit
 
-class SideMenu:UIView, UITextFieldDelegate
+class SideMenu:UIView, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource
 {
     var sharedData:SharedData!
     
     var studioImg:UIImageView!
     var custImg:UIImageView!
+    
+    var mainCon:UIView!
+    
+    var feedList:UITableView!
+    
+    var mainDataA:NSMutableArray = NSMutableArray()
+    var iconsA:NSMutableArray = NSMutableArray()
     
     override init (frame : CGRect)
     {
@@ -20,28 +27,159 @@ class SideMenu:UIView, UITextFieldDelegate
         sharedData = SharedData.sharedInstance
         backgroundColor = .white
         
-        studioImg = UIImageView()
-        studioImg.width = 60
-        studioImg.height = 60
-        studioImg.y = 80
-        studioImg.x = 10
-        studioImg.backgroundColor = .darkGray
-        studioImg.corner(radius: 30)
-        addSubview(studioImg)
+        mainCon = UIView(frame: sharedData.fullRect)
+        addSubview(mainCon)
         
-        custImg = UIImageView()
-        custImg.width = 60
-        custImg.height = 60
-        custImg.y = studioImg.posY() + 20
-        custImg.x = 10
-        custImg.backgroundColor = .darkGray
-        custImg.corner(radius: 30)
-        addSubview(custImg)
+        
+        feedList = UITableView();
+        feedList.width = sharedData.screenWidth * 0.8
+        feedList.y = 50
+        feedList.height = sharedData.screenHeight - feedList.y
+        feedList.backgroundColor = UIColor.clear
+        feedList.delegate = self
+        feedList.dataSource = self
+        feedList.showsVerticalScrollIndicator = false
+        feedList.separatorStyle = .none
+        feedList.register(SideMenuCell.self, forCellReuseIdentifier: "sidemenu_cell")
+        feedList.tableFooterView = UIView(frame: .zero)
+        mainCon.addSubview(feedList)
+        
+        
+        sharedData.addEventListener(title: "APP_LOADED", target: self, selector: #selector(self.initClass))
     }
     
-    func initClass()
+    @objc func initClass()
     {
+        mainDataA.removeAllObjects()
+        iconsA.removeAllObjects()
+        
+        mainDataA.add(sharedData.studio_name!)
+        iconsA.add(sharedData.base_domain + "/logo")
+        
+        mainDataA.add(sharedData.member_name!)
+        iconsA.add(sharedData.base_domain + "/member-photo/" + sharedData.member_id)
+        
+        
+        mainDataA.add("Manager")
+        iconsA.add("icon_manager")
+        
+        mainDataA.add("Instructor")
+        iconsA.add("icon_instructor")
+        
+        mainDataA.add("Staff")
+        iconsA.add("icon_staff")
+        
+        mainDataA.add("Programs/Classes")
+        iconsA.add("icon_classes")
+        
+        mainDataA.add("Store")
+        iconsA.add("icon_store")
+        
+        mainDataA.add("Studio Rentals")
+        iconsA.add("icon_studio_rentals")
+        
+        mainDataA.add("Log Out")
+        iconsA.add("icon_login_info")
+        
+        feedList.reloadData()
+        
+    }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
+    {
+        if(indexPath.row < 2)
+        {
+            return 80
+        }
+        return 50
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
+    {
+        mainDataA.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
+    {
+        let cell = SideMenuCell(style: .default, reuseIdentifier: "sidemenu_cell")
+        
+        let title = mainDataA.object(at: indexPath.row) as! String
+        cell.accessoryType = .disclosureIndicator
+        
+        if(indexPath.row == 0 && sharedData.owner == false)
+        {
+            cell.accessoryType = .none
+        }
+        
+        cell.title.text = title
+        cell.title.font = sharedData.normalFont(size: 20)
+        
+        cell.backgroundColor = .white
+        cell.title.textColor = .black
+        if(indexPath.row < 2)
+        {
+            cell.image.downloadedFrom(link: (iconsA.object(at: indexPath.row) as! String))
+            cell.image.tintColor = .black
+            cell.image.width = 60
+            cell.image.height = 60
+            cell.image.corner(radius: 30)
+            cell.image.layer.borderColor = UIColor.lightGray.cgColor
+            cell.image.layer.borderWidth = 1
+            cell.line.y = 79
+            cell.title.x = cell.image.posX() + 10
+            cell.title.y = 20
+        }else{
+            cell.image.image = UIImage(named: (iconsA.object(at: indexPath.row) as! String) )?.withRenderingMode(.alwaysTemplate)
+            cell.image.tintColor = .black
+        }
+        
+        if(title == "Log Out")
+        {
+            cell.backgroundColor = UIColor(hex: 0xaa0000)
+            cell.title.textColor = .white
+            cell.image.tintColor = .white
+        }
+        
+//        if(indexPath.row == 3)
+//        {
+//            cell.isHidden = true
+//        }
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
+    {
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        if(indexPath.row == 0 && sharedData.owner == false)
+        {
+            return
+        }
+        
+        let title = mainDataA.object(at: indexPath.row) as! String
+        if(title == "Log Out")
+        {
+            sharedData.showMessageCBConfirm(title: "Alert", message: "Are you sure you want to log out?", callbackY:
+            {
+                self.sharedData.postEvent(event: "HIDE_MENU")
+                self.sharedData.setTimeout(delay: 0.4, block:
+                {
+                    self.sharedData.postEvent(event: "LOG_OUT")
+                })
+                
+            }, callbackN: {
+                
+            })
+            return
+        }
+        
+        sharedData.postEvent(event: "HIDE_MENU")
+        
+        sharedData.cPage = CGFloat(indexPath.row)
+        sharedData.postEvent(event: "UPDATE_PAGES")
+        
+        
     }
     
     convenience init ()

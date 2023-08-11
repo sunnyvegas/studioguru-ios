@@ -8,7 +8,7 @@
 
 import UIKit
 
-class Login:UIView, UITextFieldDelegate,UIPickerViewDelegate, UIPickerViewDataSource
+class Login:UIView, UITextFieldDelegate,UIPickerViewDelegate, UIPickerViewDataSource, UNUserNotificationCenterDelegate
 {
     
     var sharedData:SharedData!
@@ -159,14 +159,25 @@ class Login:UIView, UITextFieldDelegate,UIPickerViewDelegate, UIPickerViewDataSo
         //btnLogin.alpha = 0.5
         addSubview(btnSignUp)
         
+        sharedData.addEventListener(title: "LOG_OUT", target: self, selector: #selector(self.onLogOut))
         
-        
+        sharedData.addEventListener(title: "TOKEN_LOADED", target: self, selector: #selector(self.tokenLoaded))
+        sharedData.postEvent(event: "SHOW_LOADING")
         loadData()
+        
+        
     }
     
     func initClass()
     {
     
+    }
+    
+    @objc func onLogOut()
+    {
+        inputEmail.text = ""
+        inputPass.text = ""
+        inputStudios.text = ""
     }
     
     @objc func loadData()
@@ -236,9 +247,41 @@ class Login:UIView, UITextFieldDelegate,UIPickerViewDelegate, UIPickerViewDataSo
         })
     }
     
+    @objc func tokenLoaded()
+    {
+        if(sharedData.getUserData(title: "user_email") != "")
+        {
+            inputEmail.text = sharedData.getUserData(title: "user_email")
+            inputPass.text = sharedData.getUserData(title: "user_pass")
+            inputStudios.text = sharedData.getUserData(title: "studio_id")
+            self.goLogin()
+        }else{
+            sharedData.postEvent(event: "HIDE_LOADING")
+        }
+    }
+    
     func checkLogin()
     {
-       
+        
+        self.sharedData.setTimeout(delay: 1.0, block: {
+            
+            //self.checkGulpTimer()
+            
+            
+            let center = UNUserNotificationCenter.current()
+            // Set the delegate to handle notification actions.
+            center.delegate = self
+                center.requestAuthorization(options: [.alert, .sound]) { (granted, error) in
+                  // Enable or disable features based on authorization.
+                    DispatchQueue.main.async {
+                               UIApplication.shared.registerForRemoteNotifications()
+                               }
+                   print("Enabled!")
+                }
+                
+               
+        })
+       /*
         if(sharedData.getUserData(title: "user_email") != "")
         {
             inputEmail.text = sharedData.getUserData(title: "user_email")
@@ -246,6 +289,20 @@ class Login:UIView, UITextFieldDelegate,UIPickerViewDelegate, UIPickerViewDataSo
             inputStudios.text = sharedData.getUserData(title: "studio_id")
             self.goLogin()
         }
+        */
+    }
+    
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+      // Convert the device token to a string.
+      let token = deviceToken.reduce("", {$0 + String(format: "%02X", $1)})
+      
+        
+        SharedData.sharedInstance.device_token = token
+      // Print the device token to the console.
+      print("Device token-: \(token)")
+        
+    
+       
     }
     
     @objc func loadStudios()
@@ -269,10 +326,11 @@ class Login:UIView, UITextFieldDelegate,UIPickerViewDelegate, UIPickerViewDataSo
         
         print("mainPicker.selectedRow(inComponent: 0)--->",mainPicker.selectedRow(inComponent: 0))
         sharedData.studio_id = ((mainDataA.object(at: mainPicker.selectedRow(inComponent: 0)) as! NSDictionary).object(forKey: "id") as! String)
+        sharedData.studio_name = ((mainDataA.object(at: mainPicker.selectedRow(inComponent: 0)) as! NSDictionary).object(forKey: "text") as! String)
         
-        sharedData.base_domain = "https://dev-studiobossapp.herokuapp.com" +  "/studio/" + sharedData.studio_id
+        sharedData.base_domain = "http://169.254.229.148:3300" +  "/studio/" + sharedData.studio_id//"https://dev-studiobossapp.herokuapp.com" +  "/studio/" + sharedData.studio_id
         
-        sharedData.postIt(urlString: sharedData.base_domain + "/api-login", params: ["email":inputEmail.text!, "password":inputPass.text!], callback: {
+        sharedData.postIt(urlString: sharedData.base_domain + "/api-login-ios", params: ["email":inputEmail.text!, "password":inputPass.text!], callback: {
             success, result_dict in
             
             self.sharedData.postEvent(event: "HIDE_LOADING")
@@ -293,9 +351,18 @@ class Login:UIView, UITextFieldDelegate,UIPickerViewDelegate, UIPickerViewDataSo
                 
                 self.sharedData.member_id = (result_dict.object(forKey: "member_id") as! String)
                 self.sharedData.member_token = (result_dict.object(forKey: "member_token") as! String)
+                self.sharedData.member_name = (result_dict.object(forKey: "member_name") as! String)
+                
+                
+                self.sharedData.owner = (result_dict.object(forKey: "owner") as! Bool)
+                self.sharedData.manager = (result_dict.object(forKey: "manager") as! Bool)
+                self.sharedData.instructor = (result_dict.object(forKey: "instructor") as! Bool)
+                self.sharedData.staff = (result_dict.object(forKey: "staff") as! Bool)
+                
                 
                 print("LOGIN_RESPONSE")
                 print(result_dict)
+                self.sharedData.postEvent(event: "APP_LOADED")
                 self.sharedData.postEvent(event: "SHOW_DASHBOARD")
                 //self.sharedData.showMessage(title: "Alert", message: "Success!")
             }else{

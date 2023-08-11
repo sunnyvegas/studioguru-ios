@@ -30,6 +30,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
+    
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data)
+    {
+        // Convert the device token to a string.
+        let token = deviceToken.reduce("", {$0 + String(format: "%02X", $1)})
+        
+        
+        SharedData.sharedInstance.device_token = token
+        // Print the device token to the console.
+        print("Device token1: \(token)")
+        
+        SharedData.sharedInstance.postEvent(event: "TOKEN_LOADED")
+        
+    }
 
 
 }

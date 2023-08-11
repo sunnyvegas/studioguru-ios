@@ -1,13 +1,13 @@
 //
-//  StudioRentals.swift
+//  ClassesPage.swift
 //  StudioGuru
 //
-//  Created by Sunny Clark on 8/5/23.
+//  Created by Sunny Clark on 8/10/23.
 //
 
 import UIKit
 
-class StudioRentals:BasePage, UITextFieldDelegate
+class ClassesPage:BasePage, UITextFieldDelegate
 {
     var sharedData:SharedData!
     
@@ -19,7 +19,7 @@ class StudioRentals:BasePage, UITextFieldDelegate
        sharedData = SharedData.sharedInstance
        backgroundColor = .white
         
-        let topBar = sharedData.getTopBarBig(title: "Studio Rentals")
+        let topBar = sharedData.getTopBarBig(title: "Programs/Classes")
         topBar.addMenu()
         addSubview(topBar)
     }
