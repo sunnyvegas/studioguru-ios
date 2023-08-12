@@ -6,12 +6,17 @@
 //
 
 import UIKit
+import AVFoundation
+import AVKit
+import Foundation
+import MobileCoreServices
 
-class ViewController: UIViewController
+class ViewController: UIViewController,UIImagePickerControllerDelegate, UINavigationControllerDelegate
 {
     
     var sharedData:SharedData!
     var dashPage:MainDashboard!
+    var loadingCon:UIView!
     
     override func viewDidLoad()
     {
@@ -23,11 +28,40 @@ class ViewController: UIViewController
         view.addSubview(loginPage)
         dashPage = MainDashboard(frame: sharedData.fullRect)
         
+        
+        loadingCon = UIView(frame: sharedData.fullRect)
+        loadingCon.backgroundColor = .black
+        loadingCon.alpha = 0.5
+        loadingCon.isHidden = true
+        view.addSubview(loadingCon)
+        
+        let actInd: UIActivityIndicatorView = UIActivityIndicatorView()
+        actInd.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
+        actInd.hidesWhenStopped = true
+        actInd.center = loadingCon.center
+        if #available(iOS 13.0, *) {
+            actInd.style = .large
+        } else {
+            // Fallback on earlier versions
+        }
+        actInd.startAnimating()
+        loadingCon.addSubview(actInd)
+        
 //        let dashPage = Dashboard(frame: sharedData.fullRect)
 //        view.addSubview(dashPage)
         
         sharedData.addEventListener(title: "SHOW_DASHBOARD", target: self, selector: #selector(self.goDash))
         sharedData.addEventListener(title: "LOG_OUT", target: self, selector: #selector(self.goLogOut))
+        
+        sharedData.addEventListener(title: "SHOW_LOADING", target: self, selector: #selector(self.showLoading))
+        
+        sharedData.addEventListener(title: "HIDE_LOADING", target: self, selector: #selector(self.hideLoading))
+        
+        
+        sharedData.addEventListener(title: "ADD_PHOTO_LIBRARY", target: self, selector: #selector(self.goPickPhotoLibrary))
+        sharedData.addEventListener(title: "ADD_PHOTO_CAMERA", target: self, selector: #selector(self.goPickPhotoCamera))
+        sharedData.addEventListener(title: "ADD_VIDEO_CAMERA", target: self, selector: #selector(self.goPickVideoCamera))
+        sharedData.addEventListener(title: "ADD_VIDEO_LIBRARY", target: self, selector: #selector(self.goPickVideoLibrary))
     }
     
     @objc func goDash()
@@ -36,6 +70,17 @@ class ViewController: UIViewController
         view.addSubview(dashPage)
         dashPage.initClass()
         dashPage.animateUp()
+    }
+    
+    @objc func showLoading()
+    {
+        view.addSubview(loadingCon)
+        loadingCon.isHidden = false
+    }
+    
+    @objc func hideLoading()
+    {
+        loadingCon.isHidden = true
     }
     
     @objc func goLogOut()
@@ -49,6 +94,160 @@ class ViewController: UIViewController
         self.sharedData.member_token = ""
         self.sharedData.member_name = ""
         dashPage.animateDown()
+    }
+    
+    @objc func goPickVideoLibrary()
+    {
+        let imagePickerController = UIImagePickerController()
+        
+        // Only allow photos to be picked, not taken.
+        imagePickerController.sourceType = .photoLibrary
+        
+        
+        //imagePickerController.cameraDevice = UIImagePickerController.CameraDevice.front
+        
+        // Make sure ViewController is notified when the user picks an image.
+        imagePickerController.delegate = self
+        imagePickerController.isEditing = true
+        imagePickerController.allowsEditing = true
+        imagePickerController.mediaTypes = [kUTTypeMovie as String]
+        present(imagePickerController, animated: true, completion:
+            {
+                //self.view.window?.rootViewController?.view.addSubview(self.uploadPhoto)
+                //self.uploadPhoto.frame = CGRect(x: 0, y: 0, width: self.screenWidth, height: self.screenHeight)
+        })
+    }
+    
+    @objc func goPickVideoCamera()
+    {
+        let imagePickerController = UIImagePickerController()
+        
+        // Only allow photos to be picked, not taken.
+        imagePickerController.sourceType = .camera
+        
+        imagePickerController.cameraDevice = .front
+        //imagePickerController.cameraDevice = UIImagePickerController.CameraDevice.front
+        imagePickerController.mediaTypes = [kUTTypeMovie as String]
+        // Make sure ViewController is notified when the user picks an image.
+        imagePickerController.delegate = self
+        imagePickerController.isEditing = true
+        imagePickerController.allowsEditing = true
+        imagePickerController.videoMaximumDuration = 60
+        present(imagePickerController, animated: true, completion:
+            {
+                //self.view.window?.rootViewController?.view.addSubview(self.uploadPhoto)
+                //self.uploadPhoto.frame = CGRect(x: 0, y: 0, width: self.screenWidth, height: self.screenHeight)
+        })
+    }
+    
+    @objc func goPickPhotoCamera()
+    {
+        let imagePickerController = UIImagePickerController()
+        
+        // Only allow photos to be picked, not taken.
+        imagePickerController.sourceType = .camera
+        
+        imagePickerController.cameraDevice = .front
+        //imagePickerController.cameraDevice = UIImagePickerController.CameraDevice.front
+        
+        // Make sure ViewController is notified when the user picks an image.
+        imagePickerController.delegate = self
+        imagePickerController.isEditing = true
+        imagePickerController.allowsEditing = true
+        present(imagePickerController, animated: true, completion:
+            {
+                //self.view.window?.rootViewController?.view.addSubview(self.uploadPhoto)
+                //self.uploadPhoto.frame = CGRect(x: 0, y: 0, width: self.screenWidth, height: self.screenHeight)
+        })
+    }
+    
+    @objc func goPickPhotoLibrary()
+    {
+        let imagePickerController = UIImagePickerController()
+        
+        // Only allow photos to be picked, not taken.
+        imagePickerController.sourceType = .photoLibrary
+        
+        
+        //imagePickerController.cameraDevice = UIImagePickerController.CameraDevice.front
+        
+        // Make sure ViewController is notified when the user picks an image.
+        imagePickerController.delegate = self
+        imagePickerController.isEditing = true
+        imagePickerController.allowsEditing = true
+        present(imagePickerController, animated: true, completion:
+            {
+                //self.view.window?.rootViewController?.view.addSubview(self.uploadPhoto)
+                //self.uploadPhoto.frame = CGRect(x: 0, y: 0, width: self.screenWidth, height: self.screenHeight)
+        })
+    }
+    
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any])
+    {
+        //dismiss(animated: true, completion: nil)
+        //return
+        print("info",info)
+        
+        
+        // Set photoImageView to display the selected image.
+        //photoImageView.image = selectedImage
+        
+        
+        if(sharedData.c_image_state == "update_user_profile_video")
+        {
+            let mediaType = info[UIImagePickerController.InfoKey.mediaType] as AnyObject
+
+                if mediaType as! String == kUTTypeMovie as String {
+                    let videoURL = info[UIImagePickerController.InfoKey.mediaURL] as? URL
+                        print("VIDEO URL: \(videoURL!)")
+                    sharedData.c_vid_url = videoURL
+                    sharedData.postEvent(event: "UPDATE_USER_VIDEO")
+                }
+            
+        }
+        
+        if(sharedData.c_image_state == "update_signup_video")
+        {
+            //UPDATE_VIDEO_SIGNUP
+            
+            let mediaType = info[UIImagePickerController.InfoKey.mediaType] as AnyObject
+
+                if mediaType as! String == kUTTypeMovie as String {
+                    let videoURL = info[UIImagePickerController.InfoKey.mediaURL] as? URL
+                        print("VIDEO URL: \(videoURL!)")
+                    sharedData.c_vid_url = videoURL
+                    sharedData.postEvent(event: "UPDATE_VIDEO_SIGNUP")
+                }
+        }
+   
+        
+        if(sharedData.c_image_state == "update_user_profile")
+        {
+            sharedData.c_image = info[.editedImage] as? UIImage
+            //sharedData.c_image = sharedData.c_image
+            sharedData.postEvent(event: "UPDATE_EDIT_USER_PHOTO")
+        }
+        
+        if(sharedData.c_image_state == "update_signup_photo")
+        {
+            sharedData.c_image = info[.editedImage] as? UIImage
+            sharedData.postEvent(event: "UPDATE_PHOTO_SIGNUP")
+        }
+        
+//        if(sharedData.c_image_state == "events_invited")
+//        {
+//            sharedData.c_image = sharedData.c_image
+//            sharedData.postEvent(event: "UPDATE_EVENTS_PHOTO_INVITE")
+//        }
+//
+//        if(sharedData.c_image_state == "my_profile")
+//        {
+//            sharedData.c_image = sharedData.c_image
+//            sharedData.postEvent(event: "UPDATE_PROFILE_PHOTO")
+//       }
+        
+        dismiss(animated: true, completion: nil)
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -1254,12 +1453,12 @@ extension UITextView
      
      
      
-     override init (frame : CGRect)
-     {
+    override init (frame : CGRect)
+    {
         super.init(frame : frame)
         sharedData = SharedData.sharedInstance
         backgroundColor = .white
-     }
+    }
      
      func initClass()
      {

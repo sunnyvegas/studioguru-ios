@@ -87,6 +87,7 @@ class SideMenu:UIView, UITextFieldDelegate, UITableViewDelegate, UITableViewData
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
     {
+       
         if(indexPath.row < 2)
         {
             return 80
@@ -140,10 +141,7 @@ class SideMenu:UIView, UITextFieldDelegate, UITableViewDelegate, UITableViewData
             cell.image.tintColor = .white
         }
         
-//        if(indexPath.row == 3)
-//        {
-//            cell.isHidden = true
-//        }
+       
         
         return cell
     }

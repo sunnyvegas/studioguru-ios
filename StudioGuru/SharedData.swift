@@ -22,9 +22,7 @@ class SharedData: NSObject
     
     var imagesDict:NSMutableDictionary!
     
-    var edit_key:String!
-    var edit_title:String!
-    var edit_value:String!
+
     
     var edit_valuesA:NSMutableArray = NSMutableArray()
     
@@ -66,6 +64,10 @@ class SharedData: NSObject
     var staff:Bool = false
     
     
+    var edit_key = ""
+    var edit_title = ""
+    var edit_value = ""
+    
     private override init()
     {
         screenWidth = UIScreen.main.bounds.width
@@ -82,7 +84,7 @@ class SharedData: NSObject
         member_name = ""
         
         base_domain = "https://dev-studiobossapp.herokuapp.com"
-        domain = "169.254.229.148"//"dev-studiobossapp.herokuapp.com"
+        domain = "169.254.143.192"//"dev-studiobossapp.herokuapp.com"
         member_token = ""
         studio_id = "abc"
         blue = UIColor(hex: 0x1187be)
@@ -257,6 +259,28 @@ class SharedData: NSObject
         window?.rootViewController!.present(alertController, animated: true) {
             // ...
         }
+    }
+    
+    func formatPhone(with mask: String, phone: String) -> String
+    {
+        let numbers = phone.replacingOccurrences(of: "[^0-9]", with: "", options: .regularExpression)
+        var result = ""
+        var index = numbers.startIndex // numbers iterator
+
+        // iterate over the mask characters until the iterator of numbers ends
+        for ch in mask where index < numbers.endIndex {
+            if ch == "X" {
+                // mask requires a number in this place, so take the next one
+                result.append(numbers[index])
+
+                // move numbers iterator to the next index
+                index = numbers.index(after: index)
+
+            } else {
+                result.append(ch) // just append a mask character
+            }
+        }
+        return result
     }
     
     func getIt(urlString:String, params:[String:Any], callback: @escaping (_ success:Bool, _ result:NSDictionary) -> Void)

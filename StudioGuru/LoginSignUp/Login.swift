@@ -328,7 +328,7 @@ class Login:UIView, UITextFieldDelegate,UIPickerViewDelegate, UIPickerViewDataSo
         sharedData.studio_id = ((mainDataA.object(at: mainPicker.selectedRow(inComponent: 0)) as! NSDictionary).object(forKey: "id") as! String)
         sharedData.studio_name = ((mainDataA.object(at: mainPicker.selectedRow(inComponent: 0)) as! NSDictionary).object(forKey: "text") as! String)
         
-        sharedData.base_domain = "http://169.254.229.148:3300" +  "/studio/" + sharedData.studio_id//"https://dev-studiobossapp.herokuapp.com" +  "/studio/" + sharedData.studio_id
+        sharedData.base_domain = "http://169.254.143.192:3300" +  "/studio/" + sharedData.studio_id//"https://dev-studiobossapp.herokuapp.com" +  "/studio/" + sharedData.studio_id
         
         sharedData.postIt(urlString: sharedData.base_domain + "/api-login-ios", params: ["email":inputEmail.text!, "password":inputPass.text!], callback: {
             success, result_dict in
