@@ -68,6 +68,8 @@ class SharedData: NSObject
     var edit_title = ""
     var edit_value = ""
     
+    var studentDict:NSMutableDictionary = NSMutableDictionary()
+    
     private override init()
     {
         screenWidth = UIScreen.main.bounds.width

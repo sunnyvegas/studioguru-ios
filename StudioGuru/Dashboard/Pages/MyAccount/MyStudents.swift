@@ -20,6 +20,7 @@ class MyStudents:BasePage, UITextFieldDelegate, UITableViewDelegate, UITableView
     var mainCon:UIView!
     
     var actInd:UIActivityIndicatorView!
+    var page:StudentDetails!
     
     override init (frame : CGRect)
     {
@@ -28,12 +29,12 @@ class MyStudents:BasePage, UITextFieldDelegate, UITableViewDelegate, UITableView
         backgroundColor = .white
         
         mainCon = UIView(frame: sharedData.fullRect)
-        mainCon.width = sharedData.screenWidth
+        mainCon.width = sharedData.screenWidth * 2
         addSubview(mainCon)
         
         let topBar = sharedData.getTopBarBig(title: "My Students")
         topBar.addBack(selector: #selector(self.goBack), target: self)
-        addSubview(topBar)
+        mainCon.addSubview(topBar)
         
         feedList = UITableView();
         feedList.width = sharedData.screenWidth
@@ -55,6 +56,12 @@ class MyStudents:BasePage, UITextFieldDelegate, UITableViewDelegate, UITableView
         actInd.style = .large
         actInd.tintColor = .black
         actInd.startAnimating()
+        
+        page = StudentDetails(frame: sharedData.fullRect)
+        page.x = sharedData.screenWidth
+        mainCon.addSubview(page)
+        
+        sharedData.addEventListener(title: "MYSTUDENTS_HOME", target: self, selector: #selector(self.goHome))
     }
     
     override func initClass()
@@ -112,6 +119,25 @@ class MyStudents:BasePage, UITextFieldDelegate, UITableViewDelegate, UITableView
         tableView.deselectRow(at: indexPath, animated: true)
         
         
+        sharedData.studentDict.removeAllObjects()
+        
+        let data = (mainDataA.object(at: indexPath.row) as! NSDictionary)
+        
+        sharedData.studentDict.addEntries(from: data as! [AnyHashable : Any])
+        page.initClass()
+        UIView.animate(withDuration: 0.25, animations:
+        {
+            self.mainCon.x = self.sharedData.screenWidth * -1
+        })
+            
+    }
+    
+    @objc func goHome()
+    {
+        UIView.animate(withDuration: 0.25, animations:
+        {
+            self.mainCon.x = 0
+        })
     }
     
     @objc func goBack()
