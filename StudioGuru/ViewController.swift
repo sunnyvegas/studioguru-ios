@@ -229,6 +229,15 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate, UINaviga
             sharedData.postEvent(event: "UPDATE_EDIT_USER_PHOTO")
         }
         
+        if(sharedData.c_image_state == "add_student_photo")
+        {
+            sharedData.c_image = info[.editedImage] as? UIImage
+            //sharedData.c_image = sharedData.c_image
+            sharedData.postEvent(event: "UPDATE_ADD_STUDENT_PHOTO")
+        }
+        
+        
+        
         if(sharedData.c_image_state == "update_signup_photo")
         {
             sharedData.c_image = info[.editedImage] as? UIImage

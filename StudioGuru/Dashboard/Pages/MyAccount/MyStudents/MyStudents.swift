@@ -34,6 +34,7 @@ class MyStudents:BasePage, UITextFieldDelegate, UITableViewDelegate, UITableView
         
         let topBar = sharedData.getTopBarBig(title: "My Students")
         topBar.addBack(selector: #selector(self.goBack), target: self)
+        topBar.addPlus(selector: #selector(self.goAdd), target: self)
         mainCon.addSubview(topBar)
         
         feedList = UITableView();
@@ -62,6 +63,7 @@ class MyStudents:BasePage, UITextFieldDelegate, UITableViewDelegate, UITableView
         mainCon.addSubview(page)
         
         sharedData.addEventListener(title: "MYSTUDENTS_HOME", target: self, selector: #selector(self.goHome))
+        sharedData.addEventListener(title: "RELOAD_MYSTUDENTS", target: self, selector: #selector(self.loadData))
     }
     
     override func initClass()
@@ -71,11 +73,13 @@ class MyStudents:BasePage, UITextFieldDelegate, UITableViewDelegate, UITableView
     
     @objc func loadData()
     {
+        self.mainDataA.removeAllObjects()
+        self.feedList.reloadData()
         mainCon.addSubview(actInd)
         sharedData.getIt(urlString: sharedData.base_domain + "/api-ios/students-list", params: [:], callback:
         {
             success, result_dict in
-            
+            self.mainDataA.removeAllObjects()
             self.mainDataA.addObjects(from: (result_dict.object(forKey: "result") as! Array<Any>) )
             self.actInd.removeFromSuperview()
             self.feedList.reloadData()
@@ -118,7 +122,6 @@ class MyStudents:BasePage, UITextFieldDelegate, UITableViewDelegate, UITableView
     {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        
         sharedData.studentDict.removeAllObjects()
         
         let data = (mainDataA.object(at: indexPath.row) as! NSDictionary)
@@ -130,6 +133,14 @@ class MyStudents:BasePage, UITextFieldDelegate, UITableViewDelegate, UITableView
             self.mainCon.x = self.sharedData.screenWidth * -1
         })
             
+    }
+    
+    @objc func goAdd()
+    {
+        let page = MyStudentsAddStudent(frame: self.sharedData.fullRectBottom)
+        self.mainCon.addSubview(page)
+        page.initClass()
+        page.animateUp()
     }
     
     @objc func goHome()

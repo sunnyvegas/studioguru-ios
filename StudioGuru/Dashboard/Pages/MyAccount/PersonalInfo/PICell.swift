@@ -65,7 +65,7 @@ class PICell:UITableViewCell
         icon.y = 15
         icon.image = UIImage(named: "icon_next")?.withRenderingMode(.alwaysTemplate)
         icon.tintColor = .lightGray
-        addSubview(icon)
+        //addSubview(icon)
         
         //self.selectionStyle = .none
     

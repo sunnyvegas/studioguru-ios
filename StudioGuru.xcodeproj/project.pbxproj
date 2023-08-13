@@ -33,6 +33,10 @@
 		FA464ED82A35134200910323 /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA464ED42A35134200910323 /* Roboto-Bold.ttf */; };
 		FA464ED92A35134200910323 /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA464ED52A35134200910323 /* Roboto-Regular.ttf */; };
 		FA70D4FD2A81DAEE00ED4449 /* SideMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA70D4FC2A81DAEE00ED4449 /* SideMenu.swift */; };
+		FA77BCA62A88376500617AC1 /* PMCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA77BCA52A88376500617AC1 /* PMCell.swift */; };
+		FA77BCAC2A883BF100617AC1 /* PMAddCreditCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA77BCAB2A883BF000617AC1 /* PMAddCreditCard.swift */; };
+		FA77BCAE2A88947700617AC1 /* PMAddBankAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA77BCAD2A88947700617AC1 /* PMAddBankAccount.swift */; };
+		FA77BCB02A889BA400617AC1 /* MyStudentsAddStudent.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA77BCAF2A889BA400617AC1 /* MyStudentsAddStudent.swift */; };
 		FA8E94C32A7F5CFF00951D52 /* MoreCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8E94C22A7F5CFF00951D52 /* MoreCell.swift */; };
 		FA8E94C62A7F5D2D00951D52 /* StudioRentals.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8E94C52A7F5D2D00951D52 /* StudioRentals.swift */; };
 		FA8E94C82A7F5D3D00951D52 /* MyAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8E94C72A7F5D3D00951D52 /* MyAccount.swift */; };
@@ -106,6 +110,10 @@
 		FA464ED42A35134200910323 /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Roboto-Bold.ttf"; path = "fonts/Roboto-Bold.ttf"; sourceTree = SOURCE_ROOT; };
 		FA464ED52A35134200910323 /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Roboto-Regular.ttf"; path = "fonts/Roboto-Regular.ttf"; sourceTree = SOURCE_ROOT; };
 		FA70D4FC2A81DAEE00ED4449 /* SideMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenu.swift; sourceTree = "<group>"; };
+		FA77BCA52A88376500617AC1 /* PMCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PMCell.swift; sourceTree = "<group>"; };
+		FA77BCAB2A883BF000617AC1 /* PMAddCreditCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PMAddCreditCard.swift; sourceTree = "<group>"; };
+		FA77BCAD2A88947700617AC1 /* PMAddBankAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PMAddBankAccount.swift; sourceTree = "<group>"; };
+		FA77BCAF2A889BA400617AC1 /* MyStudentsAddStudent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStudentsAddStudent.swift; sourceTree = "<group>"; };
 		FA8E94C22A7F5CFF00951D52 /* MoreCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreCell.swift; sourceTree = "<group>"; };
 		FA8E94C52A7F5D2D00951D52 /* StudioRentals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudioRentals.swift; sourceTree = "<group>"; };
 		FA8E94C72A7F5D3D00951D52 /* MyAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAccount.swift; sourceTree = "<group>"; };
@@ -297,6 +305,44 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
+		FA77BCA72A883B9C00617AC1 /* PersonalInfo */ = {
+			isa = PBXGroup;
+			children = (
+				FAA1879E2A85D1C700598626 /* PersonalInfo.swift */,
+				FAA187B32A87625F00598626 /* PICell.swift */,
+			);
+			path = PersonalInfo;
+			sourceTree = "<group>";
+		};
+		FA77BCA82A883BA800617AC1 /* LoginInfo */ = {
+			isa = PBXGroup;
+			children = (
+				FAA187A02A85D2FC00598626 /* LoginInfo.swift */,
+			);
+			path = LoginInfo;
+			sourceTree = "<group>";
+		};
+		FA77BCA92A883BBA00617AC1 /* MyStudents */ = {
+			isa = PBXGroup;
+			children = (
+				FAA187A22A85D31400598626 /* MyStudents.swift */,
+				FA77BCAF2A889BA400617AC1 /* MyStudentsAddStudent.swift */,
+				FAA187B92A878D4C00598626 /* StudentDetails.swift */,
+			);
+			path = MyStudents;
+			sourceTree = "<group>";
+		};
+		FA77BCAA2A883BC900617AC1 /* PaymentMethods */ = {
+			isa = PBXGroup;
+			children = (
+				FAA187A42A85D33500598626 /* PaymentMethods.swift */,
+				FA77BCAB2A883BF000617AC1 /* PMAddCreditCard.swift */,
+				FA77BCAD2A88947700617AC1 /* PMAddBankAccount.swift */,
+				FA77BCA52A88376500617AC1 /* PMCell.swift */,
+			);
+			path = PaymentMethods;
+			sourceTree = "<group>";
+		};
 		FA8E94C42A7F5D0900951D52 /* More */ = {
 			isa = PBXGroup;
 			children = (
@@ -307,12 +353,10 @@
 		FAA1879D2A85D1A600598626 /* MyAccount */ = {
 			isa = PBXGroup;
 			children = (
-				FAA1879E2A85D1C700598626 /* PersonalInfo.swift */,
-				FAA187B32A87625F00598626 /* PICell.swift */,
-				FAA187A02A85D2FC00598626 /* LoginInfo.swift */,
-				FAA187A22A85D31400598626 /* MyStudents.swift */,
-				FAA187B92A878D4C00598626 /* StudentDetails.swift */,
-				FAA187A42A85D33500598626 /* PaymentMethods.swift */,
+				FA77BCA72A883B9C00617AC1 /* PersonalInfo */,
+				FA77BCA82A883BA800617AC1 /* LoginInfo */,
+				FA77BCA92A883BBA00617AC1 /* MyStudents */,
+				FA77BCAA2A883BC900617AC1 /* PaymentMethods */,
 				FAA187B12A875EE900598626 /* PageEditItem.swift */,
 				FAA187B52A87737500598626 /* PageEditPhoto.swift */,
 				FAA187B72A8779F500598626 /* PageEditPassword.swift */,
@@ -502,6 +546,7 @@
 				FA464EC52A34EB6C00910323 /* SignUp.swift in Sources */,
 				FA464EBC2A34E92D00910323 /* SharedData.swift in Sources */,
 				FAA187B42A87625F00598626 /* PICell.swift in Sources */,
+				FA77BCAC2A883BF100617AC1 /* PMAddCreditCard.swift in Sources */,
 				FAA187B82A8779F500598626 /* PageEditPassword.swift in Sources */,
 				FA464EC72A34EEB600910323 /* Dashboard.swift in Sources */,
 				FA464E902A34E89200910323 /* ViewController.swift in Sources */,
@@ -511,12 +556,15 @@
 				FA70D4FD2A81DAEE00ED4449 /* SideMenu.swift in Sources */,
 				FAA187932A85C08B00598626 /* ManagerPage.swift in Sources */,
 				FAA1878F2A833FEB00598626 /* SideMenuCell.swift in Sources */,
+				FA77BCA62A88376500617AC1 /* PMCell.swift in Sources */,
 				FA8E94CC2A81915600951D52 /* MyAccountCell.swift in Sources */,
+				FA77BCAE2A88947700617AC1 /* PMAddBankAccount.swift in Sources */,
 				FA464ECA2A3511F700910323 /* Home.swift in Sources */,
 				FA464EBF2A34E98600910323 /* TopBar.swift in Sources */,
 				FA8E94CA2A7FFABB00951D52 /* MainDashboard.swift in Sources */,
 				FAA187B62A87737500598626 /* PageEditPhoto.swift in Sources */,
 				FA464ECE2A35124F00910323 /* Chat.swift in Sources */,
+				FA77BCB02A889BA400617AC1 /* MyStudentsAddStudent.swift in Sources */,
 				FAA187992A85C12500598626 /* ClassesPage.swift in Sources */,
 				FAA187912A85C03400598626 /* StudioPage.swift in Sources */,
 				FAA187BA2A878D4C00598626 /* StudentDetails.swift in Sources */,

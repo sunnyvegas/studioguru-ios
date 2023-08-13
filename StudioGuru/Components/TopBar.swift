@@ -73,6 +73,18 @@ class TopBar: UIView
         addSubview(btnExit)
     }
     
+    @objc func addPlus(selector:Selector, target:UIView)
+    {
+        let btnExit = UIButton(type: .custom)
+        btnExit.width = 40
+        btnExit.height = 40
+        btnExit.y = 40
+        btnExit.x = sharedData.screenWidth - 50
+        btnExit.addEventListener(selector: selector, target: target)
+        btnExit.setImage(UIImage(named: "icon_plus"), for: .normal)
+        addSubview(btnExit)
+    }
+    
     @objc func addMenu()
     {
         let btnExit = UIButton(type: .custom)
