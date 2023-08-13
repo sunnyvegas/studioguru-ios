@@ -76,6 +76,16 @@ class PageEditItem:UIView, UITextFieldDelegate
             input.text = sharedData.formatPhone(with: "XXX XXX XXXX", phone: sharedData.edit_value)
         }
         
+        if(sharedData.edit_key == "birth_date")
+        {
+            input.keyboardType = .numberPad
+            let toolbar = sharedData.getToolBar(target: self, selector: #selector(self.hideKeyboard), title: "Done", direction: "right")
+            input.inputAccessoryView = toolbar
+            
+            input.text = sharedData.formatPhone(with: "XX/XX/XXXX", phone: sharedData.edit_value.mongoDate.formatDate())
+            
+        }
+        
         input.becomeFirstResponder()
         
         btn.y = input.posY() + 20
@@ -99,6 +109,20 @@ class PageEditItem:UIView, UITextFieldDelegate
             if(textField.text!.count > 12)
             {
                 textField.text = textField.text![0..<12]
+            }
+            
+            return false
+        }
+        
+        if(sharedData.edit_key == "birth_date")
+        {
+            guard let text = textField.text else { return false }
+            let newString = (text as NSString).replacingCharacters(in: range, with: string)
+            textField.text = sharedData.formatPhone(with: "XX/XX/XXXX", phone: newString)
+            
+            if(textField.text!.count > 10)
+            {
+                textField.text = textField.text![0..<10]
             }
             
             return false

@@ -93,17 +93,20 @@ class PersonalInfo:BasePage,UITableViewDelegate, UITableViewDataSource
             
             self.mainDataA.add(((result_dict.object(forKey: "result") as! NSDictionary).object(forKey: "photo") as! String) )
             self.mainDataA.add(((result_dict.object(forKey: "result") as! NSDictionary).object(forKey: "member_name") as! String) )
+            self.mainDataA.add(((result_dict.object(forKey: "result") as! NSDictionary).object(forKey: "birth_date") as! String) )
             self.mainDataA.add(((result_dict.object(forKey: "result") as! NSDictionary).object(forKey: "phone") as! String) )
             
             
             self.mainKeysA.removeAllObjects()
             self.mainKeysA.add("photo")
             self.mainKeysA.add("member_name")
+            self.mainKeysA.add("birth_date")
             self.mainKeysA.add("phone")
             
             self.mainLabelsA.removeAllObjects()
             self.mainLabelsA.add("Photo")
             self.mainLabelsA.add("Full Name")
+            self.mainLabelsA.add("Birth Date")
             self.mainLabelsA.add("Phone")
             
             self.actInd.removeFromSuperview()
@@ -147,8 +150,12 @@ class PersonalInfo:BasePage,UITableViewDelegate, UITableViewDataSource
             cell.icon.y = 15
         }
         
-        
         if(indexPath.row == 2)
+        {
+            cell.value.text =  (mainDataA.object(at: indexPath.row) as! String).mongoDate.formatDate()
+        }
+        
+        if(indexPath.row == 3)
         {
             cell.value.text = sharedData.formatPhone(with: "XXX XXX XXXX", phone: cell.value.text!)
         }

@@ -1251,7 +1251,15 @@ extension UITextView
     }
 }
 
-extension Date {
+extension Date
+{
+    
+    func formatDate() -> String
+    {
+            let outputDateFormatter = DateFormatter()
+            outputDateFormatter.dateFormat = "MM/dd/yyyy"
+            return outputDateFormatter.string(from: self)
+    }
     
     public func timeAgo(numericDates:Bool=false) -> String {
         let calendar = Calendar.current
