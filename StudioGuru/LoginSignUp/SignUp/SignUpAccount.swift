@@ -60,6 +60,7 @@ class SignUpAccount:BasePage, UITextFieldDelegate
         input1.returnKeyType = .next
         input1.keyboardType = .emailAddress
         input1.height = 50
+        input1.autocapitalizationType = .none
         input1.borderStyle = .roundedRect
         input1.paddingLeft(10)
         input1.delegate = self
@@ -122,6 +123,23 @@ class SignUpAccount:BasePage, UITextFieldDelegate
         
     }
     
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool
+    {
+        textField.resignFirstResponder()
+        
+        if(textField == input1)
+        {
+            input2.becomeFirstResponder()
+        }
+        
+        if(textField == input2)
+        {
+            input3.becomeFirstResponder()
+        }
+        
+        return true
+    }
+    
     @objc func hideKeyboard()
     {
         input1.resignFirstResponder()
@@ -167,6 +185,8 @@ class SignUpAccount:BasePage, UITextFieldDelegate
             return
         }
         
+        sharedData.s_email = email
+        sharedData.s_password = password
         
         sharedData.cSignUpPage = 3
         sharedData.postEvent(event: "SIGNUP_UPDATE_PAGES")

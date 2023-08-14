@@ -155,6 +155,10 @@ class SignUpInfo:BasePage, UITextFieldDelegate
             sharedData.showMessage(title: "Error", message: "You must be 18 to sign up.")
             return
         }
+        
+        sharedData.s_name = input1.text!
+        sharedData.s_birth_date = input2.text!
+        
         hideKeyboard()
         sharedData.cSignUpPage = 2
         sharedData.postEvent(event: "SIGNUP_UPDATE_PAGES")

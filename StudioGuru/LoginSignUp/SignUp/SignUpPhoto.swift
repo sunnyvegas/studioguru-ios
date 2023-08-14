@@ -15,12 +15,15 @@ class SignUpPhoto:BasePage, UITextFieldDelegate
     
     var btnPhoto:UIButton!
     
+    var img_url:String!
     
    override init (frame : CGRect)
    {
        super.init(frame : frame)
        sharedData = SharedData.sharedInstance
        backgroundColor = .white
+       
+       img_url = ""
        
        mainCon = UIView(frame: sharedData.fullRect)
        addSubview(mainCon)
@@ -86,9 +89,9 @@ class SignUpPhoto:BasePage, UITextFieldDelegate
             print("result_dict")
             print(result_dict)
             
-            let img_url = (result_dict.object(forKey: "result") as! String)
+            self.img_url = (result_dict.object(forKey: "result") as! String)
             
-            print("img_url--------------------->",img_url)
+            print("img_url--------------------->",self.img_url)
             self.sharedData.postEvent(event: "HIDE_LOADING")
             
 //            let params = [self.sharedData.edit_key:img_url ]
@@ -113,7 +116,33 @@ class SignUpPhoto:BasePage, UITextFieldDelegate
     
     @objc func goSubmit()
     {
+        if(img_url == "")
+        {
+            sharedData.showMessage(title: "Error", message: "Please upload a photo.")
+            return
+        }
         
+        let params = ["photo":img_url, "email":sharedData.s_email, "member_name":sharedData.s_name, "password":sharedData.s_password,"birth_date":sharedData.s_birth_date, "phone":"","phone_carrier":""]
+        
+        sharedData.postEvent(event: "SHOW_LOADING")
+        
+        self.sharedData.postIt(urlString:  sharedData.base_domain + "/mobile-ios/cust-signup", params: params as [String : Any], callback:
+        { success, result_dict in
+
+            print("RESULT")
+            print(result_dict)
+            self.sharedData.postEvent(event: "HIDE_LOADING")
+            if((result_dict.object(forKey: "success") as! Bool) == true)
+            {
+                
+                self.sharedData.showMessage(title: "Success!", message: "You can now login!")
+                self.sharedData.postEvent(event: "SIGNUP_EXIT")
+            }else{
+                self.sharedData.showMessage(title: "Error", message: (result_dict.object(forKey: "error_message") as! String))
+            }
+            
+            
+        })
     }
     
     @objc func goUpdatePhoto()

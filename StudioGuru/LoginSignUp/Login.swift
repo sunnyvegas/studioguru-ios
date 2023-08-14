@@ -187,6 +187,7 @@ class Login:UIView, UITextFieldDelegate,UIPickerViewDelegate, UIPickerViewDataSo
             success, result_dict in
             
             self.mainDataA.addObjects(from: (result_dict.object(forKey: "result") as! Array<Any>) )
+            self.sharedData.studio_id = ((self.mainDataA.object(at: 0) as! NSDictionary).object(forKey: "id") as! String)
             self.sharedData.setTimeout(delay: 0.15, block: {
                 self.checkLogin()
             })

@@ -51,7 +51,8 @@ class SharedData: NSObject
     
     var s_email = ""
     var s_password = ""
-    
+    var s_name = ""
+    var s_birth_date = ""
     
     var chat_title = ""
     var chat_id = ""
