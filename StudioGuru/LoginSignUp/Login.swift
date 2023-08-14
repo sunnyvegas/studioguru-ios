@@ -395,7 +395,9 @@ class Login:UIView, UITextFieldDelegate,UIPickerViewDelegate, UIPickerViewDataSo
     
     @objc func goSignUp()
     {
+        sharedData.base_domain = "http://192.168.0.112:3300" +  "/studio/" + sharedData.studio_id
         let page = SignUp(frame: sharedData.fullRectBottom)
+        page.initClass()
         addSubview(page)
         page.animateUp()
     }

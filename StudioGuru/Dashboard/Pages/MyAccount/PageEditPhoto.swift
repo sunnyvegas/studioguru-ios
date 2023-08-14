@@ -152,13 +152,13 @@ class PageEditPhoto:UIView, UITextFieldDelegate
             
             
             
-            self.sharedData.postIt(urlString:  self.sharedData.base_domain + "/api-ios/update-details", params: params as [String : Any], callback:
+            self.sharedData.postIt(urlString:  self.sharedData.base_domain + self.sharedData.edit_api, params: params as [String : Any], callback:
             { success, result_dict in
                 
                 
                 self.sharedData.imagesDict.removeAllObjects()
                 self.sharedData.postEvent(event: "HIDE_LOADING")
-                self.sharedData.postEvent(event: "INFO_RELOAD")
+                self.sharedData.postEvent(event: self.sharedData.edit_event)
                 self.sharedData.postEvent(event: "EDIT_BACK")
                
             })
@@ -173,10 +173,6 @@ class PageEditPhoto:UIView, UITextFieldDelegate
   
     @objc func goExit()
     {
-        
-        
-      
-     
         sharedData.postEvent(event: "EDIT_BACK")
     }
                                     

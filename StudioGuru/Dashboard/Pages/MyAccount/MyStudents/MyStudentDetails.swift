@@ -7,7 +7,7 @@
 
 import UIKit
 
-class StudentDetails:UIView, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource
+class MyStudentDetails:UIView, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource
 {
     var sharedData:SharedData!
     
@@ -29,6 +29,7 @@ class StudentDetails:UIView, UITextFieldDelegate, UITableViewDelegate, UITableVi
         backgroundColor = .white
         
         mainCon = UIView(frame: sharedData.fullRect)
+        mainCon.width = sharedData.screenWidth * 2
         addSubview(mainCon)
         
         topBar = sharedData.getTopBarBig(title: "Student Details")
@@ -49,16 +50,34 @@ class StudentDetails:UIView, UITextFieldDelegate, UITableViewDelegate, UITableVi
         mainCon.addSubview(feedList)
         
         mainDataA.add("Personal Info")
+        mainDataA.add("Programs/Classes")
   
         
         iconsA.add("icon_personal_info")
-   
+        iconsA.add("icon_classes")
         
+        sharedData.addEventListener(title: "MYSTUDENT_DETAILS_HOME", target: self, selector: #selector(self.goBackDetails))
+        sharedData.addEventListener(title: "STUDENT_DETAILS_RELOAD", target: self, selector: #selector(self.loadData))
     }
     
     func initClass()
     {
         topBar.titleLabel.text = (sharedData.studentDict.object(forKey: "student_name") as! String)
+    }
+    
+    @objc func loadData()
+    {
+        sharedData.getIt(urlString: sharedData.base_domain + "/api-ios/student-details/" + (sharedData.studentDict.object(forKey: "student_id") as! String), params: [:], callback: {
+            succes, result_dict in
+            
+            if((result_dict.object(forKey: "success") as! Bool) == true)
+            {
+                self.sharedData.studentDict.removeAllObjects()
+                self.sharedData.studentDict.addEntries(from: ((result_dict.object(forKey: "result") as! NSDictionary) as! [AnyHashable : Any]))
+                self.sharedData.postEvent(event: "STUDENT_INFO_RELOAD")
+                self.sharedData.postEvent(event: "RELOAD_MYSTUDENTS")
+            }
+        })
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
@@ -89,6 +108,25 @@ class StudentDetails:UIView, UITextFieldDelegate, UITableViewDelegate, UITableVi
     {
         tableView.deselectRow(at: indexPath, animated: true)
         
+        if(indexPath.row == 0)
+        {
+            let page = MyStudentInfo(frame: sharedData.fullRect)
+            page.x = sharedData.screenWidth
+            page.initClass()
+            mainCon.addSubview(page)
+            UIView.animate(withDuration: 0.25, animations:
+            {
+                self.mainCon.x = self.sharedData.screenWidth * -1
+            })
+        }
+    }
+    
+    @objc func goBackDetails()
+    {
+        UIView.animate(withDuration: 0.25, animations:
+        {
+            self.mainCon.x = 0
+        })
     }
     
     @objc func goBack()

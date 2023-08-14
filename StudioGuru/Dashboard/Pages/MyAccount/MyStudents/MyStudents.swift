@@ -20,7 +20,7 @@ class MyStudents:BasePage, UITextFieldDelegate, UITableViewDelegate, UITableView
     var mainCon:UIView!
     
     var actInd:UIActivityIndicatorView!
-    var page:StudentDetails!
+    var page:MyStudentDetails!
     
     override init (frame : CGRect)
     {
@@ -58,7 +58,7 @@ class MyStudents:BasePage, UITextFieldDelegate, UITableViewDelegate, UITableView
         actInd.tintColor = .black
         actInd.startAnimating()
         
-        page = StudentDetails(frame: sharedData.fullRect)
+        page = MyStudentDetails(frame: sharedData.fullRect)
         page.x = sharedData.screenWidth
         mainCon.addSubview(page)
         

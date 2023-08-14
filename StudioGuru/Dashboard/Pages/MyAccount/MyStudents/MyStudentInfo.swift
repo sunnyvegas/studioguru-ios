@@ -1,13 +1,13 @@
 //
-//  PersonalInfo.swift
+//  MyStudentsInfo.swift
 //  StudioGuru
 //
-//  Created by Sunny Clark on 8/10/23.
+//  Created by Sunny Clark on 8/13/23.
 //
 
 import UIKit
 
-class PersonalInfo:BasePage,UITableViewDelegate, UITableViewDataSource
+class MyStudentInfo:BasePage,UITableViewDelegate, UITableViewDataSource
 {
     var sharedData:SharedData!
     
@@ -34,7 +34,7 @@ class PersonalInfo:BasePage,UITableViewDelegate, UITableViewDataSource
         mainCon.width = sharedData.screenWidth * 2
         addSubview(mainCon)
         
-        let topBar = sharedData.getTopBarBig(title: "Personal Info")
+        let topBar = sharedData.getTopBarBig(title: "Student Info")
         topBar.addBack(selector: #selector(self.goBack), target: self)
         mainCon.addSubview(topBar)
         
@@ -66,7 +66,7 @@ class PersonalInfo:BasePage,UITableViewDelegate, UITableViewDataSource
         actInd.startAnimating()
         
         sharedData.addEventListener(title: "EDIT_BACK", target: self, selector: #selector(self.goBackEdit))
-        sharedData.addEventListener(title: "INFO_RELOAD", target: self, selector: #selector(self.loadData))
+        sharedData.addEventListener(title: "STUDENT_INFO_RELOAD", target: self, selector: #selector(self.loadData))
     }
     
     override func initClass()
@@ -77,10 +77,27 @@ class PersonalInfo:BasePage,UITableViewDelegate, UITableViewDataSource
     @objc func loadData()
     {
         
-        mainCon.addSubview(actInd)
-        self.mainLabelsA.removeAllObjects()
-        self.feedList.reloadData()
+        //mainCon.addSubview(actInd)
+        mainLabelsA.removeAllObjects()
+        feedList.reloadData()
         
+        mainDataA.removeAllObjects()
+        
+        mainDataA.add((sharedData.studentDict.object(forKey: "photo") as! String) )
+        mainDataA.add((sharedData.studentDict.object(forKey: "student_name") as! String) )
+        mainDataA.add((sharedData.studentDict.object(forKey: "birth_date") as! String) )
+     
+        mainKeysA.removeAllObjects()
+        mainKeysA.add("photo")
+        mainKeysA.add("student_name")
+        mainKeysA.add("birth_date")
+        
+        mainLabelsA.removeAllObjects()
+        mainLabelsA.add("Photo")
+        mainLabelsA.add("Student Name")
+        mainLabelsA.add("Birth Date")
+        feedList.reloadData()
+        /*
         sharedData.getIt(urlString: sharedData.base_domain + "/api-ios/details", params: [:], callback:
         {
             success, result_dict in
@@ -114,6 +131,7 @@ class PersonalInfo:BasePage,UITableViewDelegate, UITableViewDataSource
             self.feedList.reloadData()
             
         })
+        */
         
     }
     
@@ -155,10 +173,6 @@ class PersonalInfo:BasePage,UITableViewDelegate, UITableViewDataSource
             cell.value.text =  (mainDataA.object(at: indexPath.row) as! String).mongoDate.formatDate()
         }
         
-        if(indexPath.row == 3)
-        {
-            cell.value.text = sharedData.formatPhone(with: "XXX XXX XXXX", phone: cell.value.text!)
-        }
        
             
         return cell
@@ -172,8 +186,10 @@ class PersonalInfo:BasePage,UITableViewDelegate, UITableViewDataSource
         {
             sharedData.edit_key = (mainKeysA.object(at: indexPath.row) as! String)
             sharedData.edit_value = (mainDataA.object(at: indexPath.row) as! String)
-            sharedData.edit_api = "/api-ios/update-details"
-            sharedData.edit_event = "INFO_RELOAD"
+            
+            sharedData.edit_api = "/api-ios/update-student-details/" + (sharedData.studentDict.object(forKey: "student_id") as! String)
+            sharedData.edit_event = "STUDENT_DETAILS_RELOAD"
+            
             pageEditPhoto.initClass()
             mainCon.addSubview(pageEditPhoto)
             UIView.animate(withDuration: 0.25, animations:
@@ -184,8 +200,9 @@ class PersonalInfo:BasePage,UITableViewDelegate, UITableViewDataSource
             sharedData.edit_key = (mainKeysA.object(at: indexPath.row) as! String)
             sharedData.edit_title = (mainLabelsA.object(at: indexPath.row) as! String)
             sharedData.edit_value = (mainDataA.object(at: indexPath.row) as! String)
-            sharedData.edit_api = "/api-ios/update-details"
-            sharedData.edit_event = "INFO_RELOAD"
+            
+            sharedData.edit_api = "/api-ios/update-student-details/" + (sharedData.studentDict.object(forKey: "student_id") as! String)
+            sharedData.edit_event = "STUDENT_DETAILS_RELOAD"
             
             pageEditItem.initClass()
             mainCon.addSubview(pageEditItem)
@@ -209,7 +226,7 @@ class PersonalInfo:BasePage,UITableViewDelegate, UITableViewDataSource
     
     @objc func goBack()
     {
-        sharedData.postEvent(event: "MY_ACCOUNT_HOME")
+        sharedData.postEvent(event: "MYSTUDENT_DETAILS_HOME")
     }
     
     convenience init ()

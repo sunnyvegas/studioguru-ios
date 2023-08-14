@@ -1040,6 +1040,21 @@ public extension UIDevice {
 extension String
 {
     
+    func is18() -> Bool
+    {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "MM/dd/yyyy"
+            
+            if let birthDate = dateFormatter.date(from: self) {
+                let calendar = Calendar.current
+                if let age = calendar.dateComponents([.year], from: birthDate, to: Date()).year {
+                    return age >= 18
+                }
+            }
+            
+            return false
+    }
+    
     var html: NSAttributedString? {
         guard let data = data(using: .utf8) else { return NSAttributedString() }
         do {

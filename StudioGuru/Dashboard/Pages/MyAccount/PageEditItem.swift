@@ -140,7 +140,7 @@ class PageEditItem:UIView, UITextFieldDelegate
         input.resignFirstResponder()
         sharedData.postEvent(event: "SHOW_LOADING")
         
-        sharedData.postIt(urlString: sharedData.base_domain + "/api-ios/update-details", params: [sharedData.edit_key:input.text!], callback: {
+        sharedData.postIt(urlString: sharedData.base_domain + sharedData.edit_api, params: [sharedData.edit_key:input.text!], callback: {
             success, result_dict in
             
             self.sharedData.postEvent(event: "HIDE_LOADING")
@@ -148,13 +148,15 @@ class PageEditItem:UIView, UITextFieldDelegate
             {
                 //let result = (result_dict.object(forKey: "result") as! NSDictionary)
                 
-                self.sharedData.postEvent(event: "INFO_RELOAD")
+                self.sharedData.postEvent(event: self.sharedData.edit_event)
                 self.goBack()
                 //self.sharedData.showMessage(title: "Alert", message: "Success!")
             }else{
                 self.sharedData.showMessage(title: "Error", message: (result_dict.object(forKey: "error_message") as! String))
             }
         })
+        
+        
     }
     
     @objc func hideKeyboard()

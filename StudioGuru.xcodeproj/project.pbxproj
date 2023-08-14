@@ -37,6 +37,7 @@
 		FA77BCAC2A883BF100617AC1 /* PMAddCreditCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA77BCAB2A883BF000617AC1 /* PMAddCreditCard.swift */; };
 		FA77BCAE2A88947700617AC1 /* PMAddBankAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA77BCAD2A88947700617AC1 /* PMAddBankAccount.swift */; };
 		FA77BCB02A889BA400617AC1 /* MyStudentsAddStudent.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA77BCAF2A889BA400617AC1 /* MyStudentsAddStudent.swift */; };
+		FA77BCB22A88BF0800617AC1 /* MyStudentInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA77BCB12A88BF0800617AC1 /* MyStudentInfo.swift */; };
 		FA8E94C32A7F5CFF00951D52 /* MoreCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8E94C22A7F5CFF00951D52 /* MoreCell.swift */; };
 		FA8E94C62A7F5D2D00951D52 /* StudioRentals.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8E94C52A7F5D2D00951D52 /* StudioRentals.swift */; };
 		FA8E94C82A7F5D3D00951D52 /* MyAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8E94C72A7F5D3D00951D52 /* MyAccount.swift */; };
@@ -57,7 +58,11 @@
 		FAA187B42A87625F00598626 /* PICell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA187B32A87625F00598626 /* PICell.swift */; };
 		FAA187B62A87737500598626 /* PageEditPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA187B52A87737500598626 /* PageEditPhoto.swift */; };
 		FAA187B82A8779F500598626 /* PageEditPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA187B72A8779F500598626 /* PageEditPassword.swift */; };
-		FAA187BA2A878D4C00598626 /* StudentDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA187B92A878D4C00598626 /* StudentDetails.swift */; };
+		FAA187BA2A878D4C00598626 /* MyStudentDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA187B92A878D4C00598626 /* MyStudentDetails.swift */; };
+		FAF9216C2A89DC79005F3095 /* SignUpInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF9216B2A89DC79005F3095 /* SignUpInfo.swift */; };
+		FAF9216E2A89DCCB005F3095 /* SignUpTerms.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF9216D2A89DCCB005F3095 /* SignUpTerms.swift */; };
+		FAF921702A89E466005F3095 /* SignUpAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF9216F2A89E466005F3095 /* SignUpAccount.swift */; };
+		FAF921722A89FA91005F3095 /* SignUpPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF921712A89FA91005F3095 /* SignUpPhoto.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -114,6 +119,7 @@
 		FA77BCAB2A883BF000617AC1 /* PMAddCreditCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PMAddCreditCard.swift; sourceTree = "<group>"; };
 		FA77BCAD2A88947700617AC1 /* PMAddBankAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PMAddBankAccount.swift; sourceTree = "<group>"; };
 		FA77BCAF2A889BA400617AC1 /* MyStudentsAddStudent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStudentsAddStudent.swift; sourceTree = "<group>"; };
+		FA77BCB12A88BF0800617AC1 /* MyStudentInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStudentInfo.swift; sourceTree = "<group>"; };
 		FA8E94C22A7F5CFF00951D52 /* MoreCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreCell.swift; sourceTree = "<group>"; };
 		FA8E94C52A7F5D2D00951D52 /* StudioRentals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudioRentals.swift; sourceTree = "<group>"; };
 		FA8E94C72A7F5D3D00951D52 /* MyAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAccount.swift; sourceTree = "<group>"; };
@@ -135,7 +141,11 @@
 		FAA187B32A87625F00598626 /* PICell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PICell.swift; sourceTree = "<group>"; };
 		FAA187B52A87737500598626 /* PageEditPhoto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageEditPhoto.swift; sourceTree = "<group>"; };
 		FAA187B72A8779F500598626 /* PageEditPassword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageEditPassword.swift; sourceTree = "<group>"; };
-		FAA187B92A878D4C00598626 /* StudentDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentDetails.swift; sourceTree = "<group>"; };
+		FAA187B92A878D4C00598626 /* MyStudentDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStudentDetails.swift; sourceTree = "<group>"; };
+		FAF9216B2A89DC79005F3095 /* SignUpInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpInfo.swift; sourceTree = "<group>"; };
+		FAF9216D2A89DCCB005F3095 /* SignUpTerms.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpTerms.swift; sourceTree = "<group>"; };
+		FAF9216F2A89E466005F3095 /* SignUpAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpAccount.swift; sourceTree = "<group>"; };
+		FAF921712A89FA91005F3095 /* SignUpPhoto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpPhoto.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -253,6 +263,7 @@
 			children = (
 				FA464EC22A34EA5600910323 /* Login.swift */,
 				FA464EC42A34EB6C00910323 /* SignUp.swift */,
+				FAF9216A2A89DC67005F3095 /* SignUp */,
 			);
 			path = LoginSignUp;
 			sourceTree = "<group>";
@@ -327,7 +338,8 @@
 			children = (
 				FAA187A22A85D31400598626 /* MyStudents.swift */,
 				FA77BCAF2A889BA400617AC1 /* MyStudentsAddStudent.swift */,
-				FAA187B92A878D4C00598626 /* StudentDetails.swift */,
+				FAA187B92A878D4C00598626 /* MyStudentDetails.swift */,
+				FA77BCB12A88BF0800617AC1 /* MyStudentInfo.swift */,
 			);
 			path = MyStudents;
 			sourceTree = "<group>";
@@ -362,6 +374,17 @@
 				FAA187B72A8779F500598626 /* PageEditPassword.swift */,
 			);
 			path = MyAccount;
+			sourceTree = "<group>";
+		};
+		FAF9216A2A89DC67005F3095 /* SignUp */ = {
+			isa = PBXGroup;
+			children = (
+				FAF9216D2A89DCCB005F3095 /* SignUpTerms.swift */,
+				FAF9216B2A89DC79005F3095 /* SignUpInfo.swift */,
+				FAF9216F2A89E466005F3095 /* SignUpAccount.swift */,
+				FAF921712A89FA91005F3095 /* SignUpPhoto.swift */,
+			);
+			path = SignUp;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -544,8 +567,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				FA464EC52A34EB6C00910323 /* SignUp.swift in Sources */,
+				FAF921702A89E466005F3095 /* SignUpAccount.swift in Sources */,
+				FA77BCB22A88BF0800617AC1 /* MyStudentInfo.swift in Sources */,
 				FA464EBC2A34E92D00910323 /* SharedData.swift in Sources */,
 				FAA187B42A87625F00598626 /* PICell.swift in Sources */,
+				FAF921722A89FA91005F3095 /* SignUpPhoto.swift in Sources */,
 				FA77BCAC2A883BF100617AC1 /* PMAddCreditCard.swift in Sources */,
 				FAA187B82A8779F500598626 /* PageEditPassword.swift in Sources */,
 				FA464EC72A34EEB600910323 /* Dashboard.swift in Sources */,
@@ -563,13 +589,15 @@
 				FA464EBF2A34E98600910323 /* TopBar.swift in Sources */,
 				FA8E94CA2A7FFABB00951D52 /* MainDashboard.swift in Sources */,
 				FAA187B62A87737500598626 /* PageEditPhoto.swift in Sources */,
+				FAF9216C2A89DC79005F3095 /* SignUpInfo.swift in Sources */,
 				FA464ECE2A35124F00910323 /* Chat.swift in Sources */,
 				FA77BCB02A889BA400617AC1 /* MyStudentsAddStudent.swift in Sources */,
 				FAA187992A85C12500598626 /* ClassesPage.swift in Sources */,
 				FAA187912A85C03400598626 /* StudioPage.swift in Sources */,
-				FAA187BA2A878D4C00598626 /* StudentDetails.swift in Sources */,
+				FAA187BA2A878D4C00598626 /* MyStudentDetails.swift in Sources */,
 				FA464EC32A34EA5600910323 /* Login.swift in Sources */,
 				FAA187952A85C0EC00598626 /* InstructorPage.swift in Sources */,
+				FAF9216E2A89DCCB005F3095 /* SignUpTerms.swift in Sources */,
 				FA8E94C82A7F5D3D00951D52 /* MyAccount.swift in Sources */,
 				FA464E8C2A34E89200910323 /* AppDelegate.swift in Sources */,
 				FAA1879F2A85D1C700598626 /* PersonalInfo.swift in Sources */,

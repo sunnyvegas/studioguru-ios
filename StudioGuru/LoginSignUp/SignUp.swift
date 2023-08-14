@@ -50,7 +50,26 @@ class SignUp:UIView, UITextFieldDelegate
 //        pagesA.add(page1)
 
         
+        let page1 = SignUpTerms(frame: sharedData.fullRect)
+        let page2 = SignUpInfo(frame: sharedData.fullRect)
+        let page3 = SignUpAccount(frame: sharedData.fullRect)
+        let page4 = SignUpPhoto(frame: sharedData.fullRect)
         
+        
+        page2.x = sharedData.screenWidth
+        page3.x = sharedData.screenWidth * 2
+        page4.x = sharedData.screenWidth * 3
+        
+        
+        mainCon.addSubview(page1)
+        mainCon.addSubview(page2)
+        mainCon.addSubview(page3)
+        mainCon.addSubview(page4)
+        
+        pagesA.add(page1)
+        pagesA.add(page2)
+        pagesA.add(page3)
+        pagesA.add(page4)
       
         
         sharedData.addEventListener(title: "SIGNUP_UPDATE_PAGES", target: self, selector: #selector(self.updatePages))
@@ -59,7 +78,10 @@ class SignUp:UIView, UITextFieldDelegate
     
     func initClass()
     {
-    
+        self.mainCon.x = 0
+        sharedData.cSignUpPage = 0
+        updatePages()
+        
     }
     
     @objc func updatePages()
