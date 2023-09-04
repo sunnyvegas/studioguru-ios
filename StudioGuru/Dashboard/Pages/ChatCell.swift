@@ -29,11 +29,13 @@ class ChatCell:UITableViewCell
         img.height = 40
         img.x = 10
         img.y = 10
+        img.layer.borderColor = UIColor.lightGray.cgColor
+        img.layer.borderWidth = 1
         addSubview(img)
         
         title = UILabel()
         title.width = sharedData.screenWidth
-        title.y = 10
+        title.y = 15
         title.x = img.posX() + 10
         title.textColor = .black
         title.font = sharedData.normalFont(size: 20)

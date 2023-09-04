@@ -22,7 +22,7 @@ class SharedData: NSObject
     
     var imagesDict:NSMutableDictionary!
     
-
+    var keyboardHeight:CGFloat = 0
     
     var edit_valuesA:NSMutableArray = NSMutableArray()
     

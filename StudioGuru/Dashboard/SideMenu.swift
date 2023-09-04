@@ -69,6 +69,9 @@ class SideMenu:UIView, UITextFieldDelegate, UITableViewDelegate, UITableViewData
         mainDataA.add("Staff")
         iconsA.add("icon_staff")
         
+        mainDataA.add("Chat")
+        iconsA.add("icon_chat")
+        
         mainDataA.add("Programs/Classes")
         iconsA.add("icon_classes")
         

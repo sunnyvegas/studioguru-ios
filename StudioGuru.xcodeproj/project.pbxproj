@@ -275,7 +275,6 @@
 				FA70D4FC2A81DAEE00ED4449 /* SideMenu.swift */,
 				FAA1878E2A833FEB00598626 /* SideMenuCell.swift */,
 				FA464EC62A34EEB600910323 /* Dashboard.swift */,
-				FA0E93432A404EF000EEB22F /* ChatDetails.swift */,
 				FA464EC82A3511EA00910323 /* Pages */,
 			);
 			path = Dashboard;
@@ -298,6 +297,7 @@
 				FA464ECB2A35124100910323 /* CalendarPage.swift */,
 				FA464ECD2A35124F00910323 /* Chat.swift */,
 				FA0E93412A404BC800EEB22F /* ChatCell.swift */,
+				FA0E93432A404EF000EEB22F /* ChatDetails.swift */,
 				FA464ECF2A35125C00910323 /* More.swift */,
 				FA8E94C22A7F5CFF00951D52 /* MoreCell.swift */,
 				FA8E94C42A7F5D0900951D52 /* More */,
@@ -802,7 +802,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -843,7 +843,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

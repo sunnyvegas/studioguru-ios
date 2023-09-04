@@ -45,9 +45,10 @@ class MainDashboard:UIView, UITextFieldDelegate
         let page3 = ManagerPage(frame: sharedData.fullRect)
         let page4 = InstructorPage(frame: sharedData.fullRect)
         let page5 = StaffPage(frame: sharedData.fullRect)
-        let page6 = ClassesPage(frame: sharedData.fullRect)
-        let page7 = StorePage(frame: sharedData.fullRect)
-        let page8 = StudioRentals(frame: sharedData.fullRect)
+        let page6 = Chat(frame: sharedData.fullRect)
+        let page7 = ClassesPage(frame: sharedData.fullRect)
+        let page8 = StorePage(frame: sharedData.fullRect)
+        let page9 = StudioRentals(frame: sharedData.fullRect)
         
         pagesA.add(page1)
         pagesA.add(page2)
@@ -57,6 +58,7 @@ class MainDashboard:UIView, UITextFieldDelegate
         pagesA.add(page6)
         pagesA.add(page7)
         pagesA.add(page8)
+        pagesA.add(page9)
         
         
         

@@ -62,6 +62,8 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate, UINaviga
         sharedData.addEventListener(title: "ADD_PHOTO_CAMERA", target: self, selector: #selector(self.goPickPhotoCamera))
         sharedData.addEventListener(title: "ADD_VIDEO_CAMERA", target: self, selector: #selector(self.goPickVideoCamera))
         sharedData.addEventListener(title: "ADD_VIDEO_LIBRARY", target: self, selector: #selector(self.goPickVideoLibrary))
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillChange), name: UIResponder.keyboardDidChangeFrameNotification, object: nil)
     }
     
     @objc func goDash()
@@ -70,6 +72,18 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate, UINaviga
         view.addSubview(dashPage)
         dashPage.initClass()
         dashPage.animateUp()
+    }
+    
+    @objc func keyboardWillChange(notification: NSNotification)
+    {
+        //print("keyboardWillChange============")
+        
+        //let duration = notification.userInfo![UIKeyboardAnimationDurationUserInfoKey] as! Double
+        //let curve = notification.userInfo![UIKeyboardAnimationCurveUserInfoKey] as! UInt
+        //let curFrame = (notification.userInfo![UIKeyboardFrameBeginUserInfoKey] as! NSValue).cgRectValue
+        let targetFrame = (notification.userInfo![UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+        //let deltaY = targetFrame.origin.y - curFrame.origin.y
+        sharedData.keyboardHeight = targetFrame.size.height
     }
     
     @objc func showLoading()

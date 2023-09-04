@@ -8,6 +8,7 @@
 import UIKit
 
 
+
 class ChatDetails:UIView, UITextFieldDelegate, UIScrollViewDelegate
 {
     var sharedData:SharedData!
@@ -33,7 +34,7 @@ class ChatDetails:UIView, UITextFieldDelegate, UIScrollViewDelegate
     {
         super.init(frame : frame)
         sharedData = SharedData.sharedInstance
-        backgroundColor = .white
+        backgroundColor = UIColor(hex: 0xf5f5f5)
         
         mainCon = UIView(frame: sharedData.fullRect)
         addSubview(mainCon)
@@ -58,10 +59,21 @@ class ChatDetails:UIView, UITextFieldDelegate, UIScrollViewDelegate
         
         bottomCon = UIView()
         bottomCon.width = sharedData.screenWidth
-        bottomCon.height = 120
-        bottomCon.y = sharedData.screenHeight - bottomCon.height
+        bottomCon.height = 60
+        
         bottomCon.backgroundColor = UIColor(hex: 0xDDDDDD)
         
+        let device = UIDevice.current
+       // let systemVersion = device.systemVersion
+        let deviceName = device.modelName
+        if(sharedData.screenHeight > 700)
+        {
+            bottomCon.height = 80
+            bottomCon.y = sharedData.screenHeight - bottomCon.height
+        }
+        print("sharedData.screenHeight--->",sharedData.screenHeight)
+        
+        //Optional(896.0)
         
         input = UITextField()
         input.width = sharedData.screenWidth - 20
@@ -97,7 +109,7 @@ class ChatDetails:UIView, UITextFieldDelegate, UIScrollViewDelegate
     
     @objc func loadData()
     {
-        sharedData.getIt(urlString: sharedData.base_domain + "/api-member/chat/details/" + sharedData.chat_id, params: [:], callback:
+        sharedData.getIt(urlString: sharedData.base_domain + "/api-ios/chat/details/" + sharedData.chat_id, params: [:], callback:
         {
             success, result_dict in
             
@@ -117,6 +129,7 @@ class ChatDetails:UIView, UITextFieldDelegate, UIScrollViewDelegate
         
         messagesCon.removeSubViews()
         pplCon.removeSubViews()
+        pplCon.backgroundColor = .white
         if(CGFloat(pplDataA.count) * 60 < sharedData.screenWidth)
         {
             pplCon.contentSize = CGSize(width: sharedData.screenWidth, height: 60)
@@ -147,44 +160,75 @@ class ChatDetails:UIView, UITextFieldDelegate, UIScrollViewDelegate
             row_item.y = lastY
             if(member_id != sharedData.member_id)
             {
+                let whiteCon = UIView()
+                whiteCon.width = sharedData.screenWidth - 20
+                whiteCon.x = 10
+                whiteCon.height = 80
+                whiteCon.y = 10
+                whiteCon.corner(radius: 10)
+                whiteCon.backgroundColor = .white
+                whiteCon.addDropShadow()
+                row_item.addSubview(whiteCon)
+                
                 let btnImg = UIButton(type: .custom)
-                btnImg.width = 30
-                btnImg.height = 30
-                btnImg.corner(radius: 15)
+                btnImg.width = 60
+                btnImg.height = 60
+                btnImg.corner(radius: 30)
                 btnImg.x = 10
                 btnImg.y = 10
+                btnImg.layer.borderColor = UIColor.gray.cgColor
+                btnImg.layer.borderWidth = 1
                 btnImg.backgroundColor = .darkGray
                 btnImg.downloadedFrom(link: sharedData.base_domain + "/member-photo/" + member_id)
-                row_item.addSubview(btnImg)
+                whiteCon.addSubview(btnImg)
                 
-                let dateLabel = UILabel()
-                dateLabel.width = sharedData.screenWidth - 10
-                dateLabel.height = 15
-                dateLabel.font = .systemFont(ofSize: 11, weight: .bold)
-                dateLabel.textColor = UIColor(hex: 0x000000)
-                dateLabel.alpha = 0.5
-                dateLabel.text = (messageData.object(forKey: "member_name") as! String) + " 12/16 12:00 PM"
-                dateLabel.x = btnImg.posX() + 10
-                dateLabel.y = 10
-                row_item.addSubview(dateLabel)
+                let nameLabel = UILabel()
+                nameLabel.width = whiteCon.width - btnImg.posX() - 10
+                nameLabel.height = 20
+                nameLabel.font = .systemFont(ofSize: 16, weight: .bold)
+                nameLabel.textColor = .black
+                nameLabel.x = btnImg.posX() + 10
+                nameLabel.y = 10
+                nameLabel.text = (messageData.object(forKey: "member_name") as! String)
+                whiteCon.addSubview(nameLabel)
                 
                 let messageCon = UITextView()
                 messageCon.width = sharedData.screenWidth - btnImg.posX() - 50
                 messageCon.height = 80
-                messageCon.x = btnImg.posX() + 10
-                messageCon.y = dateLabel.posY()
+                messageCon.x = btnImg.posX()
+                messageCon.y = nameLabel.posY()
                 messageCon.corner(radius: 10)
-                messageCon.backgroundColor = UIColor(hex: 0xEEEEEE)
+                messageCon.backgroundColor = UIColor(hex: 0xFFFFFF)
                 messageCon.textColor = .black
                 messageCon.font = .systemFont(ofSize: 16)
                 messageCon.text = (messageData.object(forKey: "message") as! String)
                 messageCon.isUserInteractionEnabled = false
                 messageCon.textContainerInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
                 messageCon.sizeToFit()
-                row_item.addSubview(messageCon)
+                whiteCon.addSubview(messageCon)
                 
-                row_item.height = messageCon.posY()
                 
+                
+                
+                let dateLabel = UILabel()
+                dateLabel.width = whiteCon.width - 10
+                dateLabel.height = 15
+                dateLabel.font = .systemFont(ofSize: 11, weight: .bold)
+                dateLabel.textColor = .darkGray
+                dateLabel.alpha = 0.5
+                dateLabel.text = ""
+                dateLabel.y = 10
+                dateLabel.textAlignment = .right
+                whiteCon.addSubview(dateLabel)
+                
+                let date = (messageData.object(forKey: "created_at") as! String).mongoDate
+                let outputFormatter = DateFormatter()
+                outputFormatter.dateFormat = "MM/dd hh:mm a" // "12/16 12:00 PM"
+                let formattedDate = outputFormatter.string(from: date)
+                dateLabel.text = formattedDate
+
+                whiteCon.height = messageCon.posY() + 10
+                row_item.height = whiteCon.posY() + 10
                 lastY = row_item.posY() + 5
             }else{
                 
@@ -194,10 +238,16 @@ class ChatDetails:UIView, UITextFieldDelegate, UIScrollViewDelegate
                 dateLabel.font = .systemFont(ofSize: 11, weight: .bold)
                 dateLabel.textColor = UIColor(hex: 0x000000)
                 dateLabel.alpha = 0.5
-                dateLabel.text = "12/16 12:00 PM"
+                dateLabel.text = ""
                 dateLabel.textAlignment = .right
                 dateLabel.y = 10
                 row_item.addSubview(dateLabel)
+                
+                let date = (messageData.object(forKey: "created_at") as! String).mongoDate
+                let outputFormatter = DateFormatter()
+                outputFormatter.dateFormat = "MM/dd hh:mm a" // "12/16 12:00 PM"
+                let formattedDate = outputFormatter.string(from: date)
+                dateLabel.text = formattedDate
                 
                 let messageCon = UITextView()
                 messageCon.width = sharedData.screenWidth  - 90
@@ -236,23 +286,54 @@ class ChatDetails:UIView, UITextFieldDelegate, UIScrollViewDelegate
             // Perform actions when the keyboard is about to be shown
             print("Keyboard will show")
         isKeyboardUp = true
-        messagesCon.height = sharedData.screenHeight - messagesCon.y - bottomCon.height - (400 - bottomCon.height)
-        UIView.animate(withDuration: 0.25)
+        
+        if(sharedData.keyboardHeight == 0)
         {
-            self.bottomCon.y = self.sharedData.screenHeight - 400
+            sharedData.setTimeout(delay: 1.0, block: {
+                self.messagesCon.height = self.sharedData.screenHeight - self.messagesCon.y - self.bottomCon.height - (self.sharedData.keyboardHeight )
+                UIView.animate(withDuration: 0.25)
+                {
+                    self.bottomCon.y = self.sharedData.screenHeight - self.sharedData.keyboardHeight - self.bottomCon.height
+                }
+                
+                let contentHeight = self.messagesCon.contentSize.height
+                let bottomOffset = CGPoint(x: 0, y: contentHeight - self.messagesCon.bounds.size.height)
+                self.messagesCon.setContentOffset(bottomOffset, animated: true)
+            })
+        }else{
+            messagesCon.height = sharedData.screenHeight - messagesCon.y - bottomCon.height - (sharedData.keyboardHeight)
+            UIView.animate(withDuration: 0.25)
+            {
+                self.bottomCon.y = self.sharedData.screenHeight - self.sharedData.keyboardHeight - self.bottomCon.height
+            }
+            
+            let contentHeight = messagesCon.contentSize.height
+            let bottomOffset = CGPoint(x: 0, y: contentHeight - messagesCon.bounds.size.height)
+            messagesCon.setContentOffset(bottomOffset, animated: true)
         }
         
-        let contentHeight = messagesCon.contentSize.height
-        let bottomOffset = CGPoint(x: 0, y: contentHeight - messagesCon.bounds.size.height)
-        messagesCon.setContentOffset(bottomOffset, animated: true)
+        
             return true
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool
     {
+        let currentDate = Date()
+
+        // Create an ISO8601DateFormatter
+        let isoFormatter = ISO8601DateFormatter()
+
+        // Optionally, you can set formatting options for the ISO8601 string
+        isoFormatter.formatOptions = [.withInternetDateTime]
+
+        // Convert the Date object to an ISO8601 string
+        let isoString = isoFormatter.string(from: currentDate)
+        
         let data = NSMutableDictionary()
         data.setValue(sharedData.member_id, forKey: "member_id")
+        data.setValue(sharedData.member_name, forKey: "member_name")
         data.setValue(input.text, forKey: "message")
+        data.setValue(isoString, forKey: "created_at")
         
         messagesDataA.add(data)
         renderDetails()
@@ -260,6 +341,15 @@ class ChatDetails:UIView, UITextFieldDelegate, UIScrollViewDelegate
         let contentHeight = messagesCon.contentSize.height
         let bottomOffset = CGPoint(x: 0, y: contentHeight - messagesCon.bounds.size.height)
         messagesCon.setContentOffset(bottomOffset, animated: true)
+        
+        sharedData.postIt(urlString: sharedData.base_domain + "/api-ios/chat/details-add/" + sharedData.chat_id , params: data as! [String : Any], callback: {
+            success, result_dict in
+            
+            
+            
+            
+        })
+        
         /*
         input.resignFirstResponder()
         input.text = ""
@@ -319,7 +409,7 @@ class ChatDetails:UIView, UITextFieldDelegate, UIScrollViewDelegate
         {
             self.bottomCon.y = self.sharedData.screenHeight -  self.bottomCon.height
         }
-        sharedData.postEvent(event: "GO_BACK_CHAT")
+        sharedData.postEvent(event: "CHAT_HOME")
     }
     
     convenience init ()
