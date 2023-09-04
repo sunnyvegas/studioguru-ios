@@ -6,7 +6,7 @@
 //
 
 import UIKit
-
+import LocalAuthentication
 
 
 class ChatDetails:UIView, UITextFieldDelegate, UIScrollViewDelegate
@@ -63,14 +63,34 @@ class ChatDetails:UIView, UITextFieldDelegate, UIScrollViewDelegate
         
         bottomCon.backgroundColor = UIColor(hex: 0xDDDDDD)
         
-        let device = UIDevice.current
+        //let device = UIDevice.current
        // let systemVersion = device.systemVersion
-        let deviceName = device.modelName
-        if(sharedData.screenHeight > 700)
-        {
-            bottomCon.height = 80
-            bottomCon.y = sharedData.screenHeight - bottomCon.height
+        //let deviceName = device.modelName
+        let context = LAContext()
+        
+        var error: NSError?
+
+        if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
+            // Face ID is available on the device
+            if context.biometryType == .faceID {
+                print("The device has Face ID")
+                bottomCon.height = 80
+                bottomCon.y = sharedData.screenHeight - bottomCon.height
+                
+            } else if context.biometryType == .touchID {
+                print("The device has Touch ID")
+            } else {
+                print("The device has some other biometric authentication method")
+            }
+        } else {
+            // Face ID is not available on the device or not configured
+            print("Face ID is not available or not configured on this device.")
+            if let error = error {
+                print("Error: \(error.localizedDescription)")
+            }
         }
+        
+       
         print("sharedData.screenHeight--->",sharedData.screenHeight)
         
         //Optional(896.0)

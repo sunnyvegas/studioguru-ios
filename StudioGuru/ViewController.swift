@@ -64,6 +64,7 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate, UINaviga
         sharedData.addEventListener(title: "ADD_VIDEO_LIBRARY", target: self, selector: #selector(self.goPickVideoLibrary))
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillChange), name: UIResponder.keyboardDidChangeFrameNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
     }
     
     @objc func goDash()
@@ -85,6 +86,32 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate, UINaviga
         //let deltaY = targetFrame.origin.y - curFrame.origin.y
         sharedData.keyboardHeight = targetFrame.size.height
     }
+    
+    @objc func keyboardWillShow(_ notification: Notification) {
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            // Calculate the keyboard height
+            let keyboardHeight = keyboardSize.height
+            print("Keyboard will show. Height: \(keyboardHeight)")
+            sharedData.keyboardHeight = keyboardHeight
+            
+            // You can use the keyboardHeight as needed, for example, to adjust the layout.
+        }
+    }
+
+    @objc func keyboardWillHide(_ notification: Notification) {
+        print("Keyboard will hide")
+        
+        // Reset any layout adjustments made when the keyboard was shown.
+    }
+   
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+
+
+
+
+
     
     @objc func showLoading()
     {
