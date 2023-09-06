@@ -70,6 +70,8 @@ class SharedData: NSObject
     var edit_value = ""
     var edit_api = ""
     var edit_event = ""
+    var chat_badge_count = ""
+    var badge_label:UILabel!
     
     var studentDict:NSMutableDictionary = NSMutableDictionary()
     

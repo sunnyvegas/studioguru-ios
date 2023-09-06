@@ -14,6 +14,7 @@ class SideMenuCell:UITableViewCell
     var title:UILabel!
     var image:UIImageView!
     var line:UIView!
+    var badge:UILabel!
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?)
     {
@@ -38,7 +39,7 @@ class SideMenuCell:UITableViewCell
         title.y = 5
         title.x = image.posX() + 10
         title.textColor = .black//sharedData.gold
-        title.font = sharedData.normalFont(size: 20)
+        title.font = sharedData.normalFont(size: 22)
         title.height = 35
         title.text = "Menu Option"
         addSubview(title)
@@ -51,6 +52,18 @@ class SideMenuCell:UITableViewCell
         line.alpha = 0.1
         addSubview(line)
         
+        badge = UILabel()
+        badge.width = 20
+        badge.height = 20
+        badge.backgroundColor = sharedData.gray
+        badge.textColor = .white
+        badge.textAlignment = .center
+        badge.corner(radius: 10)
+        badge.x = 120
+        badge.y = 15
+        badge.font = .systemFont(ofSize: 13)
+        badge.isHidden = true
+        addSubview(badge)
         
         //self.selectionStyle = .none
     

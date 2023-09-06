@@ -12,6 +12,7 @@ class ChatCell:UITableViewCell
     var mainDict:NSMutableDictionary!
     var title:UILabel!
     var img:UIImageView!
+    var badge:UIView!
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?)
     {
@@ -51,6 +52,16 @@ class ChatCell:UITableViewCell
         bottomLine.alpha = 0.15
         addSubview(bottomLine)
         
+        
+        badge = UIView()
+        badge.width = 26
+        badge.height = 26
+        badge.backgroundColor = sharedData.gray
+        badge.x = sharedData.screenWidth - 70
+        badge.y = 17
+        badge.corner(radius: 13)
+        badge.isHidden = true
+        addSubview(badge)
         
         //self.selectionStyle = .none
     

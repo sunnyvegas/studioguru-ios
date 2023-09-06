@@ -116,10 +116,11 @@ class SideMenu:UIView, UITextFieldDelegate, UITableViewDelegate, UITableViewData
         }
         
         cell.title.text = title
-        cell.title.font = sharedData.normalFont(size: 20)
+        cell.title.font = sharedData.normalFont(size: 22)
         
         cell.backgroundColor = .white
         cell.title.textColor = .black
+        cell.badge.isHidden = true
         if(indexPath.row < 2)
         {
             cell.image.downloadedFrom(link: (iconsA.object(at: indexPath.row) as! String))
@@ -135,6 +136,13 @@ class SideMenu:UIView, UITextFieldDelegate, UITableViewDelegate, UITableViewData
         }else{
             cell.image.image = UIImage(named: (iconsA.object(at: indexPath.row) as! String) )?.withRenderingMode(.alwaysTemplate)
             cell.image.tintColor = .black
+        }
+        
+        if(indexPath.row == 5 && sharedData.chat_badge_count != "0")
+        {
+            cell.badge.isHidden = false
+            cell.badge.text = ""//sharedData.chat_badge_count
+            sharedData.badge_label = cell.badge
         }
         
         if(title == "Log Out")

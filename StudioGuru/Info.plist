@@ -9,12 +9,6 @@
 		<string>Roboto-Medium.ttf</string>
 		<string>Roboto-Regular.ttf</string>
 	</array>
-    <key>NSCameraUsageDescription</key>
-    <string>The app needs access to your camera</string>
-    <key>NSPhotoLibraryUsageDescription</key>
-    <string>The app needs access to your photo/video Library</string>
-    <key>NSMicrophoneUsageDescription</key>
-    <string>The app need access to your microphone</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
@@ -34,5 +28,9 @@
 			</array>
 		</dict>
 	</dict>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>remote-notification</string>
+	</array>
 </dict>
 </plist>

@@ -182,14 +182,16 @@ class Login:UIView, UITextFieldDelegate,UIPickerViewDelegate, UIPickerViewDataSo
     
     @objc func loadData()
     {
-        sharedData.getIt(urlString: "https://dev-studiobossapp.herokuapp.com/api-studios", params: [:], callback:
+        sharedData.getIt(urlString:"http://" + sharedData.domain + ":3300/api-studios", params: [:], callback:
         {
             success, result_dict in
             
             self.mainDataA.addObjects(from: (result_dict.object(forKey: "result") as! Array<Any>) )
             self.sharedData.studio_id = ((self.mainDataA.object(at: 0) as! NSDictionary).object(forKey: "id") as! String)
+            self.mainPicker.reloadAllComponents()
+            print("mainDataA--->",result_dict)
             self.sharedData.setTimeout(delay: 0.15, block: {
-                self.checkLogin()
+               self.checkLogin()
             })
         })
     }
@@ -250,12 +252,17 @@ class Login:UIView, UITextFieldDelegate,UIPickerViewDelegate, UIPickerViewDataSo
     
     @objc func tokenLoaded()
     {
+        print("tokenLoaded--->")
         if(sharedData.getUserData(title: "user_email") != "")
         {
             inputEmail.text = sharedData.getUserData(title: "user_email")
             inputPass.text = sharedData.getUserData(title: "user_pass")
             inputStudios.text = sharedData.getUserData(title: "studio_id")
-            self.goLogin()
+            if(mainDataA.count > 0)
+            {
+                self.goLogin()
+            }
+            //self.goLogin()
         }else{
             sharedData.postEvent(event: "HIDE_LOADING")
         }
@@ -306,6 +313,19 @@ class Login:UIView, UITextFieldDelegate,UIPickerViewDelegate, UIPickerViewDataSo
        
     }
     
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+           // Check if the notification contains a JSON payload
+        print("RECIEVE_NOTIFICATION2")
+        SharedData.sharedInstance.showMessage(title: "Alert", message: "Received Notification2")
+        if let userInfo = response.notification.request.content.userInfo as? [String: Any] {
+               // Handle the JSON payload here
+               print("Received notification with payload: \(userInfo)")
+           }
+
+           // Call the completion handler when done
+           completionHandler()
+       }
+    
     @objc func loadStudios()
     {
         ///api-studios
@@ -324,7 +344,7 @@ class Login:UIView, UITextFieldDelegate,UIPickerViewDelegate, UIPickerViewDataSo
         inputStudios.resignFirstResponder()
         
         sharedData.postEvent(event: "SHOW_LOADING")
-        
+        print("mainDataA->",mainDataA)
         print("mainPicker.selectedRow(inComponent: 0)--->",mainPicker.selectedRow(inComponent: 0))
         sharedData.studio_id = ((mainDataA.object(at: mainPicker.selectedRow(inComponent: 0)) as! NSDictionary).object(forKey: "id") as! String)
         sharedData.studio_name = ((mainDataA.object(at: mainPicker.selectedRow(inComponent: 0)) as! NSDictionary).object(forKey: "text") as! String)
@@ -349,7 +369,7 @@ class Login:UIView, UITextFieldDelegate,UIPickerViewDelegate, UIPickerViewDataSo
                 self.inputEmail.text = ""
                 self.inputStudios.text = ""
                 
-                
+                self.sharedData.chat_badge_count = (result_dict.object(forKey: "chat_badge_count") as! String)
                 self.sharedData.member_id = (result_dict.object(forKey: "member_id") as! String)
                 self.sharedData.member_token = (result_dict.object(forKey: "member_token") as! String)
                 self.sharedData.member_name = (result_dict.object(forKey: "member_name") as! String)

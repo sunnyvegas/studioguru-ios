@@ -115,9 +115,11 @@ class ChatDetails:UIView, UITextFieldDelegate, UIScrollViewDelegate
         
         mainCon.addSubview(messagesCon)
         mainCon.addSubview(bottomCon)
+        
+        sharedData.addEventListener(title: "RELOAD_CURRENT_CHAT", target: self, selector: #selector(self.initClass))
     }
     
-    func initClass()
+    @objc func initClass()
     {
         topBar.titleLabel.text = sharedData.chat_title
         
@@ -140,7 +142,14 @@ class ChatDetails:UIView, UITextFieldDelegate, UIScrollViewDelegate
             self.messagesDataA.addObjects(from: (mainDict.object(forKey: "messages") as! Array<Any>) )
             //pplDataA
             self.renderDetails()
+            
+            self.sharedData.postEvent(event: "UPDATE_BADGE_COUNT")
         })
+    }
+    
+    @objc func refreshChatBadge()
+    {
+        //sharedData.chat_label
     }
     
     @objc func renderDetails()
@@ -424,6 +433,7 @@ class ChatDetails:UIView, UITextFieldDelegate, UIScrollViewDelegate
         isKeyboardUp = false
         input.resignFirstResponder()
         input.text = ""
+        sharedData.chat_id = ""
         messagesCon.height = sharedData.screenHeight - messagesCon.y - bottomCon.height
         UIView.animate(withDuration: 0.01)
         {

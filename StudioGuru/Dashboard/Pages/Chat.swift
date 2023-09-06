@@ -51,6 +51,8 @@ class Chat:BasePage,UITableViewDelegate, UITableViewDataSource
         mainCon.addSubview(page)
         
         sharedData.addEventListener(title: "CHAT_HOME", target: self, selector: #selector(self.goBackHome))
+        sharedData.addEventListener(title: "UPDATE_BADGE_COUNT", target: self, selector: #selector(self.loadData))
+        
     }
     
     override func initClass()
@@ -71,9 +73,41 @@ class Chat:BasePage,UITableViewDelegate, UITableViewDataSource
             self.mainDataA.addObjects(from: (result_dict.object(forKey: "result") as! Array<Any>) )
             
             self.feedList.reloadData()
-            
+            self.updateBadgeCount()
             
         })
+    }
+    
+    @objc func updateBadgeCount()
+    {
+        var count = 0
+        
+        for i in 0..<mainDataA.count
+        {
+            let data = mainDataA.object(at: i) as! NSDictionary
+            let badge_count = Int((data.object(forKey: "badge_count") as! String))
+            count = count + badge_count!
+        }
+        
+        
+        if(sharedData.badge_label != nil)
+        {
+            UIApplication.shared.applicationIconBadgeNumber = count
+            if(count == 0)
+            {
+                print("count-0")
+                sharedData.badge_label.isHidden = true
+            }else{
+                print("count-1")
+                sharedData.badge_label.text = ""//String(count)
+                sharedData.badge_label.isHidden = false
+            }
+        }else{
+            print("nil!!!")
+        }
+            
+            
+        
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
@@ -93,7 +127,16 @@ class Chat:BasePage,UITableViewDelegate, UITableViewDataSource
         let data = mainDataA.object(at: indexPath.row) as! NSDictionary
         cell.title.text = (data.object(forKey: "title") as! String)
         cell.img.downloadedFrom(link: (data.object(forKey: "photo") as! String))
+        cell.backgroundColor = .white
+        cell.badge.isHidden = true
+        cell.title.font = sharedData.normalFont(size: 20)
         
+        if((data.object(forKey: "badge_count") as! String)  != "0")
+        {
+            cell.backgroundColor = UIColor(hex: 0xEEEEEE)
+            cell.badge.isHidden = false
+            cell.title.font = sharedData.boldFont(size: 20)
+        }
         cell.accessoryType = .disclosureIndicator
         
         return cell

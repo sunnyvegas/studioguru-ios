@@ -797,6 +797,9 @@
 				INFOPLIST_FILE = StudioGuru/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Kiwi Suites";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.business";
+				INFOPLIST_KEY_NSCameraUsageDescription = "The app needs access to your camera";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "The app need access to your microphone";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "The app needs access to your photo/video Library";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -838,6 +841,9 @@
 				INFOPLIST_FILE = StudioGuru/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Kiwi Suites";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.business";
+				INFOPLIST_KEY_NSCameraUsageDescription = "The app needs access to your camera";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "The app need access to your microphone";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "The app needs access to your photo/video Library";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
