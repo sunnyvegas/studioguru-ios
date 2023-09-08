@@ -91,7 +91,7 @@ class ChatDetails:UIView, UITextFieldDelegate, UIScrollViewDelegate
         }
         
        
-        print("sharedData.screenHeight--->",sharedData.screenHeight)
+        //print("sharedData.screenHeight--->",sharedData.screenHeight)
         
         //Optional(896.0)
         
@@ -426,6 +426,34 @@ class ChatDetails:UIView, UITextFieldDelegate, UIScrollViewDelegate
     @objc func goSetting()
     {
         
+        let optionMenu = UIAlertController(title: "Select Option", message: "", preferredStyle: .actionSheet)
+        
+        let libAction = UIAlertAction(title: "Report Issue", style: .default, handler:
+        {
+            (alert: UIAlertAction!) -> Void in
+          
+            
+            self.sharedData.email_message = "I would like to report an issue in the " + self.sharedData.chat_title + " Group Chat"
+            self.sharedData.email_subject = "Report Issue In Group Chat"
+            self.sharedData.postEvent(event: "SHOW_EMAIL")
+           
+        })
+        optionMenu.addAction(libAction)
+        
+        
+      
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler:
+        {
+            (alert: UIAlertAction!) -> Void in
+        
+        })
+        
+        
+     
+        optionMenu.addAction(cancelAction)
+        
+        self.window?.rootViewController?.present(optionMenu, animated: true, completion: nil)
     }
     
     @objc func goBack()

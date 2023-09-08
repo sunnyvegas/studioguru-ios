@@ -378,6 +378,7 @@ class Login:UIView, UITextFieldDelegate,UIPickerViewDelegate, UIPickerViewDataSo
                 self.inputEmail.text = ""
                 self.inputStudios.text = ""
                 
+                self.sharedData.support_email = (result_dict.object(forKey: "support_email") as! String)
                 self.sharedData.chat_badge_count = (result_dict.object(forKey: "chat_badge_count") as! String)
                 self.sharedData.member_id = (result_dict.object(forKey: "member_id") as! String)
                 self.sharedData.member_token = (result_dict.object(forKey: "member_token") as! String)

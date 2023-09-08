@@ -10,8 +10,9 @@ import AVFoundation
 import AVKit
 import Foundation
 import MobileCoreServices
+import MessageUI
 
-class ViewController: UIViewController,UIImagePickerControllerDelegate, UINavigationControllerDelegate
+class ViewController: UIViewController,UIImagePickerControllerDelegate, UINavigationControllerDelegate, MFMailComposeViewControllerDelegate
 {
     
     var sharedData:SharedData!
@@ -71,6 +72,8 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate, UINaviga
         sharedData.addEventListener(title: "ADD_VIDEO_CAMERA", target: self, selector: #selector(self.goPickVideoCamera))
         sharedData.addEventListener(title: "ADD_VIDEO_LIBRARY", target: self, selector: #selector(self.goPickVideoLibrary))
         
+        sharedData.addEventListener(title: "SHOW_EMAIL", target: self, selector: #selector(self.goEmailSupport))
+        
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillChange), name: UIResponder.keyboardDidChangeFrameNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         
@@ -90,6 +93,33 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate, UINaviga
         })
         
         
+    }
+    
+    @objc func goEmailSupport()
+    {
+        //martinsfuentes@gmail.com
+        let email = sharedData.support_email
+        
+        let device = UIDevice.current
+        let systemVersion = device.systemVersion
+        let deviceName = device.modelName
+
+        print("Device: \(deviceName)")
+        print("OS Version: \(systemVersion)")
+        
+        var message = sharedData.email_message//"I am have some feedback about the A Perfect Fifth App " + "<br>"
+        message = message + " Device: " + deviceName + " <br> "
+        message = message + " OSVersion: " + systemVersion + " <br> "
+       
+        
+        
+        let mail = MFMailComposeViewController()
+            mail.mailComposeDelegate = self
+            mail.setToRecipients([email])
+            mail.setMessageBody(message, isHTML: true)
+            mail.setSubject(sharedData.email_subject)
+
+            present(mail, animated: true)
     }
     
     @objc func reachabilityDidChange(_ notification: Notification)

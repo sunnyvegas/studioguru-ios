@@ -81,6 +81,9 @@ class SharedData: NSObject
     
     var is_online = false
     
+    var support_email = ""
+    var email_message = ""
+    var email_subject = ""
     
     
     private override init()
