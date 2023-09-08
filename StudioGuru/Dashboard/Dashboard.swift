@@ -119,12 +119,16 @@ class Dashboard:UIView
         
         sharedData.addEventListener(title: "GO_CHAT", target: self, selector: #selector(self.goChat))
         sharedData.addEventListener(title: "GO_BACK_CHAT", target: self, selector: #selector(self.goBackChat))
+        
+        
     }
     
     @objc func initClass()
     {
         
     }
+    
+   
     
     @objc func goChat()
     {

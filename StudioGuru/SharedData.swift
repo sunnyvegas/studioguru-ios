@@ -57,6 +57,10 @@ class SharedData: NSObject
     var chat_title = ""
     var chat_id = ""
     
+    var tmp_chat_title = ""
+    var tmp_chat_id = ""
+    var canLoadChat = false
+    
     var device_token = ""
     
     var owner:Bool = false
@@ -74,6 +78,10 @@ class SharedData: NSObject
     var badge_label:UILabel!
     
     var studentDict:NSMutableDictionary = NSMutableDictionary()
+    
+    var is_online = false
+    
+    
     
     private override init()
     {

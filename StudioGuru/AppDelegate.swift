@@ -91,6 +91,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                 {
                     SharedData.sharedInstance.postEvent(event: "RELOAD_CURRENT_CHAT")
                 }else{
+                    SharedData.sharedInstance.tmp_chat_id = chat_id
+                    SharedData.sharedInstance.tmp_chat_title = userInfo[AnyHashable("chat_name")] as! String
                     SharedData.sharedInstance.postEvent(event: "UPDATE_BADGE_COUNT")
                     SharedData.sharedInstance.postEvent(event: "SHOW_CHAT_BANNER")
                 }

@@ -46,6 +46,13 @@ class SideMenu:UIView, UITextFieldDelegate, UITableViewDelegate, UITableViewData
         
         
         sharedData.addEventListener(title: "APP_LOADED", target: self, selector: #selector(self.initClass))
+        
+        sharedData.addEventListener(title: "RELOAD_SIDEMENU", target: self, selector: #selector(self.realoadMenu))
+    }
+    
+    @objc func realoadMenu()
+    {
+        feedList.reloadData()
     }
     
     @objc func initClass()
@@ -117,7 +124,6 @@ class SideMenu:UIView, UITextFieldDelegate, UITableViewDelegate, UITableViewData
         
         cell.title.text = title
         cell.title.font = sharedData.normalFont(size: 22)
-        
         cell.backgroundColor = .white
         cell.title.textColor = .black
         cell.badge.isHidden = true
@@ -133,9 +139,24 @@ class SideMenu:UIView, UITextFieldDelegate, UITableViewDelegate, UITableViewData
             cell.line.y = 79
             cell.title.x = cell.image.posX() + 10
             cell.title.y = 20
+            
         }else{
             cell.image.image = UIImage(named: (iconsA.object(at: indexPath.row) as! String) )?.withRenderingMode(.alwaysTemplate)
             cell.image.tintColor = .black
+            
+            if(CGFloat(indexPath.row) == sharedData.cPage)
+            {
+                cell.image.tintColor = .white
+            }
+            
+            
+        }
+        
+        if(CGFloat(indexPath.row) == sharedData.cPage)
+        {
+            cell.title.font = sharedData.boldFont(size: 22)
+            cell.title.textColor = .white
+            cell.backgroundColor = sharedData.gray
         }
         
         if(indexPath.row == 5 && sharedData.chat_badge_count != "0")
@@ -183,11 +204,11 @@ class SideMenu:UIView, UITextFieldDelegate, UITableViewDelegate, UITableViewData
             return
         }
         
-        sharedData.postEvent(event: "HIDE_MENU")
         
+        sharedData.postEvent(event: "HIDE_MENU")
         sharedData.cPage = CGFloat(indexPath.row)
         sharedData.postEvent(event: "UPDATE_PAGES")
-        
+        feedList.reloadData()
         
     }
     

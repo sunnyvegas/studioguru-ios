@@ -75,6 +75,17 @@ class Chat:BasePage,UITableViewDelegate, UITableViewDataSource
             self.feedList.reloadData()
             self.updateBadgeCount()
             
+            if(self.sharedData.canLoadChat == true)
+            {
+                self.page.initClass()
+                
+                UIView.animate(withDuration: 0.25)
+                {
+                    self.mainCon.x = self.sharedData.screenWidth * -1
+                }
+            }
+            
+            self.sharedData.canLoadChat = false
         })
     }
     
@@ -95,10 +106,10 @@ class Chat:BasePage,UITableViewDelegate, UITableViewDataSource
             UIApplication.shared.applicationIconBadgeNumber = count
             if(count == 0)
             {
-                print("count-0")
+                
                 sharedData.badge_label.isHidden = true
             }else{
-                print("count-1")
+               
                 sharedData.badge_label.text = ""//String(count)
                 sharedData.badge_label.isHidden = false
             }

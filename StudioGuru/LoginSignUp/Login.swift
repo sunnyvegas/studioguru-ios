@@ -163,7 +163,14 @@ class Login:UIView, UITextFieldDelegate,UIPickerViewDelegate, UIPickerViewDataSo
         
         sharedData.addEventListener(title: "TOKEN_LOADED", target: self, selector: #selector(self.tokenLoaded))
         sharedData.postEvent(event: "SHOW_LOADING")
-        loadData()
+       
+        sharedData.setTimeout(delay: 0.5, block: {
+            if(self.sharedData.is_online == true)
+            {
+                self.loadData()
+            }
+        })
+        
         
         
     }
@@ -326,16 +333,18 @@ class Login:UIView, UITextFieldDelegate,UIPickerViewDelegate, UIPickerViewDataSo
            completionHandler()
        }
     
-    @objc func loadStudios()
-    {
-        ///api-studios
-    }
-    
+   
     @objc func goLogin()
     {
         if(inputStudios.text == "")
         {
             sharedData.showMessage(title: "Error", message: "Please select a studio to login with")
+            return
+        }
+        
+        if(mainDataA.count == 0)
+        {
+            self.loadData()
             return
         }
         

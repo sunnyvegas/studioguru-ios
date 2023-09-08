@@ -56,7 +56,7 @@ class ChatCell:UITableViewCell
         badge = UIView()
         badge.width = 26
         badge.height = 26
-        badge.backgroundColor = sharedData.gray
+        badge.backgroundColor = sharedData.blue
         badge.x = sharedData.screenWidth - 70
         badge.y = 17
         badge.corner(radius: 13)

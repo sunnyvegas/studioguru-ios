@@ -55,7 +55,7 @@ class SideMenuCell:UITableViewCell
         badge = UILabel()
         badge.width = 20
         badge.height = 20
-        badge.backgroundColor = sharedData.gray
+        badge.backgroundColor = sharedData.blue
         badge.textColor = .white
         badge.textAlignment = .center
         badge.corner(radius: 10)

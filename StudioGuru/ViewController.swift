@@ -17,6 +17,9 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate, UINaviga
     var sharedData:SharedData!
     var dashPage:MainDashboard!
     var loadingCon:UIView!
+    var noInternet:NoInternet!
+    
+    let reachability: Reachable? = Reachable.networkReachabilityForInternetConnection()
     
     override func viewDidLoad()
     {
@@ -47,6 +50,11 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate, UINaviga
         actInd.startAnimating()
         loadingCon.addSubview(actInd)
         
+        
+        
+        noInternet = NoInternet(frame: sharedData.fullRectBottom)
+        view.addSubview(noInternet)
+        
 //        let dashPage = Dashboard(frame: sharedData.fullRect)
 //        view.addSubview(dashPage)
         
@@ -65,6 +73,43 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate, UINaviga
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillChange), name: UIResponder.keyboardDidChangeFrameNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(self.reachabilityDidChange(_:)), name: NSNotification.Name(rawValue: ReachabilityDidChangeNotificationName), object: nil)
+        
+        
+        
+        
+         
+            _ = reachability?.startNotifier()
+        
+        
+        
+        sharedData.setTimeout(delay: 0.1, block: {
+            
+            self.checkReachability()
+        })
+        
+        
+    }
+    
+    @objc func reachabilityDidChange(_ notification: Notification)
+    {
+        checkReachability()
+    }
+    
+    func checkReachability()
+    {
+        guard let r = reachability else { return }
+        if r.isReachable
+        {
+            sharedData.is_online = true
+            noInternet.animateDown()
+        }else{
+            sharedData.is_online = false
+            noInternet.y = sharedData.screenHeight
+            view.addSubview(noInternet)
+            noInternet.animateUp()
+        }
     }
     
     @objc func goDash()
@@ -87,7 +132,8 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate, UINaviga
         sharedData.keyboardHeight = targetFrame.size.height
     }
     
-    @objc func keyboardWillShow(_ notification: Notification) {
+    @objc func keyboardWillShow(_ notification: Notification)
+    {
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             // Calculate the keyboard height
             let keyboardHeight = keyboardSize.height
@@ -98,13 +144,14 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate, UINaviga
         }
     }
 
-    @objc func keyboardWillHide(_ notification: Notification) {
+    @objc func keyboardWillHide(_ notification: Notification)
+    {
         print("Keyboard will hide")
         
         // Reset any layout adjustments made when the keyboard was shown.
     }
-   
-    deinit {
+    deinit
+    {
         NotificationCenter.default.removeObserver(self)
     }
 
@@ -153,7 +200,7 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate, UINaviga
         imagePickerController.allowsEditing = true
         imagePickerController.mediaTypes = [kUTTypeMovie as String]
         present(imagePickerController, animated: true, completion:
-            {
+        {
                 //self.view.window?.rootViewController?.view.addSubview(self.uploadPhoto)
                 //self.uploadPhoto.frame = CGRect(x: 0, y: 0, width: self.screenWidth, height: self.screenHeight)
         })

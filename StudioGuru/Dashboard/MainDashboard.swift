@@ -19,6 +19,10 @@ class MainDashboard:UIView, UITextFieldDelegate
     
     var isMenuOpen:Bool = false
     
+    var cBanner:UIView!
+    
+    var isShowingBanner = false
+    
     override init (frame : CGRect)
     {
         super.init(frame : frame)
@@ -71,11 +75,91 @@ class MainDashboard:UIView, UITextFieldDelegate
         
         sharedData.cPage = 1
         updatePages()
+        
+        sharedData.addEventListener(title: "SHOW_CHAT_BANNER", target: self, selector: #selector(self.showChatBanner))
+        
+        sharedData.setTimeout(delay: 3.0, block: {
+            //self.showChatBanner()
+        })
     }
     
     func initClass()
     {
     
+    }
+    
+    @objc func showChatBanner()
+    {
+        let banner = sharedData.getTopBarBig(title: sharedData.tmp_chat_title + " - New Message")
+        banner.backgroundColor = .black
+        banner.titleLabel.textColor = .white
+        banner.titleLabel.font = .systemFont(ofSize: 17)
+        banner.titleLabel.textAlignment = .left
+        banner.titleLabel.x = 50
+        banner.y = banner.height * -1
+        addSubview(banner)
+        banner.animateUp()
+        
+        
+        let img = UIImageView()
+        img.width = 30
+        img.height = 30
+        img.x = 10
+        img.y = 45
+        img.corner(radius: 15)
+        img.downloadedFrom(link: sharedData.base_domain + "/chat-photo/" + sharedData.tmp_chat_id)
+        banner.addSubview(img)
+        
+        let btn = UIButton(type: .custom)
+        btn.width = banner.width
+        btn.height = banner.height
+        btn.backgroundColor = .clear
+        btn.addEventListener(selector: #selector(self.goChat), target: self)
+        banner.addSubview(btn)
+        
+        banner.addExitRight(selector: #selector(self.goExitBanner), target: self)
+        cBanner = banner
+        
+        isShowingBanner = true
+        
+        sharedData.setTimeout(delay: 5.0, block: {
+            self.hideBanner()
+        })
+    }
+    
+    @objc func hideBanner()
+    {
+        if(isShowingBanner == true)
+        {
+            isShowingBanner = false
+            UIView.animate(withDuration: 0.25)
+            {
+                self.cBanner.y = self.cBanner.height * -1
+            }
+        }
+    }
+    
+    @objc func goChat()
+    {
+        isShowingBanner = false
+        sharedData.chat_id = sharedData.tmp_chat_id
+        sharedData.chat_title = sharedData.tmp_chat_title
+        
+        sharedData.canLoadChat = true
+        sharedData.postEvent(event: "RELOAD_SIDEMENU")
+        sharedData.postEvent(event: "HIDE_MENU")
+        sharedData.cPage = 5
+        sharedData.postEvent(event: "UPDATE_PAGES")
+        
+        
+        //sharedData.showMessage(title: "alert", message: "yes!")
+        goExitBanner()
+    }
+    
+    @objc func goExitBanner()
+    {
+        isShowingBanner = false
+        cBanner.removeFromSuperview()
     }
     
     @objc func updateToken()
