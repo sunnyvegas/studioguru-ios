@@ -59,10 +59,39 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
            // Check if the notification contains a JSON payload
         print("RECIEVE_NOTIFICATION")
         
-        SharedData.sharedInstance.showMessage(title: "Alert", message: "Received Notification1")
+        //SharedData.sharedInstance.showMessage(title: "Alert", message: "Received Notification1")
         if let userInfo = response.notification.request.content.userInfo as? [String: Any] {
                // Handle the JSON payload here
                print("Received notification with payload: \(userInfo)")
+            
+            if let type = userInfo["type"] as? String
+            {
+                       //do something with url here
+                print("type---->",type)
+                
+                if(SharedData.sharedInstance.member_id == "")
+                {
+                    SharedData.sharedInstance.didOpenFromPush = true
+                    return
+                }
+                
+                if(type == "chat")
+                {
+                    let chat_id = userInfo["chat_id"] as! String
+                    
+                    if(chat_id == SharedData.sharedInstance.chat_id)
+                    {
+                        SharedData.sharedInstance.postEvent(event: "RELOAD_CURRENT_CHAT")
+                    }else{
+                        SharedData.sharedInstance.tmp_chat_id = chat_id
+                        SharedData.sharedInstance.tmp_chat_title = userInfo["chat_name"] as! String
+                        SharedData.sharedInstance.postEvent(event: "UPDATE_BADGE_COUNT")
+                        SharedData.sharedInstance.postEvent(event: "SHOW_CHAT_BANNER")
+                    }
+                }
+                
+               // SharedData.sharedInstance.showMessage(title: "Alert", message: "Type")
+                }
            }
 
            // Call the completion handler when done

@@ -60,6 +60,7 @@ class SharedData: NSObject
     var tmp_chat_title = ""
     var tmp_chat_id = ""
     var canLoadChat = false
+    var didOpenFromPush = false
     
     var device_token = ""
     

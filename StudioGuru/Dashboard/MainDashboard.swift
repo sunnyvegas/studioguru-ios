@@ -170,6 +170,15 @@ class MainDashboard:UIView, UITextFieldDelegate
             
             print("TOKEN_UPDATED-",self.sharedData.device_token)
         })
+        
+        if(SharedData.sharedInstance.didOpenFromPush == true)
+        {
+            sharedData.postEvent(event: "HIDE_MENU")
+            sharedData.cPage = 5
+            sharedData.postEvent(event: "RELOAD_SIDEMENU")
+            sharedData.postEvent(event: "UPDATE_PAGES")
+        }
+        SharedData.sharedInstance.didOpenFromPush = false
     }
     
     @objc func toggleMenu()
