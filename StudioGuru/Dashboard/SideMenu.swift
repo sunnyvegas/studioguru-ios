@@ -93,6 +93,8 @@ class SideMenu:UIView, UITextFieldDelegate, UITableViewDelegate, UITableViewData
         
         feedList.reloadData()
         
+        
+        
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
