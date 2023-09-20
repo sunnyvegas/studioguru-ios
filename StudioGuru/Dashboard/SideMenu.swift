@@ -63,8 +63,8 @@ class SideMenu:UIView, UITextFieldDelegate, UITableViewDelegate, UITableViewData
         mainDataA.add(sharedData.studio_name!)
         iconsA.add(sharedData.base_domain + "/logo")
         
-        mainDataA.add(sharedData.member_name!)
-        iconsA.add(sharedData.base_domain + "/member-photo/" + sharedData.member_id)
+        mainDataA.add("My Account")
+        iconsA.add("icon_myaccount")
         
         
         mainDataA.add("Manager")
@@ -99,8 +99,13 @@ class SideMenu:UIView, UITextFieldDelegate, UITableViewDelegate, UITableViewData
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
     {
-       
-        if(indexPath.row < 2)
+        if(indexPath.row == 0 || indexPath.row == 2 || indexPath.row == 3 || indexPath.row == 4)
+        {
+            return 0
+        }
+        
+        
+        if(indexPath.row < 1)
         {
             return 80
         }
@@ -129,7 +134,13 @@ class SideMenu:UIView, UITextFieldDelegate, UITableViewDelegate, UITableViewData
         cell.backgroundColor = .white
         cell.title.textColor = .black
         cell.badge.isHidden = true
-        if(indexPath.row < 2)
+        
+        if(indexPath.row == 0 || indexPath.row == 2 || indexPath.row == 3 || indexPath.row == 4)
+        {
+            cell.isHidden = true
+        }
+        
+        if(indexPath.row < 1)
         {
             cell.image.downloadedFrom(link: (iconsA.object(at: indexPath.row) as! String))
             cell.image.tintColor = .black
