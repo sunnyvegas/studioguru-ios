@@ -30,6 +30,10 @@ class ChatDetails:UIView, UITextFieldDelegate, UIScrollViewDelegate
     
     var isKeyboardUp:Bool = false
     
+    var dimView:UIView!
+    
+    var cInput:UITextView!
+    
     override init (frame : CGRect)
     {
         super.init(frame : frame)
@@ -42,6 +46,15 @@ class ChatDetails:UIView, UITextFieldDelegate, UIScrollViewDelegate
         topBar.addBack(selector: #selector(self.goBack), target: self)
         topBar.addSetting(selector: #selector(self.goSetting), target: self)
         addSubview(topBar)
+        
+        dimView = UIView(frame: sharedData.fullRect)
+        //dimView.backgroundColor = UIColor(white: 0, alpha: 0.5)
+        dimView.isHidden = true
+        addSubview(dimView)
+        
+        //let gest = UILongPressGestureRecognizer(target: self, action: #selector(self.hideDimView))
+        //gest.minimumPressDuration = 0.1
+        //dimView.addGestureRecognizer(gest)
         
         pplCon = UIScrollView()
         pplCon.width = sharedData.screenWidth
@@ -105,7 +118,19 @@ class ChatDetails:UIView, UITextFieldDelegate, UIScrollViewDelegate
         input.returnKeyType = .send
         input.delegate = self
         input.y = 10
-        bottomCon.addSubview(input)
+        //bottomCon.addSubview(input)
+        
+        let btn = UIButton(type: .custom)
+        btn.width = sharedData.screenWidth - 20
+        btn.x = 10
+        btn.y = 10
+        btn.corner(radius: 10)
+        btn.height = 40
+        btn.setTitle("Add Message", for: .normal)
+        btn.setTitleColor(.white, for: .normal)
+        btn.backgroundColor = sharedData.gray
+        bottomCon.addSubview(btn)
+        btn.addEventListener(selector: #selector(self.showAddMessage), target: self)
         
         messagesCon = UIScrollView()
         messagesCon.y = line.posY()
@@ -145,6 +170,124 @@ class ChatDetails:UIView, UITextFieldDelegate, UIScrollViewDelegate
             
             self.sharedData.postEvent(event: "UPDATE_BADGE_COUNT")
         })
+    }
+    
+    @objc func showAddMessage()
+    {
+        dimView.removeSubViews()
+        
+        let btnHide = UIButton(type: .custom)
+        btnHide.backgroundColor = UIColor(white: 0, alpha: 0.5)
+        btnHide.width = sharedData.screenWidth
+        btnHide.height = sharedData.screenHeight
+        btnHide.addEventListener(selector: #selector(self.hideDimView), target: self)
+        dimView.addSubview(btnHide)
+        
+        let card = UIView()
+        card.width = sharedData.screenWidth - 40
+        card.height = 250
+        card.backgroundColor = UIColor(hex: 0xEEEEEE)
+        card.corner(radius: 10)
+        card.x = 20
+        card.y = 130
+        card.addDropShadow()
+        dimView.addSubview(card)
+        
+        
+        let title = UILabel()
+        title.width = card.width - 20
+        title.height = 25
+        title.y = 10
+        title.x = 10
+        title.text = "Message"
+        title.textColor = .black
+        title.font = .systemFont(ofSize: 20, weight: .bold)
+        card.addSubview(title)
+        
+        let inputText = UITextView()
+        inputText.x = 10
+        inputText.y = title.posY() + 10
+        inputText.backgroundColor = .white
+        inputText.width = card.width - 20
+        inputText.height = 120
+        inputText.padding(num: 10)
+        inputText.font = .systemFont(ofSize: 18)
+        inputText.layer.borderColor = UIColor.black.cgColor
+        inputText.layer.borderWidth = 1
+        inputText.corner(radius: 10)
+        card.addSubview(inputText)
+        
+        cInput = inputText
+        
+        let toolbar = sharedData.getToolBar(target: self, selector: #selector(self.hideKeyboard), title: "Done", direction: "right")
+        cInput.inputAccessoryView = toolbar
+        
+        
+        let btn = UIButton(type: .custom)
+        btn.width = card.width - 20
+        btn.x = 10
+        btn.y = inputText.posY() + 10
+        btn.corner(radius: 10)
+        btn.height = 40
+        btn.setTitle("Send", for: .normal)
+        btn.setTitleColor(.white, for: .normal)
+        btn.backgroundColor = sharedData.gray
+        card.addSubview(btn)
+        btn.addEventListener(selector: #selector(self.goSendMessage), target: self)
+        
+        inputText.becomeFirstResponder()
+        
+        dimView.isHidden = false
+        addSubview(dimView)
+    }
+    
+    @objc func hideKeyboard()
+    {
+        cInput.resignFirstResponder()
+    }
+    
+    @objc func goSendMessage()
+    {
+        dimView.isHidden = true
+        
+        
+        let currentDate = Date()
+
+        // Create an ISO8601DateFormatter
+        let isoFormatter = ISO8601DateFormatter()
+
+        // Optionally, you can set formatting options for the ISO8601 string
+        isoFormatter.formatOptions = [.withInternetDateTime]
+
+        // Convert the Date object to an ISO8601 string
+        let isoString = isoFormatter.string(from: currentDate)
+        
+        let data = NSMutableDictionary()
+        data.setValue(sharedData.member_id, forKey: "member_id")
+        data.setValue(sharedData.member_name, forKey: "member_name")
+        data.setValue(cInput.text!, forKey: "message")
+        data.setValue(isoString, forKey: "created_at")
+        
+        messagesDataA.add(data)
+        renderDetails()
+        input.text = ""
+        let contentHeight = messagesCon.contentSize.height
+        let bottomOffset = CGPoint(x: 0, y: contentHeight - messagesCon.bounds.size.height)
+        messagesCon.setContentOffset(bottomOffset, animated: true)
+        
+        sharedData.postIt(urlString: sharedData.base_domain + "/api-ios/chat/details-add/" + sharedData.chat_id , params: data as! [String : Any], callback: {
+            success, result_dict in
+            
+            
+            
+            
+        })
+    }
+    
+    @objc func hideDimView()
+    {
+        dimView.isHidden = true
+        cInput.resignFirstResponder()
     }
     
     @objc func refreshChatBadge()
