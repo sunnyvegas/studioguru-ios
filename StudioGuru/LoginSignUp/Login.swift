@@ -351,6 +351,7 @@ class Login:UIView, UITextFieldDelegate,UIPickerViewDelegate, UIPickerViewDataSo
                         SharedData.sharedInstance.tmp_chat_title = userInfo["chat_name"] as! String
                         SharedData.sharedInstance.postEvent(event: "UPDATE_BADGE_COUNT")
                         SharedData.sharedInstance.postEvent(event: "SHOW_CHAT_BANNER")
+                        SharedData.sharedInstance.checkChatCount()
                     }
                 }
                 

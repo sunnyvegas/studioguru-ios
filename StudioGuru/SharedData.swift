@@ -367,6 +367,22 @@ class SharedData: NSObject
       
     }
     
+    func checkChatCount()
+    {
+        if(member_id != "")
+        {
+            getIt(urlString: base_domain + "/api-ios/chat/count", params: [:], callback:
+            {
+                success, result_dict in
+                
+                let count = (result_dict.object(forKey: "result") as! Int)
+                UIApplication.shared.applicationIconBadgeNumber = count
+                self.badge_label.isHidden = (count == 0)
+              
+            })
+        }
+    }
+    
     func postIt(urlString:String, params:[String:Any], callback: @escaping (_ success:Bool, _ result:NSDictionary) -> Void)
     {
         

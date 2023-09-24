@@ -87,6 +87,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                         SharedData.sharedInstance.tmp_chat_title = userInfo["chat_name"] as! String
                         SharedData.sharedInstance.postEvent(event: "UPDATE_BADGE_COUNT")
                         SharedData.sharedInstance.postEvent(event: "SHOW_CHAT_BANNER")
+                        SharedData.sharedInstance.checkChatCount()
                     }
                 }
                 
@@ -124,6 +125,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                     SharedData.sharedInstance.tmp_chat_title = userInfo[AnyHashable("chat_name")] as! String
                     SharedData.sharedInstance.postEvent(event: "UPDATE_BADGE_COUNT")
                     SharedData.sharedInstance.postEvent(event: "SHOW_CHAT_BANNER")
+                    SharedData.sharedInstance.checkChatCount()
                 }
             }
             
@@ -154,6 +156,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         print("Device token1: \(token)")
         
         SharedData.sharedInstance.postEvent(event: "TOKEN_LOADED")
+        
+    }
+    
+    func applicationDidBecomeActive(_ application: UIApplication) {
+        
+        
         
     }
 
