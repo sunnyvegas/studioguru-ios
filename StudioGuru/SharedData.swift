@@ -377,7 +377,11 @@ class SharedData: NSObject
                 
                 let count = (result_dict.object(forKey: "result") as! Int)
                 UIApplication.shared.applicationIconBadgeNumber = count
-                self.badge_label.isHidden = (count == 0)
+                if(self.badge_label != nil)
+                {
+                    self.badge_label.isHidden = (count == 0)
+                }
+                
               
             })
         }

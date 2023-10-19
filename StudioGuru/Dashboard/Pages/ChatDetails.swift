@@ -374,11 +374,16 @@ class ChatDetails:UIView, UITextFieldDelegate, UIScrollViewDelegate
                 messageCon.textColor = .black
                 messageCon.font = .systemFont(ofSize: 16)
                 messageCon.text = (messageData.object(forKey: "message") as! String)
-                messageCon.isUserInteractionEnabled = false
+                messageCon.dataDetectorTypes = .all
+                messageCon.isEditable = false
+                messageCon.linkTextAttributes = [
+                    .foregroundColor: sharedData.blue!, // Text color for links
+                    .underlineStyle: NSUnderlineStyle.single.rawValue // Underline style for links
+                ]
                 messageCon.textContainerInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
                 messageCon.sizeToFit()
                 whiteCon.addSubview(messageCon)
-                
+                messageCon.inputView = UIView()
                 
                 
                 
@@ -426,15 +431,21 @@ class ChatDetails:UIView, UITextFieldDelegate, UIScrollViewDelegate
                 messageCon.height = 100
                 messageCon.x = 80
                 messageCon.y = 25
-                messageCon.isUserInteractionEnabled = false
+                
                 messageCon.corner(radius: 10)
                 messageCon.backgroundColor = UIColor(hex: 0x2f90f7)
                 messageCon.textColor = .white
                 messageCon.font = .systemFont(ofSize: 16)
                 messageCon.text = (messageData.object(forKey: "message") as! String)
-                messageCon.isUserInteractionEnabled = false
+                messageCon.dataDetectorTypes = .all
+                messageCon.isEditable = false
+                messageCon.linkTextAttributes = [
+                    .foregroundColor: UIColor.white, // Text color for links
+                    .underlineStyle: NSUnderlineStyle.single.rawValue // Underline style for links
+                ]
                 messageCon.textContainerInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
                 messageCon.sizeToFit()
+                messageCon.inputView = UIView()
                 messageCon.x = sharedData.screenWidth - messageCon.width - 10
                 row_item.addSubview(messageCon)
                 
