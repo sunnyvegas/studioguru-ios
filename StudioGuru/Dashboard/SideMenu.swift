@@ -89,7 +89,7 @@ class SideMenu:UIView, UITextFieldDelegate, UITableViewDelegate, UITableViewData
         iconsA.add("icon_studio_rentals")
         
         mainDataA.add("Studio Feed")
-        iconsA.add("icon_studio_rentals")
+        iconsA.add("icon_feed")
         
         mainDataA.add("Log Out")
         iconsA.add("icon_login_info")
