@@ -419,7 +419,10 @@ class Login:UIView, UITextFieldDelegate,UIPickerViewDelegate, UIPickerViewDataSo
                 self.sharedData.member_token = (result_dict.object(forKey: "member_token") as! String)
                 self.sharedData.member_name = (result_dict.object(forKey: "member_name") as! String)
                 
-                UIApplication.shared.applicationIconBadgeNumber = Int(self.sharedData.chat_badge_count)!
+                //feed_badge_count
+                self.sharedData.feed_badge_count = (result_dict.object(forKey: "feed_badge_count") as! String)
+                
+                UIApplication.shared.applicationIconBadgeNumber = (Int(self.sharedData.chat_badge_count)! + Int(self.sharedData.feed_badge_count )!)  
                 
                 self.sharedData.owner = (result_dict.object(forKey: "owner") as! Bool)
                 self.sharedData.manager = (result_dict.object(forKey: "manager") as! Bool)

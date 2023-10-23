@@ -78,6 +78,9 @@ class SharedData: NSObject
     var chat_badge_count = ""
     var badge_label:UILabel!
     
+    var feed_badge_count = ""
+    var feed_badge_label:UILabel!
+    
     var studentDict:NSMutableDictionary = NSMutableDictionary()
     
     var is_online = false

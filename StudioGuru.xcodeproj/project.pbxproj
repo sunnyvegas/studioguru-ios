@@ -62,6 +62,7 @@
 		FAB902B12AAB957900A4A47F /* NoInternet.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB902B02AAB957900A4A47F /* NoInternet.swift */; };
 		FAB902B32AAB962000A4A47F /* Reachable.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB902B22AAB962000A4A47F /* Reachable.swift */; };
 		FAB902B52AAB963800A4A47F /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB902B42AAB963800A4A47F /* NetworkManager.swift */; };
+		FAF69C802AE6541200F9150D /* FeedPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF69C7F2AE6541200F9150D /* FeedPage.swift */; };
 		FAF9216C2A89DC79005F3095 /* SignUpInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF9216B2A89DC79005F3095 /* SignUpInfo.swift */; };
 		FAF9216E2A89DCCB005F3095 /* SignUpTerms.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF9216D2A89DCCB005F3095 /* SignUpTerms.swift */; };
 		FAF921702A89E466005F3095 /* SignUpAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF9216F2A89E466005F3095 /* SignUpAccount.swift */; };
@@ -148,6 +149,7 @@
 		FAB902B02AAB957900A4A47F /* NoInternet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoInternet.swift; sourceTree = "<group>"; };
 		FAB902B22AAB962000A4A47F /* Reachable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachable.swift; sourceTree = "<group>"; };
 		FAB902B42AAB963800A4A47F /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		FAF69C7F2AE6541200F9150D /* FeedPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedPage.swift; sourceTree = "<group>"; };
 		FAF9216B2A89DC79005F3095 /* SignUpInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpInfo.swift; sourceTree = "<group>"; };
 		FAF9216D2A89DCCB005F3095 /* SignUpTerms.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpTerms.swift; sourceTree = "<group>"; };
 		FAF9216F2A89E466005F3095 /* SignUpAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpAccount.swift; sourceTree = "<group>"; };
@@ -309,6 +311,7 @@
 				FA0E93432A404EF000EEB22F /* ChatDetails.swift */,
 				FA464ECF2A35125C00910323 /* More.swift */,
 				FA8E94C22A7F5CFF00951D52 /* MoreCell.swift */,
+				FAF69C7F2AE6541200F9150D /* FeedPage.swift */,
 				FA8E94C42A7F5D0900951D52 /* More */,
 			);
 			path = Pages;
@@ -613,6 +616,7 @@
 				FAA1879F2A85D1C700598626 /* PersonalInfo.swift in Sources */,
 				FAB902B52AAB963800A4A47F /* NetworkManager.swift in Sources */,
 				FA0E93422A404BC800EEB22F /* ChatCell.swift in Sources */,
+				FAF69C802AE6541200F9150D /* FeedPage.swift in Sources */,
 				FAA187A12A85D2FC00598626 /* LoginInfo.swift in Sources */,
 				FAA187972A85C10800598626 /* StaffPage.swift in Sources */,
 				FAA1879B2A85C15300598626 /* StorePage.swift in Sources */,

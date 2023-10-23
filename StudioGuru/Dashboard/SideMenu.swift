@@ -88,6 +88,9 @@ class SideMenu:UIView, UITextFieldDelegate, UITableViewDelegate, UITableViewData
         mainDataA.add("Studio Rentals")
         iconsA.add("icon_studio_rentals")
         
+        mainDataA.add("Studio Feed")
+        iconsA.add("icon_studio_rentals")
+        
         mainDataA.add("Log Out")
         iconsA.add("icon_login_info")
         
@@ -177,6 +180,14 @@ class SideMenu:UIView, UITextFieldDelegate, UITableViewDelegate, UITableViewData
             cell.badge.isHidden = false
             cell.badge.text = ""//sharedData.chat_badge_count
             sharedData.badge_label = cell.badge
+        }
+        
+        if(indexPath.row == 9 && sharedData.feed_badge_count != "0")
+        {
+            cell.badge.x = 190
+            cell.badge.isHidden = false
+            cell.badge.text = ""//sharedData.chat_badge_count
+            sharedData.feed_badge_label = cell.badge
         }
         
         if(title == "Log Out")
