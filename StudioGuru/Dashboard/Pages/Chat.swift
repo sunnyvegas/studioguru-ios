@@ -100,6 +100,7 @@ class Chat:BasePage,UITableViewDelegate, UITableViewDataSource
             count = count + badge_count!
         }
         
+        sharedData.chat_badge_count = String(count)
         
         if(sharedData.badge_label != nil)
         {

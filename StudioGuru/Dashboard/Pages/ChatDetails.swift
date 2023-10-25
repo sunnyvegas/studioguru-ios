@@ -156,6 +156,10 @@ class ChatDetails:UIView, UITextFieldDelegate, UIScrollViewDelegate
     
     @objc func loadData()
     {
+        messagesCon.removeSubViews()
+        pplCon.removeSubViews()
+        pplCon.backgroundColor = .white
+        sharedData.postEvent(event: "SHOW_LOADING")
         sharedData.getIt(urlString: sharedData.base_domain + "/api-ios/chat/details/" + sharedData.chat_id, params: [:], callback:
         {
             success, result_dict in
@@ -169,6 +173,7 @@ class ChatDetails:UIView, UITextFieldDelegate, UIScrollViewDelegate
             self.renderDetails()
             
             self.sharedData.postEvent(event: "UPDATE_BADGE_COUNT")
+            self.sharedData.postEvent(event: "HIDE_LOADING")
         })
     }
     
@@ -309,6 +314,15 @@ class ChatDetails:UIView, UITextFieldDelegate, UIScrollViewDelegate
             pplCon.contentSize = CGSize(width: (CGFloat(pplDataA.count) * 60), height: 60)
         }
         
+        pplCon.contentSize = CGSize(width: sharedData.screenWidth, height: 60)
+        
+        let btn = UIButton(type: .custom)
+        btn.setUnderline(text: String(pplDataA.count) + " Members", color: sharedData.blue)
+        btn.width = sharedData.screenWidth
+        btn.height = pplCon.height
+        btn.addEventListener(selector: #selector(self.showMembersList), target: self)
+        pplCon.addSubview(btn)
+        /*
         for i in 0..<pplDataA.count
         {
             let data = (pplDataA.object(at: i) as! NSDictionary)
@@ -321,6 +335,8 @@ class ChatDetails:UIView, UITextFieldDelegate, UIScrollViewDelegate
             row_item.x = 10 + (CGFloat(i) * 50)
             pplCon.addSubview(row_item)
         }
+        */
+        
         var lastY:CGFloat = 0
         for i in 0..<messagesDataA.count
         {
@@ -462,6 +478,17 @@ class ChatDetails:UIView, UITextFieldDelegate, UIScrollViewDelegate
         let contentHeight = messagesCon.contentSize.height
         let bottomOffset = CGPoint(x: 0, y: contentHeight - messagesCon.bounds.size.height)
         messagesCon.setContentOffset(bottomOffset, animated: false)
+    }
+    
+    @objc func showMembersList()
+    {
+        //pplDataA
+        
+        let page = ChatMembersList(frame: sharedData.fullRectBottom)
+        page.mainDataA.addObjects(from: pplDataA as! [Any])
+        page.initClass()
+        addSubview(page)
+        page.animateUp()
     }
     
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool

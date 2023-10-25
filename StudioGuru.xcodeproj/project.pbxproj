@@ -32,6 +32,7 @@
 		FA464ED72A35134200910323 /* Roboto-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA464ED32A35134200910323 /* Roboto-Light.ttf */; };
 		FA464ED82A35134200910323 /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA464ED42A35134200910323 /* Roboto-Bold.ttf */; };
 		FA464ED92A35134200910323 /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA464ED52A35134200910323 /* Roboto-Regular.ttf */; };
+		FA70AC602AE9284500AD5ED0 /* ChatMembersList.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA70AC5F2AE9284500AD5ED0 /* ChatMembersList.swift */; };
 		FA70D4FD2A81DAEE00ED4449 /* SideMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA70D4FC2A81DAEE00ED4449 /* SideMenu.swift */; };
 		FA77BCA62A88376500617AC1 /* PMCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA77BCA52A88376500617AC1 /* PMCell.swift */; };
 		FA77BCAC2A883BF100617AC1 /* PMAddCreditCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA77BCAB2A883BF000617AC1 /* PMAddCreditCard.swift */; };
@@ -119,6 +120,7 @@
 		FA464ED32A35134200910323 /* Roboto-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Roboto-Light.ttf"; path = "fonts/Roboto-Light.ttf"; sourceTree = SOURCE_ROOT; };
 		FA464ED42A35134200910323 /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Roboto-Bold.ttf"; path = "fonts/Roboto-Bold.ttf"; sourceTree = SOURCE_ROOT; };
 		FA464ED52A35134200910323 /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Roboto-Regular.ttf"; path = "fonts/Roboto-Regular.ttf"; sourceTree = SOURCE_ROOT; };
+		FA70AC5F2AE9284500AD5ED0 /* ChatMembersList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMembersList.swift; sourceTree = "<group>"; };
 		FA70D4FC2A81DAEE00ED4449 /* SideMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenu.swift; sourceTree = "<group>"; };
 		FA77BCA52A88376500617AC1 /* PMCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PMCell.swift; sourceTree = "<group>"; };
 		FA77BCAB2A883BF000617AC1 /* PMAddCreditCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PMAddCreditCard.swift; sourceTree = "<group>"; };
@@ -311,6 +313,7 @@
 				FA464ECD2A35124F00910323 /* Chat.swift */,
 				FA0E93412A404BC800EEB22F /* ChatCell.swift */,
 				FA0E93432A404EF000EEB22F /* ChatDetails.swift */,
+				FA70AC5F2AE9284500AD5ED0 /* ChatMembersList.swift */,
 				FA464ECF2A35125C00910323 /* More.swift */,
 				FA8E94C22A7F5CFF00951D52 /* MoreCell.swift */,
 				FAF69C7F2AE6541200F9150D /* FeedPage.swift */,
@@ -631,6 +634,7 @@
 				FAB902B32AAB962000A4A47F /* Reachable.swift in Sources */,
 				FA464ECC2A35124100910323 /* CalendarPage.swift in Sources */,
 				FA8E94C62A7F5D2D00951D52 /* StudioRentals.swift in Sources */,
+				FA70AC602AE9284500AD5ED0 /* ChatMembersList.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
