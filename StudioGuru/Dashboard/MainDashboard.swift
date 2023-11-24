@@ -109,7 +109,7 @@ class MainDashboard:UIView, UITextFieldDelegate
         img.x = 10
         img.y = 45
         img.corner(radius: 15)
-        img.downloadedFrom(link: sharedData.base_domain + "/chat-photo/" + sharedData.tmp_chat_id)
+        img.downloadedFrom(link: sharedData.base_domain + "/api-ios/chat-photo/" + sharedData.tmp_chat_id)
         banner.addSubview(img)
         
         let btn = UIButton(type: .custom)

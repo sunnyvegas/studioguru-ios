@@ -61,7 +61,7 @@ class SideMenu:UIView, UITextFieldDelegate, UITableViewDelegate, UITableViewData
         iconsA.removeAllObjects()
         
         mainDataA.add(sharedData.studio_name!)
-        iconsA.add(sharedData.base_domain + "/logo")
+        iconsA.add(sharedData.base_domain + "/api-ios/logo")
         
         mainDataA.add("My Account")
         iconsA.add("icon_myaccount")

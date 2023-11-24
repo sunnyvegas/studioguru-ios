@@ -73,7 +73,7 @@ class ChatMembersList:UIView, UITextFieldDelegate, UITableViewDelegate, UITableV
         //cell.accessoryType = .disclosureIndicator
         cell.title.text = (data.object(forKey: "member_name") as! String)
         cell.title.font = sharedData.normalFont(size: 20)
-        cell.img.downloadedFrom(link: sharedData.base_domain + "/member-photo/" + (data.object(forKey: "member_id") as! String) )
+        cell.img.downloadedFrom(link: sharedData.base_domain + "/api-ios/member-photo/" + (data.object(forKey: "member_id") as! String) )
         //cell.image.image = UIImage(named: (iconsA.object(at: indexPath.row) as! String) )?.withRenderingMode(.alwaysTemplate)
         //cell.image.tintColor = .black
         

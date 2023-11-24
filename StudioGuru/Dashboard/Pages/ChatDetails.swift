@@ -367,7 +367,7 @@ class ChatDetails:UIView, UITextFieldDelegate, UIScrollViewDelegate
                 btnImg.layer.borderColor = UIColor.gray.cgColor
                 btnImg.layer.borderWidth = 1
                 btnImg.backgroundColor = .darkGray
-                btnImg.downloadedFrom(link: sharedData.base_domain + "/member-photo/" + member_id)
+                btnImg.downloadedFrom(link: sharedData.base_domain + "/api-ios/member-photo/" + member_id)
                 whiteCon.addSubview(btnImg)
                 
                 let nameLabel = UILabel()

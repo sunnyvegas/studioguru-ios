@@ -871,7 +871,7 @@ extension UIImageView {
                     
                     DispatchQueue.main.async() { () -> Void in
                         
-                        
+                        print("url---->",url.absoluteString)
                         let sharedData = SharedData.sharedInstance
                         sharedData.imagesDict.setObject(UIImage(data: data!)!, forKey: url as NSCopying)
                         self.image = image
