@@ -189,7 +189,8 @@ class Login:UIView, UITextFieldDelegate,UIPickerViewDelegate, UIPickerViewDataSo
     
     @objc func loadData()
     {
-        sharedData.getIt(urlString:"http://" + sharedData.domain + ":3300/api-studios", params: [:], callback:
+        //print("---->","http://" + sharedData.domain + ":3400/api-studios")
+        sharedData.getIt(urlString:"https://www.test-kiwisuites.com/api-studios", params: [:], callback:
         {
             success, result_dict in
             
@@ -393,8 +394,10 @@ class Login:UIView, UITextFieldDelegate,UIPickerViewDelegate, UIPickerViewDataSo
         sharedData.studio_id = ((mainDataA.object(at: mainPicker.selectedRow(inComponent: 0)) as! NSDictionary).object(forKey: "id") as! String)
         sharedData.studio_name = ((mainDataA.object(at: mainPicker.selectedRow(inComponent: 0)) as! NSDictionary).object(forKey: "text") as! String)
         
-        sharedData.base_domain = "http://192.168.0.112:3300" +  "/studio/" + sharedData.studio_id//"https://dev-studiobossapp.herokuapp.com" +  "/studio/" + sharedData.studio_id
+        sharedData.base_domain = "https://www.test-kiwisuites.com" +  "/studio/" + sharedData.studio_id//"https://dev-studiobossapp.herokuapp.com" +  "/studio/" + sharedData.studio_id
         
+        
+        print(sharedData.base_domain + "/api-login-ios")
         sharedData.postIt(urlString: sharedData.base_domain + "/api-login-ios", params: ["email":inputEmail.text!, "password":inputPass.text!], callback: {
             success, result_dict in
             
@@ -467,7 +470,7 @@ class Login:UIView, UITextFieldDelegate,UIPickerViewDelegate, UIPickerViewDataSo
     
     @objc func goSignUp()
     {
-        sharedData.base_domain = "http://192.168.0.112:3300" +  "/studio/" + sharedData.studio_id
+        sharedData.base_domain = "https://www.test-kiwisuites.com" +  "/studio/" + sharedData.studio_id
         let page = SignUp(frame: sharedData.fullRectBottom)
         page.initClass()
         addSubview(page)

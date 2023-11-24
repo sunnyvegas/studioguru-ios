@@ -1,7 +1,7 @@
 {
   "images" : [
     {
-      "filename" : "kiwi_app_icon.png",
+      "filename" : "app_icon1024x1024.png",
       "idiom" : "universal",
       "platform" : "ios",
       "size" : "1024x1024"

@@ -73,8 +73,12 @@ class FeedPage:BasePage, UITextFieldDelegate,  UITableViewDelegate, UITableViewD
             
             DispatchQueue.main.async() { () -> Void in
                 
-                self.sharedData.feed_badge_label.isHidden = true
-                self.sharedData.feed_badge_count = "0"
+                if(self.sharedData.feed_badge_label != nil)
+                {
+                    self.sharedData.feed_badge_label.isHidden = true
+                    self.sharedData.feed_badge_count = "0"
+                }
+                
                
                 if(UIApplication.shared.applicationIconBadgeNumber > 0)
                 {

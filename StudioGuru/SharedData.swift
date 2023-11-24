@@ -105,8 +105,12 @@ class SharedData: NSObject
         studio_name = ""
         member_name = ""
         
-        base_domain = "https://dev-studiobossapp.herokuapp.com"
-        domain = "192.168.0.112"//"dev-studiobossapp.herokuapp.com"
+        base_domain = "http://192.168.0.116:3400"// "https://dev-studiobossapp.herokuapp.com"
+        domain = "192.168.0.116"//"dev-studiobossapp.herokuapp.com"
+        
+        base_domain = "https://www.test-kiwisuites.com/api-studios"
+        domain = "www.test-kiwisuites.com"
+        
         member_token = ""
         studio_id = "abc"
         blue = UIColor(hex: 0x1187be)
